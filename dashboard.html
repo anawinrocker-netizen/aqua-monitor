@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Aqua Monitor</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body class="dashboard-body">
+
+  <!-- Header -->
+  <header class="dashboard-header">
+    <div class="header-content">
+      <h1>🌊 Aqua Monitor</h1>
+      <div class="user-info">
+        <span id="farmInfo">กำลังโหลด...</span>
+        <a href="friends.html" class="btn-logout" style="text-decoration:none;">👥 เพื่อน</a>
+        <button id="logoutBtn" class="btn-logout">ออกจากระบบ</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="dashboard-main">
+
+    <!-- Status Cards -->
+    <section class="status-grid">
+      <div class="status-card">
+        <div class="status-label">DO ปัจจุบัน</div>
+        <div class="status-value" id="currentDO">--</div>
+        <div class="status-unit">mg/L</div>
+      </div>
+
+      <div class="status-card">
+        <div class="status-label">อุณหภูมิ</div>
+        <div class="status-value" id="currentTemp">--</div>
+        <div class="status-unit">°C</div>
+      </div>
+
+      <div class="status-card">
+        <div class="status-label">DO Saturation</div>
+        <div class="status-value" id="currentSat">--</div>
+        <div class="status-unit">%</div>
+      </div>
+
+      <div class="status-card status-aerator">
+        <div class="status-label">เครื่องตีน้ำ</div>
+        <div class="status-value" id="aeratorStatus">--</div>
+        <button id="toggleAerator" class="btn-toggle">เปลี่ยนสถานะ</button>
+      </div>
+    </section>
+
+    <!-- Last Update -->
+    <p class="last-update">อัปเดตล่าสุด: <span id="lastUpdate">--</span></p>
+
+    <!-- Charts -->
+<section class="chart-section">
+  <h2>กราฟ DO ย้อนหลัง 24 ชั่วโมง</h2>
+  <div class="chart-container">
+    <canvas id="doChart"></canvas>
+  </div>
+</section>
+
+<!-- Rate of Change Chart -->
+<section class="chart-section" style="margin-top: 25px;">
+  <h2>อัตราการเปลี่ยนแปลง DO (Rate of Change)</h2>
+  <p class="chart-desc">
+    📈 เส้นบวก = DO เพิ่มขึ้น (ปลอดภัย) | 📉 เส้นลบ = DO ลดลง | 
+    ⚠️ เกินเส้นแดง (-0.5) = ระบบจะเปิดเครื่องตีน้ำอัตโนมัติ
+  </p>
+  <div class="chart-container">
+    <canvas id="rocChart"></canvas>
+  </div>
+</section>
+
+  </main>
+
+  <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ลงทะเบียนฟาร์ม - Aqua Monitor</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>🌊 Aqua Monitor</h1>
+      <h2>ลงทะเบียนฟาร์ม</h2>
+
+      <form id="farmForm">
+        <div class="form-group">
+          <label for="farmName">ชื่อฟาร์ม</label>
+          <input type="text" id="farmName" required placeholder="เช่น ฟาร์มกุ้งบ้านควน">
+        </div>
+
+        <div class="form-group">
+          <label for="province">จังหวัด</label>
+          <input type="text" id="province" required placeholder="เช่น ตรัง">
+        </div>
+
+        <div class="form-group">
+          <label for="district">อำเภอ</label>
+          <input type="text" id="district" required placeholder="เช่น เมืองตรัง">
+        </div>
+
+        <div class="form-group">
+          <label for="aquaType">ประเภทสัตว์น้ำ</label>
+          <select id="aquaType" required>
+            <option value="">-- เลือกประเภท --</option>
+            <option value="กุ้งขาว">กุ้งขาว</option>
+            <option value="กุ้งกุลาดำ">กุ้งกุลาดำ</option>
+            <option value="ปลานิล">ปลานิล</option>
+            <option value="ปลาดุก">ปลาดุก</option>
+            <option value="ปลาทับทิม">ปลาทับทิม</option>
+            <option value="อื่นๆ">อื่นๆ</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="pondSize">ขนาดบ่อ (ตารางเมตร)</label>
+          <input type="number" id="pondSize" required min="1" placeholder="เช่น 800">
+        </div>
+
+        <div class="form-group">
+          <label for="latitude">ละติจูด (Latitude)</label>
+          <input type="number" id="latitude" step="any" required placeholder="เช่น 7.5563">
+        </div>
+
+        <div class="form-group">
+          <label for="longitude">ลองจิจูด (Longitude)</label>
+          <input type="number" id="longitude" step="any" required placeholder="เช่น 99.6114">
+        </div>
+
+        <button type="button" id="getLocationBtn" style="background: #6c757d; margin-bottom: 15px;">
+          📍 ใช้ตำแหน่งปัจจุบัน
+        </button>
+
+        <button type="submit" id="submitBtn">ลงทะเบียนฟาร์ม</button>
+
+        <p id="message" class="message"></p>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="js/setup-farm.js"></script>
+</body>
+</html>

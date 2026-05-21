@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ข้อมูลสาธารณะ - Aqua Monitor</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/public.css">
+  
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body class="landing-body">
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-content">
+      <a href="index.html" class="logo">🌊 Aqua Monitor</a>
+      <div class="nav-buttons">
+        <a href="index.html" class="btn-nav-secondary">หน้าแรก</a>
+        <a href="login.html" class="btn-nav-secondary">เข้าสู่ระบบ</a>
+        <a href="register.html" class="btn-nav-primary">สมัครสมาชิก</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="public-hero">
+    <h1>ข้อมูลคุณภาพน้ำของประเทศไทย</h1>
+    <p>ฐานข้อมูลค่าออกซิเจนละลายน้ำและอุณหภูมิจากเครือข่ายฟาร์มทั่วประเทศ</p>
+  </section>
+
+  <!-- Stats Cards -->
+  <section class="public-stats">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">🌊</div>
+        <div class="stat-value" id="totalFarms">--</div>
+        <div class="stat-label">ฟาร์มในเครือข่าย</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">💧</div>
+        <div class="stat-value" id="avgDO">--</div>
+        <div class="stat-label">DO เฉลี่ย (mg/L)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🌡️</div>
+        <div class="stat-value" id="avgTemp">--</div>
+        <div class="stat-label">อุณหภูมิเฉลี่ย (°C)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📊</div>
+        <div class="stat-value" id="totalReadings">--</div>
+        <div class="stat-label">บันทึกข้อมูลทั้งหมด</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map Section -->
+  <section class="map-section">
+    <div class="section-container">
+      <h2>แผนที่ฟาร์มในเครือข่าย</h2>
+      <p class="section-desc">จุดสีแสดงสถานะ DO ของแต่ละฟาร์ม — 🟢 ปกติ | 🟡 เฝ้าระวัง | 🔴 ต่ำกว่ามาตรฐาน</p>
+      <div id="map"></div>
+    </div>
+  </section>
+
+  <!-- Region Section -->
+  <section class="charts-section">
+    <div class="section-container">
+      <div class="filter-header">
+        <h2>เปรียบเทียบรายภาค</h2>
+        <select id="regionFilter" class="chart-select">
+          <option value="all">ทั้งหมด</option>
+          <option value="เหนือ">ภาคเหนือ</option>
+          <option value="กลาง">ภาคกลาง</option>
+          <option value="ใต้">ภาคใต้</option>
+          <option value="อีสาน">ภาคอีสาน</option>
+          <option value="ตะวันออก">ภาคตะวันออก</option>
+        </select>
+      </div>
+      <div class="charts-grid">
+        <div class="chart-box">
+          <h3>DO เฉลี่ย (mg/L)</h3>
+          <div class="chart-wrap">
+            <canvas id="regionDOChart"></canvas>
+          </div>
+        </div>
+        <div class="chart-box">
+          <h3>อุณหภูมิเฉลี่ย (°C)</h3>
+          <div class="chart-wrap">
+            <canvas id="regionTempChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Aqua Type Section -->
+  <section class="charts-section" style="background: white;">
+    <div class="section-container">
+      <div class="filter-header">
+        <h2>เปรียบเทียบรายชนิดสัตว์น้ำ</h2>
+        <select id="aquaTypeFilter" class="chart-select">
+          <option value="all">ทั้งหมด</option>
+          <option value="กุ้งขาว">กุ้งขาว</option>
+          <option value="กุ้งกุลาดำ">กุ้งกุลาดำ</option>
+          <option value="ปลานิล">ปลานิล</option>
+          <option value="ปลาดุก">ปลาดุก</option>
+          <option value="ปลาทับทิม">ปลาทับทิม</option>
+          <option value="อื่นๆ">อื่นๆ</option>
+        </select>
+      </div>
+      <div class="charts-grid">
+        <div class="chart-box">
+          <h3>DO เฉลี่ย (mg/L)</h3>
+          <div class="chart-wrap">
+            <canvas id="aquaDOChart"></canvas>
+          </div>
+        </div>
+        <div class="chart-box">
+          <h3>อุณหภูมิเฉลี่ย (°C)</h3>
+          <div class="chart-wrap">
+            <canvas id="aquaTempChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2026 Aqua Monitor | โครงงานวิทยาศาสตร์ โรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัย ตรัง</p>
+  </footer>
+
+  <script type="module" src="js/public.js"></script>
+</body>
+</html>

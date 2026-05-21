@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>สมัครสมาชิก - Aqua Monitor</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>🌊 Aqua Monitor</h1>
+      <h2>สมัครสมาชิก</h2>
+
+      <form id="registerForm">
+        <div class="form-group">
+          <label for="name">ชื่อ-นามสกุล</label>
+          <input type="text" id="name" required placeholder="เช่น อนาวิล เก้าเอี้ยน">
+        </div>
+
+        <div class="form-group">
+          <label for="email">อีเมล</label>
+          <input type="email" id="email" required placeholder="example@email.com">
+        </div>
+
+        <div class="form-group">
+          <label for="password">รหัสผ่าน (อย่างน้อย 6 ตัว)</label>
+          <input type="password" id="password" required minlength="6" placeholder="••••••••">
+        </div>
+
+        <button type="submit" id="submitBtn">สมัครสมาชิก</button>
+
+        <p id="message" class="message"></p>
+      </form>
+
+      <p class="link-text">มีบัญชีอยู่แล้ว? <a href="login.html">เข้าสู่ระบบ</a></p>
+    </div>
+  </div>
+
+  <script type="module" src="js/register.js"></script>
+</body>
+</html>

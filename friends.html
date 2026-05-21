@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>เพื่อน - Aqua Monitor</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/friends.css">
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body class="dashboard-body">
+
+  <!-- Header -->
+  <header class="dashboard-header">
+    <div class="header-content">
+      <h1>🌊 Aqua Monitor</h1>
+      <div class="user-info">
+        <span id="farmInfo">กำลังโหลด...</span>
+        <a href="dashboard.html" class="btn-logout" style="text-decoration:none;">📊 Dashboard</a>
+        <button id="logoutBtn" class="btn-logout">ออกจากระบบ</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+
+    <!-- ค้นหาฟาร์ม -->
+    <section class="search-section">
+      <h2>🔍 ค้นหาฟาร์ม</h2>
+      <p class="search-desc">กรอกรหัสฟาร์ม (เช่น FARM-1234) เพื่อค้นหาและเพิ่มเป็นเพื่อน</p>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="FARM-XXXX" maxlength="9">
+        <button id="searchBtn">ค้นหา</button>
+      </div>
+      <div id="searchResult"></div>
+    </section>
+
+    <!-- แผนที่เครือข่าย -->
+    <section class="network-map-section">
+      <h2>🗺️ แผนที่เครือข่ายเพื่อน</h2>
+      <p class="search-desc">⭐ ฟาร์มของคุณ | 🟢 ปกติ | 🟡 เฝ้าระวัง | 🔴 ต่ำกว่ามาตรฐาน</p>
+      <div id="friendsMap"></div>
+    </section>
+
+    <!-- รายชื่อเพื่อน -->
+    <section class="friends-list-section">
+      <h2>👥 เพื่อนของฉัน <span id="friendCount" class="count-badge">0</span></h2>
+      <div id="friendsList" class="friends-grid">
+        <p class="no-friends">ยังไม่มีเพื่อน — ใช้ช่องค้นหาด้านบนเพื่อเพิ่ม</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script type="module" src="js/friends.js"></script>
+</body>
+</html>

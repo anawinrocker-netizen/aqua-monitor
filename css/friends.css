@@ -1,0 +1,195 @@
+/* Friends Page Styles */
+
+/* Search Section */
+.search-section {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  margin-bottom: 25px;
+}
+
+.search-section h2,
+.network-map-section h2,
+.friends-list-section h2 {
+  color: #2c3e50;
+  margin-bottom: 8px;
+  font-size: 22px;
+}
+
+.search-desc {
+  color: #6c757d;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.search-box {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.search-box input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.search-box button {
+  width: auto;
+  padding: 12px 24px;
+  white-space: nowrap;
+}
+
+/* Search Result Card */
+.farm-result {
+  background: #f9fafc;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 15px;
+  border-left: 4px solid #667eea;
+}
+
+.farm-result h3 {
+  color: #2c3e50;
+  margin-bottom: 8px;
+}
+
+.farm-result p {
+  color: #6c757d;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.farm-result .btn-add {
+  margin-top: 15px;
+  padding: 10px 20px;
+  width: auto;
+  font-size: 14px;
+}
+
+.farm-result .btn-added {
+  background: #28a745 !important;
+  cursor: default;
+}
+
+.error-msg, .success-msg {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.error-msg {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.success-msg {
+  background: #d4edda;
+  color: #155724;
+}
+
+/* Network Map */
+.network-map-section {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  margin-bottom: 25px;
+}
+
+#friendsMap {
+  height: 400px;
+  border-radius: 10px;
+  z-index: 1;
+}
+
+/* Friends List */
+.friends-list-section {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.count-badge {
+  background: #667eea;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+.friends-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.friend-card {
+  background: #f9fafc;
+  padding: 20px;
+  border-radius: 10px;
+  border-left: 4px solid #667eea;
+  transition: transform 0.2s;
+}
+
+.friend-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.friend-card h4 {
+  color: #2c3e50;
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+.friend-card .friend-id {
+  color: #667eea;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.friend-card .friend-info {
+  color: #6c757d;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.friend-card .friend-do {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.friend-do.do-good { color: #28a745; }
+.friend-do.do-warning { color: #ffc107; }
+.friend-do.do-danger { color: #dc3545; }
+
+.friend-card .btn-remove {
+  background: #dc3545;
+  width: 100%;
+  padding: 8px;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+.no-friends {
+  text-align: center;
+  color: #6c757d;
+  padding: 30px;
+  grid-column: 1 / -1;
+}
