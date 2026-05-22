@@ -4,12 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ลงทะเบียนฟาร์ม - Aqua Monitor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
   <div class="container">
     <div class="card">
-      <h1>🌊 Aqua Monitor</h1>
+      <h1><i data-lucide="waves" class="icon-logo"></i> Aqua Monitor</h1>
       <h2>ลงทะเบียนฟาร์ม</h2>
 
       <form id="farmForm">
@@ -56,8 +60,8 @@
           <input type="number" id="longitude" step="any" required placeholder="เช่น 99.6114">
         </div>
 
-        <button type="button" id="getLocationBtn" style="background: #6c757d; margin-bottom: 15px;">
-          📍 ใช้ตำแหน่งปัจจุบัน
+        <button type="button" id="getLocationBtn" style="background:#64748b; margin-bottom:15px;">
+          <i data-lucide="map-pin" class="icon-inline"></i> ใช้ตำแหน่งปัจจุบัน
         </button>
 
         <button type="submit" id="submitBtn">ลงทะเบียนฟาร์ม</button>
@@ -67,6 +71,7 @@
     </div>
   </div>
 
+  <script>lucide.createIcons();</script>
   <script type="module" src="js/setup-farm.js"></script>
 </body>
 </html>

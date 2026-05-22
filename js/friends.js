@@ -29,9 +29,9 @@ function getDOClass(doVal) {
 }
 
 function getMarkerColor(doVal) {
-  if (doVal >= 5) return '#28a745';
-  if (doVal >= 3) return '#ffc107';
-  return '#dc3545';
+  if (doVal >= 5) return '#10b981';
+  if (doVal >= 3) return '#f59e0b';
+  return '#ef4444';
 }
 
 // ==================== Auth Check ====================
@@ -72,11 +72,14 @@ function initMap() {
     maxZoom: 18
   }).addTo(friendsMap);
 
+  // เรนเดอร์ไอคอน Lucide ในป๊อปอัปทุกครั้งที่เปิด
+  friendsMap.on('popupopen', () => lucide.createIcons());
+
   // Marker ของฟาร์มเรา (รูปดาว)
   L.marker([currentFarmData.location.lat, currentFarmData.location.lng], {
     title: 'ฟาร์มของคุณ'
   }).addTo(friendsMap).bindPopup(
-    `<b>⭐ ${currentFarmData.farmName}</b><br>${currentFarmId}<br>${currentFarmData.province}`
+    `<b><i data-lucide="star" class="icon-inline"></i> ${currentFarmData.farmName}</b><br>${currentFarmId}<br>${currentFarmData.province}`
   );
 }
 
@@ -160,13 +163,17 @@ async function searchFarm() {
         <p><b>จังหวัด:</b> ${farmData.province} ${farmData.district || ''}</p>
         <p><b>ประเภทสัตว์น้ำ:</b> ${farmData.aquaType}</p>
         <p><b>ขนาดบ่อ:</b> ${farmData.pondSize} ตร.ม.</p>
-        <button class="btn-add ${isAlreadyFriend ? 'btn-added' : ''}" 
-                id="addFriendBtn" 
+        <button class="btn-add ${isAlreadyFriend ? 'btn-added' : ''}"
+                id="addFriendBtn"
                 ${isAlreadyFriend ? 'disabled' : ''}>
-          ${isAlreadyFriend ? '✓ เป็นเพื่อนแล้ว' : '+ เพิ่มเป็นเพื่อน'}
+          ${isAlreadyFriend
+            ? '<i data-lucide="check" class="icon-inline"></i> เป็นเพื่อนแล้ว'
+            : '<i data-lucide="user-plus" class="icon-inline"></i> เพิ่มเป็นเพื่อน'}
         </button>
       </div>
     `;
+
+    lucide.createIcons();
 
     if (!isAlreadyFriend) {
       document.getElementById('addFriendBtn').addEventListener('click', () => addFriend(farmIdInput));
@@ -191,7 +198,8 @@ async function addFriend(friendId) {
     if (!currentFarmData.friends) currentFarmData.friends = [];
     currentFarmData.friends.push(friendId);
 
-    searchResult.innerHTML += '<div class="success-msg">✓ เพิ่มเพื่อนสำเร็จ!</div>';
+    searchResult.innerHTML += '<div class="success-msg"><i data-lucide="check-circle" class="icon-inline"></i> เพิ่มเพื่อนสำเร็จ!</div>';
+    lucide.createIcons();
     loadFriends();
 
     // Clear search after 2 sec
@@ -256,12 +264,12 @@ async function loadFriends() {
       <div class="friend-card">
         <h4>${farmData.farmName}</h4>
         <div class="friend-id">${friendId}</div>
-        <div class="friend-info">📍 ${farmData.province} ${farmData.district || ''}</div>
-        <div class="friend-info">🐟 ${farmData.aquaType}</div>
+        <div class="friend-info"><i data-lucide="map-pin" class="icon-inline"></i> ${farmData.province} ${farmData.district || ''}</div>
+        <div class="friend-info"><i data-lucide="fish" class="icon-inline"></i> ${farmData.aquaType}</div>
         <div class="friend-do ${doVal !== null ? getDOClass(doVal) : ''}">
           ${doVal !== null ? doVal.toFixed(2) + ' mg/L' : '-- mg/L'}
         </div>
-        <div class="friend-info">🌡️ ${tempVal !== null ? tempVal.toFixed(1) + '°C' : '--'}</div>
+        <div class="friend-info"><i data-lucide="thermometer" class="icon-inline"></i> ${tempVal !== null ? tempVal.toFixed(1) + '°C' : '--'}</div>
         <button class="btn-remove" data-id="${friendId}">ลบเพื่อน</button>
       </div>
     `);
@@ -271,6 +279,7 @@ async function loadFriends() {
   }
 
   friendsList.innerHTML = cards.join('');
+  lucide.createIcons();
 
   // Event listener สำหรับปุ่มลบ
   document.querySelectorAll('.btn-remove').forEach(btn => {

@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>เพื่อน - Aqua Monitor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/dashboard.css">
   <link rel="stylesheet" href="css/friends.css">
@@ -11,17 +14,24 @@
   <!-- Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="dashboard-body">
 
   <!-- Header -->
   <header class="dashboard-header">
     <div class="header-content">
-      <h1>🌊 Aqua Monitor</h1>
+      <h1><i data-lucide="waves" class="icon-logo"></i> Aqua Monitor</h1>
       <div class="user-info">
         <span id="farmInfo">กำลังโหลด...</span>
-        <a href="dashboard.html" class="btn-logout" style="text-decoration:none;">📊 Dashboard</a>
-        <button id="logoutBtn" class="btn-logout">ออกจากระบบ</button>
+        <a href="dashboard.html" class="btn-logout" style="text-decoration:none;">
+          <i data-lucide="layout-dashboard" class="icon-inline"></i> Dashboard
+        </a>
+        <button id="logoutBtn" class="btn-logout">
+          <i data-lucide="log-out" class="icon-inline"></i> ออกจากระบบ
+        </button>
       </div>
     </div>
   </header>
@@ -29,8 +39,8 @@
   <main class="dashboard-main">
 
     <!-- ค้นหาฟาร์ม -->
-    <section class="search-section">
-      <h2>🔍 ค้นหาฟาร์ม</h2>
+    <section class="search-section animate-in">
+      <h2><i data-lucide="search" class="icon-inline"></i> ค้นหาฟาร์ม</h2>
       <p class="search-desc">กรอกรหัสฟาร์ม (เช่น FARM-1234) เพื่อค้นหาและเพิ่มเป็นเพื่อน</p>
       <div class="search-box">
         <input type="text" id="searchInput" placeholder="FARM-XXXX" maxlength="9">
@@ -40,15 +50,23 @@
     </section>
 
     <!-- แผนที่เครือข่าย -->
-    <section class="network-map-section">
-      <h2>🗺️ แผนที่เครือข่ายเพื่อน</h2>
-      <p class="search-desc">⭐ ฟาร์มของคุณ | 🟢 ปกติ | 🟡 เฝ้าระวัง | 🔴 ต่ำกว่ามาตรฐาน</p>
+    <section class="network-map-section animate-in">
+      <h2><i data-lucide="map" class="icon-inline"></i> แผนที่เครือข่ายเพื่อน</h2>
+      <p class="search-desc">
+        <span><i data-lucide="star" class="icon-inline"></i> ฟาร์มของคุณ</span>
+        <span><span class="status-dot status-good"></span>ปกติ</span>
+        <span><span class="status-dot status-warning"></span>เฝ้าระวัง</span>
+        <span><span class="status-dot status-danger"></span>ต่ำกว่ามาตรฐาน</span>
+      </p>
       <div id="friendsMap"></div>
     </section>
 
     <!-- รายชื่อเพื่อน -->
-    <section class="friends-list-section">
-      <h2>👥 เพื่อนของฉัน <span id="friendCount" class="count-badge">0</span></h2>
+    <section class="friends-list-section animate-in">
+      <h2>
+        <i data-lucide="users" class="icon-inline"></i> เพื่อนของฉัน
+        <span id="friendCount" class="count-badge">0</span>
+      </h2>
       <div id="friendsList" class="friends-grid">
         <p class="no-friends">ยังไม่มีเพื่อน — ใช้ช่องค้นหาด้านบนเพื่อเพิ่ม</p>
       </div>
@@ -56,6 +74,12 @@
 
   </main>
 
+  <script>
+    document.querySelectorAll('.animate-in').forEach((el, i) => {
+      el.style.animationDelay = (i * 0.08) + 's';
+    });
+    lucide.createIcons();
+  </script>
   <script type="module" src="js/friends.js"></script>
 </body>
 </html>

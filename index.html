@@ -4,15 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aqua Monitor - ระบบควบคุมออกซิเจนละลายน้ำอัตโนมัติ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/landing.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="landing-body">
 
   <!-- Navbar -->
   <nav class="navbar">
     <div class="navbar-content">
-      <div class="logo">🌊 Aqua Monitor</div>
+      <a href="index.html" class="logo">
+        <i data-lucide="waves" class="icon-logo"></i> Aqua Monitor
+      </a>
       <div class="nav-buttons">
         <a href="public.html" class="btn-nav-secondary">ข้อมูลสาธารณะ</a>
         <a href="login.html" class="btn-nav-secondary">เข้าสู่ระบบ</a>
@@ -33,45 +39,49 @@
         <a href="public.html" class="btn-hero-secondary">ดูข้อมูลสาธารณะ</a>
       </div>
     </div>
+    <svg class="hero-waves" viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#f8fafc" d="M0,40 C240,90 480,0 720,30 C960,60 1200,90 1440,45 L1440,90 L0,90 Z"></path>
+    </svg>
   </section>
 
   <!-- Features -->
   <section class="features">
     <div class="features-container">
       <h2 class="section-title">ทำไมต้อง Aqua Monitor</h2>
+      <p class="section-subtitle">เทคโนโลยีที่ออกแบบมาเพื่อเกษตรกรผู้เพาะเลี้ยงสัตว์น้ำโดยเฉพาะ</p>
       <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">📊</div>
+        <div class="feature-card animate-in">
+          <div class="feature-icon"><i data-lucide="layout-dashboard"></i></div>
           <h3>วัดค่า DO ตลอด 24 ชั่วโมง</h3>
           <p>เซนเซอร์ออปติคัลความแม่นยำสูง วัดค่าทุก 15 วินาที ส่งข้อมูลขึ้นคลาวด์อัตโนมัติ</p>
         </div>
 
-        <div class="feature-card">
-          <div class="feature-icon">🤖</div>
+        <div class="feature-card animate-in">
+          <div class="feature-icon"><i data-lucide="cpu"></i></div>
           <h3>ควบคุมเครื่องตีน้ำอัตโนมัติ</h3>
           <p>ระบบ Proactive ดูอัตราการเปลี่ยนแปลง DO เปิดเครื่องล่วงหน้าก่อนที่ค่าจะถึงจุดอันตราย</p>
         </div>
 
-        <div class="feature-card">
-          <div class="feature-icon">🌐</div>
+        <div class="feature-card animate-in">
+          <div class="feature-icon"><i data-lucide="globe"></i></div>
           <h3>เครือข่ายเกษตรกร</h3>
           <p>ดูข้อมูลฟาร์มเพื่อนในพื้นที่ใกล้เคียง เรียนรู้และเตือนภัยร่วมกันผ่านแผนที่เครือข่าย</p>
         </div>
 
-        <div class="feature-card">
-          <div class="feature-icon">💡</div>
+        <div class="feature-card animate-in">
+          <div class="feature-icon"><i data-lucide="lightbulb"></i></div>
           <h3>ประหยัดพลังงาน</h3>
           <p>เปิดเครื่องตีน้ำเฉพาะเมื่อจำเป็น ลดค่าไฟฟ้าและยืดอายุการใช้งานเครื่อง</p>
         </div>
 
-        <div class="feature-card">
-          <div class="feature-icon">📱</div>
+        <div class="feature-card animate-in">
+          <div class="feature-icon"><i data-lucide="smartphone"></i></div>
           <h3>ดูได้ทุกที่ ทุกเวลา</h3>
           <p>เปิดเว็บไซต์จากมือถือหรือคอมพิวเตอร์ ดูข้อมูลฟาร์มของคุณได้แบบ Real-time</p>
         </div>
 
-        <div class="feature-card">
-          <div class="feature-icon">🇹🇭</div>
+        <div class="feature-card animate-in">
+          <div class="feature-icon"><i data-lucide="flag"></i></div>
           <h3>ข้อมูลคุณภาพน้ำของประเทศ</h3>
           <p>ฐานข้อมูล DO ทั่วประเทศที่เปิดให้สาธารณะใช้อ้างอิงและวิเคราะห์ได้</p>
         </div>
@@ -83,6 +93,7 @@
   <section class="how-it-works">
     <div class="features-container">
       <h2 class="section-title">วิธีการทำงาน</h2>
+      <p class="section-subtitle">เริ่มต้นใช้งานได้ง่ายเพียง 4 ขั้นตอน</p>
       <div class="steps-grid">
         <div class="step-card">
           <div class="step-number">1</div>
@@ -116,9 +127,56 @@
   </section>
 
   <!-- Footer -->
-  <footer class="footer">
-    <p>© 2026 Aqua Monitor | โครงงานวิทยาศาสตร์ โรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัย ตรัง</p>
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <i data-lucide="waves" class="icon-logo"></i> Aqua Monitor
+        </div>
+        <p>แพลตฟอร์มเครือข่ายข้อมูลคุณภาพน้ำเพื่อการเพาะเลี้ยงสัตว์น้ำของประเทศไทย ควบคุมออกซิเจนละลายน้ำอัตโนมัติแบบ Real-time</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i data-lucide="facebook" class="icon-inline"></i></a>
+          <a href="#" aria-label="Twitter"><i data-lucide="twitter" class="icon-inline"></i></a>
+          <a href="#" aria-label="YouTube"><i data-lucide="youtube" class="icon-inline"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>เมนู</h4>
+        <ul>
+          <li><a href="index.html">หน้าแรก</a></li>
+          <li><a href="public.html">ข้อมูลสาธารณะ</a></li>
+          <li><a href="login.html">เข้าสู่ระบบ</a></li>
+          <li><a href="register.html">สมัครสมาชิก</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>ติดต่อเรา</h4>
+        <div class="footer-contact-item">
+          <i data-lucide="mail" class="icon-inline"></i> contact@aquamonitor.th
+        </div>
+        <div class="footer-contact-item">
+          <i data-lucide="map-pin" class="icon-inline"></i> จังหวัดตรัง ประเทศไทย
+        </div>
+        <div class="footer-contact-item">
+          <i data-lucide="phone" class="icon-inline"></i> 075-000-000
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 Aqua Monitor | โครงงานวิทยาศาสตร์ โรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัย ตรัง
+    </div>
   </footer>
 
+  <script>
+    // Sticky navbar shadow on scroll
+    window.addEventListener('scroll', () => {
+      document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 10);
+    });
+    // Staggered card entrance
+    document.querySelectorAll('.animate-in').forEach((el, i) => {
+      el.style.animationDelay = (i * 0.08) + 's';
+    });
+    lucide.createIcons();
+  </script>
 </body>
 </html>

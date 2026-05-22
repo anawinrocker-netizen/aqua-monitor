@@ -30,23 +30,27 @@ getLocationBtn.addEventListener('click', () => {
     return;
   }
 
-  getLocationBtn.textContent = '⏳ กำลังค้นหาตำแหน่ง...';
+  getLocationBtn.innerHTML = '<i data-lucide="loader" class="icon-inline"></i> กำลังค้นหาตำแหน่ง...';
   getLocationBtn.disabled = true;
+  lucide.createIcons();
 
   navigator.geolocation.getCurrentPosition(
     (position) => {
       document.getElementById('latitude').value = position.coords.latitude.toFixed(6);
       document.getElementById('longitude').value = position.coords.longitude.toFixed(6);
-      getLocationBtn.textContent = '✓ ได้ตำแหน่งแล้ว';
+      getLocationBtn.innerHTML = '<i data-lucide="check" class="icon-inline"></i> ได้ตำแหน่งแล้ว';
+      lucide.createIcons();
       setTimeout(() => {
-        getLocationBtn.textContent = '📍 ใช้ตำแหน่งปัจจุบัน';
+        getLocationBtn.innerHTML = '<i data-lucide="map-pin" class="icon-inline"></i> ใช้ตำแหน่งปัจจุบัน';
         getLocationBtn.disabled = false;
+        lucide.createIcons();
       }, 2000);
     },
     (error) => {
       alert('ไม่สามารถดึงตำแหน่งได้: ' + error.message);
-      getLocationBtn.textContent = '📍 ใช้ตำแหน่งปัจจุบัน';
+      getLocationBtn.innerHTML = '<i data-lucide="map-pin" class="icon-inline"></i> ใช้ตำแหน่งปัจจุบัน';
       getLocationBtn.disabled = false;
+      lucide.createIcons();
     }
   );
 });
@@ -106,7 +110,8 @@ form.addEventListener('submit', async (e) => {
     });
 
     message.className = 'message success';
-    message.textContent = `✓ ลงทะเบียนสำเร็จ! รหัสฟาร์มของคุณคือ ${farmId}`;
+    message.innerHTML = `<i data-lucide="check-circle" class="icon-inline"></i> ลงทะเบียนสำเร็จ! รหัสฟาร์มของคุณคือ ${farmId}`;
+    lucide.createIcons();
 
     setTimeout(() => {
       window.location.href = 'dashboard.html';
@@ -116,6 +121,7 @@ form.addEventListener('submit', async (e) => {
     submitBtn.disabled = false;
     submitBtn.textContent = 'ลงทะเบียนฟาร์ม';
     message.className = 'message error';
-    message.textContent = '✗ เกิดข้อผิดพลาด: ' + error.message;
+    message.innerHTML = '<i data-lucide="x" class="icon-inline"></i> เกิดข้อผิดพลาด: ' + error.message;
+    lucide.createIcons();
   }
 });

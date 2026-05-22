@@ -130,8 +130,8 @@ function updateChart(readings) {
       datasets: [{
         label: 'DO (mg/L)',
         data: data,
-        borderColor: '#667eea',
-        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+        borderColor: '#0ea5e9',
+        backgroundColor: 'rgba(14, 165, 233, 0.1)',
         fill: true,
         tension: 0.4,
         pointRadius: 0,
@@ -192,8 +192,8 @@ function updateROCChart(readings) {
       datasets: [{
         label: 'อัตราการเปลี่ยนแปลง DO (mg/L ต่อ 10 นาที)',
         data: rocData,
-        borderColor: '#f39c12',
-        backgroundColor: 'rgba(243, 156, 18, 0.1)',
+        borderColor: '#f59e0b',
+        backgroundColor: 'rgba(245, 158, 11, 0.1)',
         fill: true,
         tension: 0.4,
         pointRadius: 0,
@@ -212,9 +212,9 @@ function updateROCChart(readings) {
           suggestedMax: 1,
           grid: {
             color: (ctx) => {
-              if (ctx.tick.value === 0) return '#666';
-              if (ctx.tick.value === -0.5) return '#dc3545';
-              return '#e0e0e0';
+              if (ctx.tick.value === 0) return '#64748b';
+              if (ctx.tick.value === -0.5) return '#ef4444';
+              return '#e2e8f0';
             },
             lineWidth: (ctx) => {
               if (ctx.tick.value === 0) return 2;
@@ -224,7 +224,7 @@ function updateROCChart(readings) {
           },
           ticks: {
             callback: function(value) {
-              if (value === -0.5) return '-0.5 ⚠️';
+              if (value === -0.5) return '-0.5 (อันตราย)';
               if (value === 0) return '0';
               return value;
             }
@@ -243,12 +243,15 @@ function listenToAeratorStatus() {
     if (docSnap.exists()) {
       const data = docSnap.data();
       const isOn = data.aeratorOn;
-      aeratorStatusEl.textContent = isOn ? '🟢 เปิดอยู่' : '🔴 ปิดอยู่';
+      aeratorStatusEl.innerHTML = isOn
+        ? '<i data-lucide="power" style="color:#10b981"></i> เปิดอยู่'
+        : '<i data-lucide="power-off" style="color:#ef4444"></i> ปิดอยู่';
       aeratorStatusEl.className = 'status-value ' + (isOn ? 'on' : 'off');
     } else {
-      aeratorStatusEl.textContent = '🔴 ปิดอยู่';
+      aeratorStatusEl.innerHTML = '<i data-lucide="power-off" style="color:#ef4444"></i> ปิดอยู่';
       aeratorStatusEl.className = 'status-value off';
     }
+    lucide.createIcons();
   });
 }
 

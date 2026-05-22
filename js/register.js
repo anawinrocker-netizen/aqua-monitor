@@ -37,7 +37,8 @@ form.addEventListener('submit', async (e) => {
 
     // 3. แสดงข้อความสำเร็จ + ไปหน้าลงทะเบียนฟาร์ม
     message.className = 'message success';
-    message.textContent = '✓ สมัครสมาชิกสำเร็จ! กำลังไปหน้าลงทะเบียนฟาร์ม...';
+    message.innerHTML = '<i data-lucide="check-circle" class="icon-inline"></i> สมัครสมาชิกสำเร็จ! กำลังไปหน้าลงทะเบียนฟาร์ม...';
+    lucide.createIcons();
     
     setTimeout(() => {
       window.location.href = 'setup-farm.html';
@@ -57,6 +58,7 @@ form.addEventListener('submit', async (e) => {
     }
 
     message.className = 'message error';
-    message.textContent = '✗ ' + errorMsg;
+    message.innerHTML = '<i data-lucide="x" class="icon-inline"></i> ' + errorMsg;
+    lucide.createIcons();
   }
 });

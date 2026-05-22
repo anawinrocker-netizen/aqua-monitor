@@ -1,4 +1,39 @@
-/* Reset & Base */
+/* ==========================================================================
+   Aqua Monitor — Global Stylesheet (Ocean Theme)
+   ========================================================================== */
+
+/* ---------- Design Tokens ---------- */
+:root {
+  /* Primary palette */
+  --color-primary: #0ea5e9;
+  --color-primary-dark: #0369a1;
+  --color-primary-light: #e0f2fe;
+  --color-accent: #06b6d4;
+  --gradient-primary: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
+  --gradient-hero: linear-gradient(135deg, #0c4a6e 0%, #0369a1 50%, #0ea5e9 100%);
+
+  /* Semantic colors */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-info: #3b82f6;
+
+  /* Neutrals */
+  --color-bg: #f8fafc;
+  --color-card: #ffffff;
+  --color-text: #0f172a;
+  --color-text-muted: #64748b;
+  --color-border: #e2e8f0;
+
+  /* Effects */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(14, 165, 233, 0.06);
+  --shadow-hover: 0 8px 32px rgba(14, 165, 233, 0.12);
+  --radius-card: 16px;
+  --radius-btn: 10px;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------- Reset & Base ---------- */
 * {
   margin: 0;
   padding: 0;
@@ -6,47 +41,130 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: 'Sarabun', system-ui, sans-serif;
+  background: var(--gradient-hero);
   min-height: 100vh;
-  color: #333;
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Container */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+}
+
+/* ---------- Icon System ---------- */
+.icon-inline {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  vertical-align: middle;
+  stroke-width: 2;
+}
+
+.icon-logo {
+  width: 32px;
+  height: 32px;
+  color: var(--color-primary);
+}
+
+.icon-stat {
+  width: 36px;
+  height: 36px;
+  color: var(--color-primary);
+}
+
+.status-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.status-good {
+  background: var(--color-success);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+}
+
+.status-warning {
+  background: var(--color-warning);
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+}
+
+.status-danger {
+  background: var(--color-danger);
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
+}
+
+/* ---------- Animations ---------- */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.6; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-in {
+  opacity: 0;
+  animation: fadeInUp 0.6s var(--ease) forwards;
+}
+
+.live-dot {
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+/* ---------- Auth Layout (login / register / setup-farm) ---------- */
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 20px;
+  padding: 24px;
 }
 
-/* Card */
 .card {
-  background: white;
-  padding: 40px;
-  border-radius: 16px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  background: var(--color-card);
+  padding: 44px;
+  border-radius: var(--radius-card);
+  box-shadow: 0 20px 60px rgba(12, 74, 110, 0.35);
   width: 100%;
-  max-width: 420px;
+  max-width: 440px;
+  animation: fadeInUp 0.6s var(--ease) both;
 }
 
 .card h1 {
   text-align: center;
-  color: #667eea;
-  margin-bottom: 8px;
+  color: var(--color-primary-dark);
+  margin-bottom: 6px;
   font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.card h1 .icon-logo {
+  width: 30px;
+  height: 30px;
 }
 
 .card h2 {
   text-align: center;
-  color: #555;
-  margin-bottom: 30px;
-  font-size: 20px;
+  color: var(--color-text-muted);
+  margin-bottom: 32px;
+  font-size: 19px;
   font-weight: 500;
 }
 
-/* Form */
+/* ---------- Forms ---------- */
 .form-group {
   margin-bottom: 20px;
 }
@@ -54,7 +172,7 @@ body {
 .form-group label {
   display: block;
   margin-bottom: 8px;
-  color: #555;
+  color: var(--color-text);
   font-size: 14px;
   font-weight: 500;
 }
@@ -62,82 +180,211 @@ body {
 .form-group input,
 .form-group select {
   width: 100%;
-  padding: 12px 16px;
-  border: 2px solid #e0e0e0;
-  border-radius: 8px;
+  padding: 14px 18px;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-btn);
   font-size: 15px;
-  transition: border-color 0.2s;
+  font-family: inherit;
+  color: var(--color-text);
+  background: var(--color-card);
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
 }
 
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.1);
 }
 
-/* Button */
+/* ---------- Buttons ---------- */
 button {
   width: 100%;
-  padding: 14px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 14px 28px;
+  background: var(--gradient-primary);
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: var(--radius-btn);
   font-size: 16px;
   font-weight: 600;
+  font-family: inherit;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
 }
 
 button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3);
 }
 
 button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   transform: none;
+  box-shadow: none;
 }
 
-/* Message */
+/* ---------- Messages ---------- */
 .message {
-  margin-top: 15px;
-  padding: 12px;
-  border-radius: 6px;
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: var(--radius-btn);
   text-align: center;
   font-size: 14px;
   display: none;
 }
 
 .message.success {
-  display: block;
-  background: #d4edda;
-  color: #155724;
-  border: 1px solid #c3e6cb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
 }
 
 .message.error {
-  display: block;
-  background: #f8d7da;
-  color: #721c24;
-  border: 1px solid #f5c6cb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
 }
 
-/* Link */
+/* ---------- Link ---------- */
 .link-text {
   text-align: center;
-  margin-top: 20px;
-  color: #666;
+  margin-top: 22px;
+  color: var(--color-text-muted);
   font-size: 14px;
 }
 
 .link-text a {
-  color: #667eea;
+  color: var(--color-primary);
   text-decoration: none;
   font-weight: 600;
 }
 
 .link-text a:hover {
   text-decoration: underline;
+}
+
+/* ---------- Rich Footer (shared) ---------- */
+.site-footer {
+  background: #0c4a6e;
+  color: #cbd5e1;
+  padding: 56px 20px 28px;
+}
+
+.footer-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 40px;
+}
+
+.footer-col h4 {
+  color: white;
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 12px;
+}
+
+.footer-brand .icon-logo {
+  color: #38bdf8;
+}
+
+.footer-col p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #94a3b8;
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col ul li {
+  margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.footer-col ul li a:hover {
+  color: #38bdf8;
+}
+
+.footer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #94a3b8;
+  margin-bottom: 10px;
+}
+
+.footer-social {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.footer-social a {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #cbd5e1;
+  transition: all 0.2s ease;
+}
+
+.footer-social a:hover {
+  background: var(--color-primary);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 40px auto 0;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .card {
+    padding: 32px 24px;
+  }
 }

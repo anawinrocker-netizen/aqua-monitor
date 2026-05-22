@@ -30,7 +30,8 @@ form.addEventListener('submit', async (e) => {
     const userData = userDoc.data();
 
     message.className = 'message success';
-    message.textContent = '✓ เข้าสู่ระบบสำเร็จ!';
+    message.innerHTML = '<i data-lucide="check-circle" class="icon-inline"></i> เข้าสู่ระบบสำเร็จ!';
+    lucide.createIcons();
 
     setTimeout(() => {
       if (userData && userData.farmId) {
@@ -58,6 +59,7 @@ form.addEventListener('submit', async (e) => {
     }
 
     message.className = 'message error';
-    message.textContent = '✗ ' + errorMsg;
+    message.innerHTML = '<i data-lucide="x" class="icon-inline"></i> ' + errorMsg;
+    lucide.createIcons();
   }
 });

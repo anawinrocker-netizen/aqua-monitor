@@ -18,9 +18,9 @@ function getRegion(province) {
 }
 
 function getMarkerColor(doVal) {
-  if (doVal >= 5) return '#28a745';
-  if (doVal >= 3) return '#ffc107';
-  return '#dc3545';
+  if (doVal >= 5) return '#10b981';
+  if (doVal >= 3) return '#f59e0b';
+  return '#ef4444';
 }
 
 function getDoClassPopup(doVal) {
@@ -162,7 +162,7 @@ function drawRegionCharts(filterRegion) {
       datasets: [{
         label: 'DO (mg/L)',
         data: doData,
-        backgroundColor: '#667eea',
+        backgroundColor: '#0ea5e9',
         borderRadius: 6
       }]
     },
@@ -183,7 +183,7 @@ function drawRegionCharts(filterRegion) {
       datasets: [{
         label: 'อุณหภูมิ (°C)',
         data: tempData,
-        backgroundColor: '#e74c3c',
+        backgroundColor: '#ef4444',
         borderRadius: 6
       }]
     },
@@ -235,7 +235,7 @@ function drawAquaTypeCharts(filterType) {
       datasets: [{
         label: 'DO (mg/L)',
         data: doData,
-        backgroundColor: '#764ba2',
+        backgroundColor: '#06b6d4',
         borderRadius: 6
       }]
     },
@@ -255,7 +255,7 @@ function drawAquaTypeCharts(filterType) {
       datasets: [{
         label: 'อุณหภูมิ (°C)',
         data: tempData,
-        backgroundColor: '#f39c12',
+        backgroundColor: '#f59e0b',
         borderRadius: 6
       }]
     },
