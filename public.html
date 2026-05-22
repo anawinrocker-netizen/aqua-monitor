@@ -6,7 +6,7 @@
   <title>ข้อมูลสาธารณะ - Aqua Monitor</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Prompt:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/landing.css">
   <link rel="stylesheet" href="css/public.css">
@@ -41,30 +41,30 @@
   <section class="public-hero">
     <h1>ข้อมูลคุณภาพน้ำของประเทศไทย</h1>
     <p>ฐานข้อมูลค่าออกซิเจนละลายน้ำและอุณหภูมิจากเครือข่ายฟาร์มทั่วประเทศ</p>
-    <svg class="hero-waves" viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path fill="#f8fafc" d="M0,40 C240,90 480,0 720,30 C960,60 1200,90 1440,45 L1440,90 L0,90 Z"></path>
+    <svg class="hero-wave" viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,40 C320,100 720,0 1440,60 L1440,100 L0,100 Z" fill="#f8fafc"/>
     </svg>
   </section>
 
   <!-- Stats Cards -->
   <section class="public-stats">
     <div class="stats-grid">
-      <div class="stat-card animate-in">
+      <div class="stat-card">
         <div class="stat-icon"><i data-lucide="waves" class="icon-stat"></i></div>
         <div class="stat-value" id="totalFarms">--</div>
         <div class="stat-label">ฟาร์มในเครือข่าย</div>
       </div>
-      <div class="stat-card animate-in">
+      <div class="stat-card">
         <div class="stat-icon"><i data-lucide="droplet" class="icon-stat"></i></div>
         <div class="stat-value" id="avgDO">--</div>
         <div class="stat-label">DO เฉลี่ย (mg/L)</div>
       </div>
-      <div class="stat-card animate-in">
+      <div class="stat-card">
         <div class="stat-icon"><i data-lucide="thermometer" class="icon-stat"></i></div>
         <div class="stat-value" id="avgTemp">--</div>
         <div class="stat-label">อุณหภูมิเฉลี่ย (°C)</div>
       </div>
-      <div class="stat-card animate-in">
+      <div class="stat-card">
         <div class="stat-icon"><i data-lucide="layout-dashboard" class="icon-stat"></i></div>
         <div class="stat-value" id="totalReadings">--</div>
         <div class="stat-label">บันทึกข้อมูลทั้งหมด</div>
@@ -191,12 +191,29 @@
   </footer>
 
   <script>
+    // Scroll-reveal animations
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.feature-card, .step-card, .stat-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+      observer.observe(el);
+    });
+
+    // Navbar scroll effect
     window.addEventListener('scroll', () => {
-      document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 10);
+      document.querySelector('.navbar')?.classList.toggle('scrolled', window.scrollY > 20);
     });
-    document.querySelectorAll('.animate-in').forEach((el, i) => {
-      el.style.animationDelay = (i * 0.08) + 's';
-    });
+
     lucide.createIcons();
   </script>
   <script type="module" src="js/public.js"></script>

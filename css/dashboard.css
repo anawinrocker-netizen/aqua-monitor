@@ -8,10 +8,24 @@
 
 /* ---------- Header ---------- */
 .dashboard-header {
-  background: var(--gradient-hero);
+  background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 55%, #0284c7 100%);
   color: white;
   padding: 22px 0;
-  box-shadow: 0 4px 20px rgba(12, 74, 110, 0.18);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(8, 47, 73, 0.25);
+}
+
+.dashboard-header::after {
+  content: '';
+  position: absolute;
+  top: -120px;
+  right: -60px;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.35) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(30px);
 }
 
 .header-content {
@@ -23,17 +37,22 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 15px;
+  position: relative;
+  z-index: 1;
 }
 
 .header-content h1 {
   font-size: 24px;
+  font-weight: 800;
   margin: 0;
   display: flex;
   align-items: center;
   gap: 8px;
+  user-select: none;
 }
 
-.header-content h1 .icon-logo {
+.header-content h1 .icon-logo,
+.header-content h1 svg {
   color: #bae6fd;
 }
 
@@ -45,23 +64,27 @@
 }
 
 .btn-logout {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: white;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   padding: 9px 16px;
   border-radius: var(--radius-btn);
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
+  user-select: none;
   width: auto;
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  box-shadow: none;
   transition: all 0.3s ease;
 }
 
 .btn-logout:hover {
-  background: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.25);
   transform: translateY(-1px);
   box-shadow: none;
 }
@@ -70,7 +93,7 @@
 .dashboard-main {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 32px 24px;
+  padding: 36px 24px;
 }
 
 /* ---------- Status Grid ---------- */
@@ -82,62 +105,87 @@
 }
 
 .status-card {
-  background: var(--color-card);
-  padding: 26px;
-  border-radius: var(--radius-card);
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-card);
-  transition: all 0.3s var(--ease);
+  position: relative;
+  background: white;
+  padding: 28px;
+  border-radius: 20px;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.03),
+    0 8px 24px rgba(14, 165, 233, 0.08);
+  border: 1px solid rgba(14, 165, 233, 0.08);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.status-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(40px, -40px);
 }
 
 .status-card:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-hover);
+  box-shadow: 0 12px 32px rgba(14, 165, 233, 0.15);
 }
 
-.status-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgba(14, 165, 233, 0.12);
+.status-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.status-card .icon-wrapper {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
+  color: #0369a1;
 }
 
-.status-icon i,
-.status-icon svg {
-  width: 22px;
-  height: 22px;
-  color: var(--color-primary);
+.status-card .icon-wrapper i[data-lucide],
+.status-card .icon-wrapper svg {
+  width: 24px;
+  height: 24px;
+  color: #0369a1;
 }
 
 .status-label {
-  color: var(--color-text-muted);
-  font-size: 14px;
-  margin-bottom: 6px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .status-value {
   font-size: 42px;
-  font-weight: 700;
-  color: var(--color-text);
-  line-height: 1.1;
-  margin-bottom: 4px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1;
+  margin: 8px 0;
+  font-family: 'Prompt', sans-serif;
+  letter-spacing: -0.02em;
   transition: color 0.3s ease;
-  animation: pulse 0.4s ease;
 }
 
 .status-unit {
-  color: var(--color-text-muted);
   font-size: 13px;
+  color: #94a3b8;
+  font-weight: 500;
 }
 
 /* Aerator card */
 .status-aerator .status-value {
-  font-size: 24px;
+  font-size: 26px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -151,7 +199,7 @@
   color: var(--color-danger);
 }
 
-.status-aerator .status-value i,
+.status-aerator .status-value i[data-lucide],
 .status-aerator .status-value svg {
   width: 24px;
   height: 24px;
@@ -177,15 +225,15 @@
   gap: 6px;
   color: var(--color-text-muted);
   font-size: 13px;
-  margin-bottom: 32px;
+  margin-bottom: 36px;
 }
 
 /* ---------- Chart Section ---------- */
 .chart-section {
   background: var(--color-card);
-  padding: 30px;
-  border-radius: var(--radius-card);
-  border: 1px solid var(--color-border);
+  padding: 32px;
+  border-radius: 20px;
+  border: 1px solid rgba(14, 165, 233, 0.08);
   box-shadow: var(--shadow-card);
 }
 
@@ -193,6 +241,7 @@
   margin-bottom: 8px;
   color: var(--color-text);
   font-size: 19px;
+  font-weight: 700;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -202,7 +251,7 @@
   color: var(--color-text-muted);
   font-size: 14px;
   margin-bottom: 20px;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 .chart-container {

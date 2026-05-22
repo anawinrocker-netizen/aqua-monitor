@@ -6,7 +6,7 @@
   <title>Dashboard - Aqua Monitor</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Prompt:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/dashboard.css">
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -36,28 +36,28 @@
     <!-- Status Cards -->
     <section class="status-grid">
       <div class="status-card animate-in">
-        <div class="status-icon"><i data-lucide="droplet"></i></div>
+        <div class="icon-wrapper"><i data-lucide="droplet"></i></div>
         <div class="status-label">DO ปัจจุบัน</div>
         <div class="status-value" id="currentDO">--</div>
         <div class="status-unit">mg/L</div>
       </div>
 
       <div class="status-card animate-in">
-        <div class="status-icon"><i data-lucide="thermometer"></i></div>
+        <div class="icon-wrapper"><i data-lucide="thermometer"></i></div>
         <div class="status-label">อุณหภูมิ</div>
         <div class="status-value" id="currentTemp">--</div>
         <div class="status-unit">°C</div>
       </div>
 
       <div class="status-card animate-in">
-        <div class="status-icon"><i data-lucide="gauge"></i></div>
+        <div class="icon-wrapper"><i data-lucide="gauge"></i></div>
         <div class="status-label">DO Saturation</div>
         <div class="status-value" id="currentSat">--</div>
         <div class="status-unit">%</div>
       </div>
 
       <div class="status-card status-aerator animate-in">
-        <div class="status-icon"><i data-lucide="fan"></i></div>
+        <div class="icon-wrapper"><i data-lucide="fan"></i></div>
         <div class="status-label">เครื่องตีน้ำ</div>
         <div class="status-value" id="aeratorStatus">--</div>
         <button id="toggleAerator" class="btn-toggle">เปลี่ยนสถานะ</button>
@@ -95,7 +95,7 @@
 
   <script>
     document.querySelectorAll('.animate-in').forEach((el, i) => {
-      el.style.animationDelay = (i * 0.08) + 's';
+      el.style.animationDelay = (i * 0.1) + 's';
     });
     lucide.createIcons();
   </script>

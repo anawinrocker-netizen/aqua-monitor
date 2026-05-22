@@ -192,8 +192,8 @@ function updateROCChart(readings) {
       datasets: [{
         label: 'อัตราการเปลี่ยนแปลง DO (mg/L ต่อ 10 นาที)',
         data: rocData,
-        borderColor: '#f59e0b',
-        backgroundColor: 'rgba(245, 158, 11, 0.1)',
+        borderColor: '#06b6d4',
+        backgroundColor: 'rgba(6, 182, 212, 0.1)',
         fill: true,
         tension: 0.4,
         pointRadius: 0,

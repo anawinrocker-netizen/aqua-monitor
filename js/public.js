@@ -183,7 +183,7 @@ function drawRegionCharts(filterRegion) {
       datasets: [{
         label: 'อุณหภูมิ (°C)',
         data: tempData,
-        backgroundColor: '#ef4444',
+        backgroundColor: '#0ea5e9',
         borderRadius: 6
       }]
     },
@@ -255,7 +255,7 @@ function drawAquaTypeCharts(filterType) {
       datasets: [{
         label: 'อุณหภูมิ (°C)',
         data: tempData,
-        backgroundColor: '#f59e0b',
+        backgroundColor: '#06b6d4',
         borderRadius: 6
       }]
     },

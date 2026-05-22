@@ -6,12 +6,37 @@
 .search-section,
 .network-map-section,
 .friends-list-section {
+  position: relative;
   background: var(--color-card);
-  padding: 30px;
-  border-radius: var(--radius-card);
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-card);
+  padding: 32px;
+  border-radius: 20px;
+  border: 1px solid rgba(14, 165, 233, 0.08);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.03),
+    0 8px 24px rgba(14, 165, 233, 0.08);
   margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.search-section::before,
+.network-map-section::before,
+.friends-list-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.07) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(50px, -50px);
+}
+
+.search-section > *,
+.network-map-section > *,
+.friends-list-section > * {
+  position: relative;
+  z-index: 1;
 }
 
 .search-section h2,
@@ -20,6 +45,7 @@
   color: var(--color-text);
   margin-bottom: 8px;
   font-size: 22px;
+  font-weight: 700;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -32,7 +58,7 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 4px 10px;
+  gap: 4px 12px;
 }
 
 /* ---------- Search box ---------- */
@@ -50,13 +76,15 @@
   font-size: 16px;
   font-family: inherit;
   text-transform: uppercase;
-  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+  background: #fbfdfe;
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease), background 0.2s ease;
 }
 
 .search-box input:focus {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.1);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.12);
 }
 
 .search-box button {
@@ -67,16 +95,18 @@
 
 /* ---------- Search Result Card ---------- */
 .farm-result {
-  background: var(--color-bg);
-  padding: 22px;
-  border-radius: 12px;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  padding: 24px;
+  border-radius: 16px;
   margin-top: 16px;
+  border: 1px solid rgba(14, 165, 233, 0.15);
   border-left: 4px solid var(--color-primary);
 }
 
 .farm-result h3 {
   color: var(--color-text);
   margin-bottom: 8px;
+  font-weight: 700;
 }
 
 .farm-result p {
@@ -121,8 +151,8 @@
 /* ---------- Network Map ---------- */
 #friendsMap {
   height: 420px;
-  border-radius: 12px;
-  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  border: 1px solid rgba(14, 165, 233, 0.12);
   z-index: 1;
 }
 
@@ -133,8 +163,9 @@
   padding: 4px 13px;
   border-radius: 20px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   margin-left: 4px;
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
 }
 
 .friends-grid {
@@ -145,23 +176,25 @@
 }
 
 .friend-card {
-  background: var(--color-bg);
-  padding: 22px;
-  border-radius: 12px;
-  border: 1px solid var(--color-border);
+  background: var(--color-card);
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(14, 165, 233, 0.1);
   border-left: 4px solid var(--color-primary);
+  box-shadow: 0 4px 16px rgba(14, 165, 233, 0.06);
   transition: all 0.3s var(--ease);
 }
 
 .friend-card:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-hover);
+  box-shadow: 0 16px 36px rgba(14, 165, 233, 0.14);
 }
 
 .friend-card h4 {
   color: var(--color-text);
   margin-bottom: 5px;
   font-size: 16px;
+  font-weight: 700;
 }
 
 .friend-card .friend-id {
@@ -181,8 +214,10 @@
 }
 
 .friend-card .friend-do {
-  font-size: 24px;
-  font-weight: 700;
+  font-family: 'Prompt', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
   margin: 10px 0;
 }
 
@@ -196,10 +231,11 @@
   padding: 9px;
   font-size: 13px;
   margin-top: 12px;
+  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.25);
 }
 
 .friend-card .btn-remove:hover {
-  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+  box-shadow: 0 10px 24px rgba(239, 68, 68, 0.35);
 }
 
 .no-friends {

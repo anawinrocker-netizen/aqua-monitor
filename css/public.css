@@ -5,35 +5,77 @@
 /* ---------- Hero ---------- */
 .public-hero {
   position: relative;
-  background: var(--gradient-hero);
+  background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 35%, #0284c7 70%, #0ea5e9 100%);
   color: white;
-  padding: 80px 20px 110px;
+  padding: 100px 20px 150px;
   text-align: center;
   overflow: hidden;
 }
 
+.public-hero::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  right: -120px;
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(40px);
+  animation: float 9s ease-in-out infinite;
+}
+
+.public-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -160px;
+  left: -160px;
+  width: 580px;
+  height: 580px;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.25) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(60px);
+  animation: float 11s ease-in-out infinite reverse;
+}
+
 .public-hero h1 {
-  font-size: 42px;
+  font-size: clamp(28px, 4.5vw, 48px);
   font-weight: 800;
-  margin-bottom: 15px;
+  margin-bottom: 16px;
   position: relative;
   z-index: 2;
-  letter-spacing: -0.3px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(180deg, #ffffff 0%, #e0f2fe 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .public-hero p {
-  font-size: 18px;
-  opacity: 0.92;
+  font-size: clamp(15px, 2vw, 19px);
+  opacity: 0.95;
   max-width: 720px;
   margin: 0 auto;
-  font-weight: 300;
+  line-height: 1.7;
   position: relative;
   z-index: 2;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Wave divider */
+.hero-wave {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100px;
+  z-index: 1;
 }
 
 /* ---------- Stats ---------- */
 .public-stats {
-  padding: 64px 20px;
+  padding: 72px 20px;
   background: var(--color-bg);
 }
 
@@ -42,45 +84,76 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 22px;
+  gap: 24px;
 }
 
 .stat-card {
+  position: relative;
   background: var(--color-card);
-  padding: 30px 26px;
-  border-radius: var(--radius-card);
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-card);
+  padding: 32px 26px;
+  border-radius: 20px;
+  border: 1px solid rgba(14, 165, 233, 0.1);
+  box-shadow:
+    0 1px 3px rgba(14, 165, 233, 0.05),
+    0 8px 24px rgba(14, 165, 233, 0.08);
   text-align: center;
-  transition: all 0.3s var(--ease);
+  transition: all 0.4s var(--ease);
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #0ea5e9, #06b6d4);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
 }
 
 .stat-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-hover);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(14, 165, 233, 0.15);
+}
+
+.stat-card:hover::before {
+  transform: scaleX(1);
 }
 
 .stat-icon {
-  width: 56px;
-  height: 56px;
-  margin: 0 auto 14px;
-  border-radius: 50%;
-  background: rgba(14, 165, 233, 0.12);
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 16px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.stat-icon i[data-lucide],
+.stat-icon svg {
+  width: 30px;
+  height: 30px;
+  color: #0369a1;
+}
+
 .stat-value {
+  font-family: 'Prompt', sans-serif;
   font-size: 38px;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--color-primary-dark);
+  letter-spacing: -0.02em;
   margin-bottom: 4px;
 }
 
 .stat-label {
   color: var(--color-text-muted);
   font-size: 14px;
+  font-weight: 500;
 }
 
 /* ---------- Section ---------- */
@@ -91,8 +164,8 @@
 
 .section-container h2 {
   text-align: center;
-  font-size: 32px;
-  font-weight: 700;
+  font-size: clamp(24px, 3.5vw, 34px);
+  font-weight: 800;
   color: var(--color-text);
   margin-bottom: 10px;
 }
@@ -100,31 +173,31 @@
 .section-desc {
   text-align: center;
   color: var(--color-text-muted);
-  margin-bottom: 30px;
+  margin-bottom: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 4px 10px;
+  gap: 4px 12px;
 }
 
 /* ---------- Map ---------- */
 .map-section {
-  padding: 70px 20px;
+  padding: 80px 20px;
   background: var(--color-card);
 }
 
 #map {
   height: 500px;
-  border-radius: var(--radius-card);
-  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  border: 1px solid rgba(14, 165, 233, 0.12);
   box-shadow: var(--shadow-card);
   z-index: 1;
 }
 
 /* ---------- Charts ---------- */
 .charts-section {
-  padding: 70px 20px;
+  padding: 80px 20px;
   background: var(--color-bg);
 }
 
@@ -137,9 +210,14 @@
 .chart-box {
   background: var(--color-card);
   padding: 30px;
-  border-radius: var(--radius-card);
-  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  border: 1px solid rgba(14, 165, 233, 0.1);
   box-shadow: var(--shadow-card);
+  transition: box-shadow 0.3s ease;
+}
+
+.chart-box:hover {
+  box-shadow: var(--shadow-hover);
 }
 
 .chart-box h3 {
@@ -147,6 +225,7 @@
   margin-bottom: 20px;
   color: var(--color-text);
   font-size: 17px;
+  font-weight: 700;
 }
 
 .chart-wrap {
@@ -166,7 +245,8 @@
 
 .filter-header h2 {
   margin: 0;
-  font-size: 28px;
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 800;
   color: var(--color-text);
 }
 
@@ -186,7 +266,7 @@
 .chart-select:focus {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.1);
+  box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.12);
 }
 
 /* ---------- Popup marker ---------- */
@@ -217,12 +297,13 @@
 }
 
 @media (max-width: 768px) {
-  .public-hero h1 { font-size: 28px; }
-  .public-hero p { font-size: 15px; }
-  .stat-value { font-size: 30px; }
   #map { height: 350px; }
   .charts-grid { grid-template-columns: 1fr; }
-  .filter-header h2 { font-size: 24px; }
+  .map-section,
+  .charts-section,
+  .public-stats {
+    padding: 56px 20px;
+  }
 }
 
 @media (max-width: 480px) {
