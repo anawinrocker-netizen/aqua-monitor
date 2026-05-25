@@ -76,7 +76,15 @@
 /* ---------- Stats ---------- */
 .public-stats {
   padding: 72px 20px;
-  background: var(--color-bg);
+  background: linear-gradient(
+    180deg,
+    rgba(224, 242, 254, 0.4) 0%,
+    rgba(255, 255, 255, 0.5) 100%
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
 }
 
 .stats-grid {
@@ -89,16 +97,22 @@
 
 .stat-card {
   position: relative;
-  background: var(--color-card);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   padding: 32px 26px;
   border-radius: 20px;
-  border: 1px solid rgba(14, 165, 233, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.6);
   box-shadow:
-    0 1px 3px rgba(14, 165, 233, 0.05),
-    0 8px 24px rgba(14, 165, 233, 0.08);
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 10px 30px rgba(14, 165, 233, 0.08);
   text-align: center;
   transition: all 0.4s var(--ease);
   overflow: hidden;
+}
+
+.stat-card:hover {
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .stat-card::before {
@@ -184,7 +198,11 @@
 /* ---------- Map ---------- */
 .map-section {
   padding: 80px 20px;
-  background: var(--color-card);
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
 }
 
 #map {
@@ -198,7 +216,15 @@
 /* ---------- Charts ---------- */
 .charts-section {
   padding: 80px 20px;
-  background: var(--color-bg);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(207, 250, 254, 0.3) 100%
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
 }
 
 .charts-grid {
@@ -208,11 +234,15 @@
 }
 
 .chart-box {
-  background: var(--color-card);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   padding: 30px;
   border-radius: 20px;
-  border: 1px solid rgba(14, 165, 233, 0.1);
-  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 10px 30px rgba(14, 165, 233, 0.08);
   transition: box-shadow 0.3s ease;
 }
 

@@ -12,6 +12,7 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="landing-body">
+  <div class="bg-animated"></div>
 
   <!-- Navbar -->
   <nav class="navbar">
@@ -196,6 +197,36 @@
     });
 
     lucide.createIcons();
+  </script>
+  <script>
+    (function() {
+      const bgAnimated = document.querySelector('.bg-animated');
+      if (!bgAnimated) return;
+
+      let ticking = false;
+
+      function updateBackground() {
+        const scrollY = window.scrollY;
+        const winHeight = window.innerHeight;
+        const docHeight = document.documentElement.scrollHeight - winHeight;
+        const scrollPercent = docHeight > 0 ? Math.min(scrollY / docHeight, 1) : 0;
+
+        const hueRotate = scrollPercent * 30;
+        bgAnimated.style.filter = `hue-rotate(${hueRotate}deg)`;
+
+        const translateY = scrollY * 0.1;
+        bgAnimated.style.transform = `translateY(${translateY}px)`;
+
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(updateBackground);
+          ticking = true;
+        }
+      });
+    })();
   </script>
 </body>
 </html>
