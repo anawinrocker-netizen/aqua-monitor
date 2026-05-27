@@ -22,6 +22,22 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="landing-body">
+  <div class="bubbles-container" aria-hidden="true">
+    <div class="bubble" style="--size:20px; --left:10%; --delay:0s; --duration:12s;"></div>
+    <div class="bubble" style="--size:35px; --left:25%; --delay:2s; --duration:14s;"></div>
+    <div class="bubble" style="--size:15px; --left:45%; --delay:4s; --duration:10s;"></div>
+    <div class="bubble" style="--size:25px; --left:65%; --delay:1s; --duration:13s;"></div>
+    <div class="bubble" style="--size:18px; --left:80%; --delay:3s; --duration:11s;"></div>
+    <div class="bubble" style="--size:30px; --left:90%; --delay:5s; --duration:15s;"></div>
+    <div class="bubble" style="--size:12px; --left:15%; --delay:6s; --duration:10s;"></div>
+    <div class="bubble" style="--size:22px; --left:55%; --delay:7s; --duration:12s;"></div>
+  </div>
+  <div class="aurora-bg" aria-hidden="true">
+    <div class="aurora-blob aurora-blob-1"></div>
+    <div class="aurora-blob aurora-blob-2"></div>
+    <div class="aurora-blob aurora-blob-3"></div>
+    <div class="aurora-blob aurora-blob-4"></div>
+  </div>
   <div class="bg-animated"></div>
 
   <!-- Navbar -->
@@ -42,8 +58,9 @@
   <section class="public-hero">
     <h1>ข้อมูลคุณภาพน้ำของประเทศไทย</h1>
     <p>ฐานข้อมูลค่าออกซิเจนละลายน้ำและอุณหภูมิจากเครือข่ายฟาร์มทั่วประเทศ</p>
-    <svg class="hero-wave" viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,40 C320,100 720,0 1440,60 L1440,100 L0,100 Z" fill="#f8fafc"/>
+    <svg class="hero-wave" viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute; bottom:-1px; left:0; width:100%; height:120px; z-index:2;">
+      <path d="M0,60 C320,120 720,0 1440,80 L1440,120 L0,120 Z" fill="rgba(240,249,255,0.6)" />
+      <path d="M0,80 C480,40 960,120 1440,60 L1440,120 L0,120 Z" fill="rgba(255,255,255,0.4)" />
     </svg>
   </section>
 
@@ -192,28 +209,84 @@
   </footer>
 
   <script>
-    // Scroll-reveal animations
-    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-    const observer = new IntersectionObserver((entries) => {
+    // Premium scroll-reveal
+    const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
+          entry.target.classList.add('revealed');
         }
       });
-    }, observerOptions);
+    }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
 
-    document.querySelectorAll('.feature-card, .step-card, .stat-card').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(30px)';
-      el.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-      observer.observe(el);
+    document.querySelectorAll('.feature-card, .step-card, .stat-card, .chart-box, .section-title').forEach((el, i) => {
+      el.classList.add('reveal-on-scroll');
+      el.style.transitionDelay = (i * 0.1) + 's';
+      revealObserver.observe(el);
     });
 
     // Navbar scroll effect
     window.addEventListener('scroll', () => {
       document.querySelector('.navbar')?.classList.toggle('scrolled', window.scrollY > 20);
     });
+
+    // Magnetic buttons
+    document.querySelectorAll('.btn-hero-primary, .btn-hero-secondary, .btn-primary').forEach(btn => {
+      btn.addEventListener('mousemove', e => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = '';
+      });
+    });
+
+    // Animated count-up for stats
+    (function() {
+      function animateValue(element, start, end, duration) {
+        const range = end - start;
+        if (range === 0) { element.textContent = end; return; }
+        const stepTime = Math.max(8, Math.abs(Math.floor(duration / Math.abs(range))));
+        const step = Math.max(1, Math.ceil(Math.abs(range) / 100)) * (range > 0 ? 1 : -1);
+        let current = start;
+        const isFloat = String(end).includes('.');
+        const timer = setInterval(() => {
+          current += step;
+          if ((step > 0 && current >= end) || (step < 0 && current <= end)) {
+            current = end;
+            clearInterval(timer);
+          }
+          element.textContent = isFloat ? current.toFixed(1) : Math.floor(current).toLocaleString();
+        }, stepTime);
+      }
+
+      const statObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !entry.target.dataset.animated) {
+            const raw = (entry.target.textContent || '').replace(/,/g, '').trim();
+            const target = parseFloat(raw);
+            if (!isNaN(target) && raw !== '--' && raw !== '') {
+              entry.target.dataset.animated = 'true';
+              animateValue(entry.target, 0, target, 1500);
+            }
+          }
+        });
+      }, { threshold: 0.5 });
+
+      // Observe both existing values and re-observe after public.js renders
+      function bind() {
+        document.querySelectorAll('.stat-number, .stat-value').forEach(el => statObserver.observe(el));
+      }
+      bind();
+      // Re-bind when stats are populated by public.js (poll briefly)
+      let tries = 0;
+      const reBind = setInterval(() => {
+        tries++;
+        bind();
+        if (tries > 20) clearInterval(reBind);
+      }, 500);
+    })();
 
     lucide.createIcons();
   </script>

@@ -146,13 +146,35 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #0369a1;
 }
 
 .stat-icon i[data-lucide],
 .stat-icon svg {
   width: 30px;
   height: 30px;
+  color: inherit;
+}
+
+/* Alternating stat-card icon palettes */
+.stat-card:nth-child(1) .stat-icon {
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%) !important;
   color: #0369a1;
+}
+
+.stat-card:nth-child(2) .stat-icon {
+  background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%) !important;
+  color: #ea580c;
+}
+
+.stat-card:nth-child(3) .stat-icon {
+  background: linear-gradient(135deg, #cffafe 0%, #a5f3fc 100%) !important;
+  color: #0e7490;
+}
+
+.stat-card:nth-child(4) .stat-icon {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%) !important;
+  color: #b45309;
 }
 
 .stat-value {

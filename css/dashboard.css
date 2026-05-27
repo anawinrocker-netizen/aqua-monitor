@@ -179,7 +179,28 @@
 .status-card .icon-wrapper svg {
   width: 24px;
   height: 24px;
+  color: inherit;
+}
+
+/* Alternating icon palettes for visual rhythm */
+.status-card:nth-child(1) .icon-wrapper {
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%) !important;
   color: #0369a1;
+}
+
+.status-card:nth-child(2) .icon-wrapper {
+  background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%) !important;
+  color: #ea580c;
+}
+
+.status-card:nth-child(3) .icon-wrapper {
+  background: linear-gradient(135deg, #cffafe 0%, #a5f3fc 100%) !important;
+  color: #0e7490;
+}
+
+.status-card:nth-child(4) .icon-wrapper {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%) !important;
+  color: #b45309;
 }
 
 .status-label {
