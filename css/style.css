@@ -49,12 +49,9 @@ body {
   color: #0f172a;
   background: linear-gradient(
     180deg,
-    #0c4a6e 0%,
-    #0369a1 20%,
-    #0284c7 40%,
-    #0369a1 60%,
-    #0c4a6e 80%,
-    #082f49 100%
+    #f0f9ff 0%,
+    #e0f2fe 50%,
+    #f0f9ff 100%
   ) !important;
   background-attachment: fixed !important;
   background-size: 100% 100% !important;
@@ -62,42 +59,14 @@ body {
   overflow-x: hidden;
 }
 
-/* ---------- Aurora background (single subtle coral accent) ---------- */
-.aurora-bg {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  overflow: hidden;
-  pointer-events: none;
-}
+/* ---------- Aurora background disabled in mixed-theme layout ---------- */
+.aurora-bg { display: none !important; }
 
-.aurora-blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(120px);
-}
-
-.aurora-blob-2 {
-  width: 350px;
-  height: 350px;
-  background: radial-gradient(circle, rgba(249, 115, 22, 0.35) 0%, transparent 70%);
-  top: 40%;
-  right: -50px;
-  opacity: 0.6;
-  animation: none;
-}
-
-.aurora-blob-1,
-.aurora-blob-3,
-.aurora-blob-4 {
-  display: none !important;
-}
-
-/* ---------- Floating bubbles (water theme) ---------- */
+/* ---------- Floating bubbles (scoped to dark sections only) ---------- */
 .bubbles-container {
-  position: fixed;
+  position: absolute;
   inset: 0;
-  z-index: -1;
+  z-index: 1;
   pointer-events: none;
   overflow: hidden;
 }
@@ -147,38 +116,96 @@ body {
   }
 }
 
-/* ---------- Sections become lighter glass on dark bg ---------- */
+/* ==========================================================================
+   MIXED THEME — dark hero/cta/footer + light content sections
+   ========================================================================== */
+
+/* ---------- Dark sections (hero, cta, footer) ---------- */
+.hero,
+.cta,
+.footer,
+.site-footer,
+.public-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero > *,
+.cta > *,
+.footer > *,
+.site-footer > *,
+.public-hero > * {
+  position: relative;
+  z-index: 2;
+}
+
+.hero .bubbles-container,
+.cta .bubbles-container,
+.footer .bubbles-container,
+.site-footer .bubbles-container,
+.public-hero .bubbles-container,
+.dashboard-header .bubbles-container {
+  z-index: 1;
+}
+
+/* ---------- Light content sections — transparent over light body ---------- */
 .features, .how-it-works, .public-stats, .charts-section,
-.dashboard-main, .map-section, .stats-section {
-  background: rgba(255, 255, 255, 0.05) !important;
-  backdrop-filter: blur(20px) saturate(150%);
-  -webkit-backdrop-filter: blur(20px) saturate(150%);
+.dashboard-main, .map-section, .stats-section,
+.chart-section, .search-section, .network-map-section, .friends-list-section {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
   position: relative;
 }
 
-.cta {
-  background: linear-gradient(135deg, rgba(12, 74, 110, 0.95) 0%, rgba(3, 105, 161, 0.95) 100%) !important;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-}
-
-/* ---------- Text overrides for dark background ---------- */
+/* ---------- Section headings on light background ---------- */
 .section-title,
 .features h2,
 .how-it-works h2,
-.public-stats h2,
-section > h2,
-section > p {
-  color: white !important;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  -webkit-text-fill-color: white !important;
-  background: none !important;
-  -webkit-background-clip: border-box !important;
-  background-clip: border-box !important;
+.public-stats h2 {
+  color: #0c4a6e !important;
+  text-shadow: none !important;
+  background: linear-gradient(135deg, #0c4a6e 0%, #0ea5e9 60%, #f97316 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.section-subtitle {
-  color: rgba(255, 255, 255, 0.85) !important;
+.section-subtitle,
+.features > .features-container > p,
+.how-it-works > .features-container > p {
+  color: #475569 !important;
+  text-shadow: none !important;
+}
+
+/* ---------- Text inside dark sections stays white ---------- */
+.hero, .hero *,
+.cta, .cta *,
+.public-hero, .public-hero *,
+.dashboard-header, .dashboard-header * {
+  color: white;
+}
+
+.hero h1, .hero h2, .hero p,
+.cta h1, .cta h2, .cta p,
+.public-hero h1, .public-hero h2, .public-hero p {
+  color: white !important;
+}
+
+/* ---------- Cards in light sections — full white background ---------- */
+.feature-card, .status-card, .stat-card, .chart-box,
+.farm-result, .friend-card, .step-card, .auth-card,
+.chart-section, .search-section, .network-map-section, .friends-list-section {
+  background: #ffffff !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid rgba(14, 165, 233, 0.15) !important;
+  box-shadow:
+    0 1px 3px rgba(14, 165, 233, 0.05),
+    0 8px 24px rgba(14, 165, 233, 0.08) !important;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .feature-card, .feature-card *,
@@ -187,6 +214,7 @@ section > p {
 .chart-box, .chart-box *,
 .farm-result, .farm-result *,
 .friend-card, .friend-card *,
+.step-card, .step-card *,
 .card, .card *,
 .auth-card, .auth-card * {
   color: #0f172a;
@@ -195,65 +223,101 @@ section > p {
 
 .feature-card h3,
 .status-card h3,
-.stat-card h3 {
+.stat-card h3,
+.step-card h3 {
   color: #0f172a !important;
 }
 
 .feature-card p,
+.step-card p,
 .card p,
-.status-label {
+.status-label,
+.stat-card .stat-label {
   color: #64748b !important;
 }
 
-/* ---------- Cards — more opaque for dark bg contrast ---------- */
-.feature-card, .status-card, .stat-card, .chart-box,
-.farm-result, .friend-card, .card, .auth-card,
-.chart-section, .search-section, .network-map-section, .friends-list-section {
-  background: rgba(255, 255, 255, 0.95) !important;
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.6) !important;
-  box-shadow:
-    0 4px 20px rgba(0, 0, 0, 0.15),
-    0 1px 3px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
-
-/* Shine sweep on hover */
-.feature-card::after, .status-card::after, .stat-card::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    115deg,
-    transparent 0%,
-    transparent 40%,
-    rgba(255, 255, 255, 0.5) 50%,
-    transparent 60%,
-    transparent 100%
-  );
-  transform: translateX(-100%);
-  transition: transform 0.8s ease;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.feature-card:hover::after, .status-card:hover::after, .stat-card:hover::after {
-  transform: translateX(100%);
-}
-
-.feature-card:hover, .status-card:hover, .stat-card:hover {
+.feature-card:hover,
+.status-card:hover,
+.stat-card:hover,
+.step-card:hover {
   transform: translateY(-8px);
-  background: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(14, 165, 233, 0.3) !important;
   box-shadow:
-    0 20px 60px rgba(14, 165, 233, 0.15),
+    0 20px 50px rgba(14, 165, 233, 0.15),
     0 8px 24px rgba(249, 115, 22, 0.08) !important;
+}
+
+/* ---------- Step cards (วิธีการทำงาน) — restored frame ---------- */
+.step-card,
+.steps .card,
+.how-it-works .card,
+.step {
+  background: #ffffff !important;
+  border: 1px solid rgba(14, 165, 233, 0.15) !important;
+  border-radius: 20px !important;
+  padding: 40px 28px !important;
+  text-align: center;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 8px 24px rgba(14, 165, 233, 0.08) !important;
+  transition: all 0.3s ease;
+}
+
+.step-card .step-number,
+.step .step-number {
+  width: 64px !important;
+  height: 64px !important;
+  background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%) !important;
+  color: white !important;
+  border-radius: 20px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 800;
+  margin: 0 auto 20px;
+  box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
+}
+
+.step-card:nth-child(2) .step-number,
+.step:nth-child(2) .step-number {
+  background: linear-gradient(135deg, #fb923c 0%, #ea580c 100%) !important;
+  box-shadow: 0 10px 30px rgba(249, 115, 22, 0.3) !important;
+}
+
+.step-card:nth-child(4) .step-number,
+.step:nth-child(4) .step-number {
+  background: linear-gradient(135deg, #06b6d4 0%, #0e7490 100%) !important;
+  box-shadow: 0 10px 30px rgba(6, 182, 212, 0.3) !important;
+}
+
+/* ---------- Footer — deep dark ---------- */
+.footer,
+.site-footer {
+  background: linear-gradient(180deg, #082f49 0%, #020617 100%) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.footer *,
+.site-footer * {
+  color: inherit;
+}
+
+.footer h4,
+.footer strong,
+.site-footer h4,
+.site-footer .footer-brand {
+  color: white !important;
+}
+
+.footer a,
+.site-footer a {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.footer a:hover,
+.site-footer a:hover {
+  color: #0ea5e9 !important;
 }
 
 /* ---------- Scroll reveal ---------- */
