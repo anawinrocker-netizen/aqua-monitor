@@ -64,34 +64,38 @@ body {
 
 /* ---------- Floating bubbles (scoped to dark sections only) ---------- */
 .bubbles-container {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  overflow: hidden;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
+  z-index: 1 !important;
 }
 
 .bubble {
-  position: absolute;
-  bottom: -100px;
-  left: var(--left);
-  width: var(--size);
-  height: var(--size);
+  position: absolute !important;
+  bottom: -100px !important;
+  left: var(--left) !important;
+  width: var(--size) !important;
+  height: var(--size) !important;
   background: radial-gradient(
     circle at 30% 30%,
     rgba(255, 255, 255, 0.95) 0%,
     rgba(186, 230, 253, 0.7) 40%,
     rgba(125, 211, 252, 0.4) 70%,
     rgba(56, 189, 248, 0.2) 100%
-  );
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 50%;
+  ) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  border-radius: 50% !important;
   box-shadow:
     inset 0 0 20px rgba(255, 255, 255, 0.3),
-    0 0 15px rgba(186, 230, 253, 0.3);
-  animation: bubbleRise var(--duration) linear infinite;
-  animation-delay: var(--delay);
+    0 0 15px rgba(186, 230, 253, 0.3) !important;
+  animation: bubbleRise var(--duration, 15s) linear infinite !important;
+  animation-delay: var(--delay, 0s) !important;
   opacity: 0;
+  display: block !important;
 }
 
 @keyframes bubbleRise {
@@ -125,27 +129,22 @@ body {
 .cta,
 .footer,
 .site-footer,
-.public-hero {
-  position: relative;
-  overflow: hidden;
+.public-hero,
+.dashboard-header {
+  position: relative !important;
+  overflow: hidden !important;
 }
 
-.hero > *,
-.cta > *,
-.footer > *,
-.site-footer > *,
-.public-hero > * {
+/* Promote direct children above the bubble layer, EXCEPT the bubble layer itself
+   (applying position:relative to .bubbles-container would break its full-section fill) */
+.hero > *:not(.bubbles-container),
+.cta > *:not(.bubbles-container),
+.footer > *:not(.bubbles-container),
+.site-footer > *:not(.bubbles-container),
+.public-hero > *:not(.bubbles-container),
+.dashboard-header > *:not(.bubbles-container) {
   position: relative;
   z-index: 2;
-}
-
-.hero .bubbles-container,
-.cta .bubbles-container,
-.footer .bubbles-container,
-.site-footer .bubbles-container,
-.public-hero .bubbles-container,
-.dashboard-header .bubbles-container {
-  z-index: 1;
 }
 
 /* ---------- Light content sections — transparent over light body ---------- */
