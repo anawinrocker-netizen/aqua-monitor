@@ -42,6 +42,72 @@ let allFarmLatest = {};
 let regionDOChart = null, regionTempChart = null;
 let aquaDOChart = null, aquaTempChart = null;
 
+// ==================== Chart.js premium styling (visual only) ====================
+// NOTE: data & queries below are unchanged — these helpers only affect appearance.
+Chart.defaults.font.family = "'IBM Plex Sans Thai','Prompt',sans-serif";
+Chart.defaults.font.size = 13;
+Chart.defaults.color = '#64748b';
+
+const OCEAN_BAR = { from: '#0284c7', to: '#7dd3fc' };
+const CYAN_BAR  = { from: '#0891b2', to: '#67e8f9' };
+
+function makeBarGradient(ctx, area, from, to) {
+  if (!area) return from; // chartArea not ready on first paint
+  const g = ctx.createLinearGradient(0, area.bottom, 0, area.top);
+  g.addColorStop(0, from);
+  g.addColorStop(1, to);
+  return g;
+}
+
+function barDataset(label, data, palette) {
+  return {
+    label: label,
+    data: data,
+    backgroundColor: (c) => makeBarGradient(c.chart.ctx, c.chart.chartArea, palette.from, palette.to),
+    hoverBackgroundColor: (c) => makeBarGradient(c.chart.ctx, c.chart.chartArea, palette.from, palette.to),
+    borderRadius: 8,
+    borderSkipped: false,
+    maxBarThickness: 56
+  };
+}
+
+function chartOptions(beginAtZero, unit) {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    layout: { padding: { top: 8, right: 6, bottom: 2, left: 2 } },
+    animation: { duration: 700, easing: 'easeOutQuart' },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: 'rgba(12,74,110,0.96)',
+        padding: 12,
+        cornerRadius: 10,
+        displayColors: false,
+        caretSize: 6,
+        titleFont: { family: "'Prompt',sans-serif", weight: '600', size: 13 },
+        bodyFont: { size: 13 },
+        callbacks: {
+          label: (item) => `${item.formattedValue}${unit ? ' ' + unit : ''}`
+        }
+      }
+    },
+    scales: {
+      x: {
+        border: { display: false },
+        grid: { display: false },
+        ticks: { color: '#64748b', maxRotation: 0, autoSkip: true }
+      },
+      y: {
+        beginAtZero: beginAtZero,
+        border: { display: false },
+        grid: { color: 'rgba(14,165,233,0.10)', drawTicks: false },
+        ticks: { color: '#94a3b8', padding: 8, maxTicksLimit: 6 }
+      }
+    }
+  };
+}
+
 // ==================== Load Data ====================
 async function loadPublicData() {
   try {
@@ -159,19 +225,9 @@ function drawRegionCharts(filterRegion) {
     type: 'bar',
     data: {
       labels: labels,
-      datasets: [{
-        label: 'DO (mg/L)',
-        data: doData,
-        backgroundColor: '#0ea5e9',
-        borderRadius: 6
-      }]
+      datasets: [barDataset('DO (mg/L)', doData, OCEAN_BAR)]
     },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: { y: { beginAtZero: true } }
-    }
+    options: chartOptions(true, 'mg/L')
   });
 
   // Temp Chart
@@ -180,19 +236,9 @@ function drawRegionCharts(filterRegion) {
     type: 'bar',
     data: {
       labels: labels,
-      datasets: [{
-        label: 'อุณหภูมิ (°C)',
-        data: tempData,
-        backgroundColor: '#0ea5e9',
-        borderRadius: 6
-      }]
+      datasets: [barDataset('อุณหภูมิ (°C)', tempData, OCEAN_BAR)]
     },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: { y: { beginAtZero: false } }
-    }
+    options: chartOptions(false, '°C')
   });
 }
 
@@ -232,19 +278,9 @@ function drawAquaTypeCharts(filterType) {
     type: 'bar',
     data: {
       labels: labels,
-      datasets: [{
-        label: 'DO (mg/L)',
-        data: doData,
-        backgroundColor: '#06b6d4',
-        borderRadius: 6
-      }]
+      datasets: [barDataset('DO (mg/L)', doData, CYAN_BAR)]
     },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: { y: { beginAtZero: true } }
-    }
+    options: chartOptions(true, 'mg/L')
   });
 
   if (aquaTempChart) aquaTempChart.destroy();
@@ -252,19 +288,9 @@ function drawAquaTypeCharts(filterType) {
     type: 'bar',
     data: {
       labels: labels,
-      datasets: [{
-        label: 'อุณหภูมิ (°C)',
-        data: tempData,
-        backgroundColor: '#06b6d4',
-        borderRadius: 6
-      }]
+      datasets: [barDataset('อุณหภูมิ (°C)', tempData, CYAN_BAR)]
     },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: { y: { beginAtZero: false } }
-    }
+    options: chartOptions(false, '°C')
   });
 }
 

@@ -3,207 +3,280 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aqua Monitor - ระบบควบคุมออกซิเจนละลายน้ำอัตโนมัติ</title>
+  <title>Aqua Monitor — ระบบควบคุมออกซิเจนละลายน้ำอัจฉริยะเชิงรุก</title>
+  <meta name="description" content="แพลตฟอร์มเครือข่ายข้อมูลคุณภาพน้ำ ควบคุมออกซิเจนละลายน้ำอัตโนมัติแบบเชิงรุก เพื่อเกษตรกรผู้เพาะเลี้ยงสัตว์น้ำของประเทศไทย">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Prompt:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/landing.css">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/index.css">
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="landing-body">
+<body>
 
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="navbar-content">
-      <a href="index.html" class="logo">
-        <i data-lucide="waves" class="icon-logo"></i> Aqua Monitor
+  <!-- ==================== Navbar ==================== -->
+  <nav class="site-nav" id="siteNav">
+    <div class="container">
+      <a href="index.html" class="brand">
+        <i data-lucide="waves"></i> Aqua Monitor
       </a>
-      <div class="nav-buttons">
-        <a href="public.html" class="btn-nav-secondary">ข้อมูลสาธารณะ</a>
-        <a href="login.html" class="btn-nav-secondary">เข้าสู่ระบบ</a>
-        <a href="register.html" class="btn-nav-primary">สมัครสมาชิก</a>
+      <button class="nav-toggle" id="navToggle" aria-label="เปิดเมนู" aria-expanded="false">
+        <i data-lucide="menu"></i>
+      </button>
+      <div class="nav-links" id="navLinks">
+        <a href="public.html">ข้อมูลสาธารณะ</a>
+        <a href="login.html">เข้าสู่ระบบ</a>
+        <a href="register.html" class="btn-primary">สมัครสมาชิก</a>
       </div>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="bubbles-container" aria-hidden="true">
-      <div class="bubble" style="--size:30px; --left:5%; --delay:0s; --duration:15s;"></div>
-      <div class="bubble" style="--size:52px; --left:18%; --delay:3s; --duration:15s;"></div>
-      <div class="bubble" style="--size:22px; --left:30%; --delay:6s; --duration:15s;"></div>
-      <div class="bubble" style="--size:45px; --left:42%; --delay:1s; --duration:15s;"></div>
-      <div class="bubble" style="--size:38px; --left:55%; --delay:9s; --duration:15s;"></div>
-      <div class="bubble" style="--size:27px; --left:68%; --delay:4s; --duration:15s;"></div>
-      <div class="bubble" style="--size:48px; --left:80%; --delay:7s; --duration:15s;"></div>
-      <div class="bubble" style="--size:33px; --left:92%; --delay:2s; --duration:15s;"></div>
-      <div class="bubble" style="--size:25px; --left:12%; --delay:10s; --duration:15s;"></div>
-      <div class="bubble" style="--size:40px; --left:60%; --delay:12s; --duration:15s;"></div>
-      <div class="bubble" style="--size:35px; --left:25%; --delay:5s; --duration:15s;"></div>
-      <div class="bubble" style="--size:42px; --left:75%; --delay:11s; --duration:15s;"></div>
+  <!-- ==================== Hero ==================== -->
+  <header class="hero on-dark">
+    <div class="bubbles" aria-hidden="true">
+      <span class="bubble" style="--size:28px;--left:6%;--delay:0s;--duration:16s;"></span>
+      <span class="bubble" style="--size:48px;--left:15%;--delay:4s;--duration:19s;"></span>
+      <span class="bubble" style="--size:20px;--left:24%;--delay:8s;--duration:14s;"></span>
+      <span class="bubble" style="--size:36px;--left:33%;--delay:2s;--duration:17s;"></span>
+      <span class="bubble" style="--size:24px;--left:44%;--delay:10s;--duration:15s;"></span>
+      <span class="bubble" style="--size:42px;--left:53%;--delay:5s;--duration:20s;"></span>
+      <span class="bubble" style="--size:18px;--left:62%;--delay:1s;--duration:13s;"></span>
+      <span class="bubble" style="--size:34px;--left:70%;--delay:7s;--duration:18s;"></span>
+      <span class="bubble" style="--size:26px;--left:79%;--delay:3s;--duration:16s;"></span>
+      <span class="bubble" style="--size:46px;--left:88%;--delay:9s;--duration:21s;"></span>
+      <span class="bubble" style="--size:22px;--left:94%;--delay:6s;--duration:15s;"></span>
+      <span class="bubble" style="--size:30px;--left:38%;--delay:12s;--duration:19s;"></span>
     </div>
-    <div class="hero-content">
-      <h1>ระบบควบคุมออกซิเจน<br>ละลายน้ำอัตโนมัติ</h1>
-      <p class="hero-subtitle">
-        แพลตฟอร์มเครือข่ายข้อมูลคุณภาพน้ำเพื่อการเพาะเลี้ยงสัตว์น้ำของประเทศไทย
-      </p>
-      <div class="hero-buttons">
-        <a href="register.html" class="btn-hero-primary">
-          เริ่มใช้งานฟรี <i data-lucide="arrow-right" class="icon-inline"></i>
-        </a>
-        <a href="public.html" class="btn-hero-secondary">ดูข้อมูลสาธารณะ</a>
+
+    <div class="container">
+      <div class="hero-copy">
+        <span class="eyebrow hero-eyebrow">นวัตกรรมเพื่อเกษตรกรผู้เลี้ยงสัตว์น้ำ</span>
+        <h1>ระบบควบคุมออกซิเจน<br>ละลายน้ำ<span class="accent">อัจฉริยะเชิงรุก</span></h1>
+        <p class="hero-sub">
+          แพลตฟอร์มเครือข่ายข้อมูลคุณภาพน้ำ ที่วัดค่า DO ตลอด 24 ชั่วโมง
+          และสั่งเปิดเครื่องตีน้ำล่วงหน้าก่อนถึงจุดอันตราย
+        </p>
+        <div class="hero-actions">
+          <a href="register.html" class="btn-primary">เริ่มใช้งานฟรี <i data-lucide="arrow-right"></i></a>
+          <a href="public.html" class="btn-ghost on-glass">ดูข้อมูลสาธารณะ</a>
+        </div>
+        <div class="trust-row">
+          <span>ทำงาน 24 ชม.</span><span class="dot"></span>
+          <span>เชิงรุก</span><span class="dot"></span>
+          <span>ต้นทุนต่ำ</span>
+        </div>
+      </div>
+
+      <div class="hero-art">
+        <div class="buoy-wrap">
+          <!-- hand-drawn style sensor buoy with solar panel -->
+          <svg viewBox="0 0 400 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ทุ่นเซนเซอร์วัดออกซิเจนพร้อมแผงโซลาร์ลอยอยู่บนผิวน้ำ">
+            <!-- antenna -->
+            <line x1="200" y1="70" x2="200" y2="120" stroke="#e0f2fe" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="200" cy="64" r="8" fill="#f97316" stroke="#fff" stroke-width="2.5"/>
+            <circle cx="200" cy="64" r="15" fill="none" stroke="#7dd3fc" stroke-width="2" opacity="0.6"/>
+            <!-- solar panel -->
+            <g>
+              <rect x="150" y="112" width="100" height="40" rx="6" fill="#0c4a6e" stroke="#e0f2fe" stroke-width="3" transform="skewX(-8)"/>
+              <line x1="176" y1="112" x2="169" y2="152" stroke="#38bdf8" stroke-width="2"/>
+              <line x1="202" y1="112" x2="195" y2="152" stroke="#38bdf8" stroke-width="2"/>
+              <line x1="228" y1="112" x2="221" y2="152" stroke="#38bdf8" stroke-width="2"/>
+              <line x1="150" y1="132" x2="242" y2="132" stroke="#38bdf8" stroke-width="2"/>
+            </g>
+            <!-- buoy body -->
+            <rect x="164" y="150" width="72" height="86" rx="18" fill="#fb923c"/>
+            <rect x="164" y="150" width="72" height="86" rx="18" fill="url(#buoyShine)" opacity="0.35"/>
+            <rect x="164" y="182" width="72" height="20" fill="#f8fafc"/>
+            <circle cx="200" cy="215" r="11" fill="#0c4a6e"/>
+            <circle cx="200" cy="215" r="4" fill="#7dd3fc"/>
+            <!-- floating collar -->
+            <ellipse cx="200" cy="238" rx="66" ry="20" fill="#0ea5e9"/>
+            <ellipse cx="200" cy="234" rx="66" ry="20" fill="#38bdf8"/>
+            <ellipse cx="200" cy="234" rx="40" ry="11" fill="#0c4a6e" opacity="0.55"/>
+            <!-- water surface + ripples -->
+            <path d="M20 262 Q110 246 200 262 T380 262" stroke="#bae6fd" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+            <path d="M40 288 Q130 272 220 288 T392 286" stroke="#7dd3fc" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+            <path d="M10 312 Q100 298 190 312 T372 310" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+            <ellipse cx="200" cy="252" rx="90" ry="10" fill="#38bdf8" opacity="0.18"/>
+            <defs>
+              <linearGradient id="buoyShine" x1="164" y1="150" x2="236" y2="236" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#fff"/>
+                <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="data-chip">
+            <span class="chip-dot"></span>
+            <span>
+              <span class="chip-label">DO ปัจจุบัน</span><br>
+              <span class="chip-value">6.5 mg/L</span>
+            </span>
+          </div>
+        </div>
       </div>
     </div>
-    <svg class="hero-wave" viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute; bottom:-1px; left:0; width:100%; height:120px; z-index:2;">
-      <path d="M0,60 C320,120 720,0 1440,80 L1440,120 L0,120 Z" fill="rgba(240,249,255,0.5)" />
-      <path d="M0,80 C480,40 960,120 1440,60 L1440,120 L0,120 Z" fill="#f0f9ff" />
+
+    <svg class="hero-wave" viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M0,60 C320,120 720,0 1440,80 L1440,120 L0,120 Z" fill="rgba(248,251,255,.5)"/>
+      <path d="M0,80 C480,40 960,120 1440,60 L1440,120 L0,120 Z" fill="#f8fbff"/>
     </svg>
+  </header>
+
+  <!-- ==================== 4P highlight strip ==================== -->
+  <section class="strip">
+    <div class="container">
+      <div class="strip-grid">
+        <div class="strip-item reveal">
+          <span class="icon-tile"><i data-lucide="zap"></i></span>
+          <div><h4>Proactive</h4><p>เปิดเครื่องล่วงหน้าเชิงรุก</p></div>
+        </div>
+        <div class="strip-item reveal">
+          <span class="icon-tile"><i data-lucide="battery-charging"></i></span>
+          <div><h4>Power-saving</h4><p>ทำงานเฉพาะเมื่อจำเป็น</p></div>
+        </div>
+        <div class="strip-item reveal">
+          <span class="icon-tile"><i data-lucide="layout-dashboard"></i></span>
+          <div><h4>Platform</h4><p>ดูข้อมูลผ่านเว็บได้ทุกที่</p></div>
+        </div>
+        <div class="strip-item reveal">
+          <span class="icon-tile"><i data-lucide="bell-ring"></i></span>
+          <div><h4>Prompt</h4><p>แจ้งเตือนทันทีเมื่อผิดปกติ</p></div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- Features -->
-  <section class="features">
-    <div class="features-container">
-      <h2 class="section-title">ทำไมต้อง Aqua Monitor</h2>
-      <p class="section-subtitle">เทคโนโลยีที่ออกแบบมาเพื่อเกษตรกรผู้เพาะเลี้ยงสัตว์น้ำโดยเฉพาะ</p>
+  <!-- ==================== Features ==================== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>ทำไมต้อง Aqua Monitor</h2>
+        <p>เทคโนโลยีที่ออกแบบมาเพื่อเกษตรกรผู้เพาะเลี้ยงสัตว์น้ำโดยเฉพาะ</p>
+      </div>
       <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon"><i data-lucide="layout-dashboard"></i></div>
+        <article class="card feature hover-lift reveal">
+          <span class="icon-tile"><i data-lucide="activity"></i></span>
           <h3>วัดค่า DO ตลอด 24 ชั่วโมง</h3>
           <p>เซนเซอร์ออปติคัลความแม่นยำสูง วัดค่าทุก 15 วินาที ส่งข้อมูลขึ้นคลาวด์อัตโนมัติ</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon"><i data-lucide="cpu"></i></div>
+        </article>
+        <article class="card feature hover-lift reveal">
+          <span class="icon-tile"><i data-lucide="cpu"></i></span>
           <h3>ควบคุมเครื่องตีน้ำอัตโนมัติ</h3>
-          <p>ระบบ Proactive ดูอัตราการเปลี่ยนแปลง DO เปิดเครื่องล่วงหน้าก่อนที่ค่าจะถึงจุดอันตราย</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon"><i data-lucide="globe"></i></div>
+          <p>ระบบเชิงรุกดูอัตราการเปลี่ยนแปลง DO เปิดเครื่องล่วงหน้าก่อนที่ค่าจะถึงจุดอันตราย</p>
+        </article>
+        <article class="card feature hover-lift reveal">
+          <span class="icon-tile"><i data-lucide="globe-2"></i></span>
           <h3>เครือข่ายเกษตรกร</h3>
           <p>ดูข้อมูลฟาร์มเพื่อนในพื้นที่ใกล้เคียง เรียนรู้และเตือนภัยร่วมกันผ่านแผนที่เครือข่าย</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon"><i data-lucide="lightbulb"></i></div>
+        </article>
+        <article class="card feature hover-lift reveal">
+          <span class="icon-tile"><i data-lucide="leaf"></i></span>
           <h3>ประหยัดพลังงาน</h3>
           <p>เปิดเครื่องตีน้ำเฉพาะเมื่อจำเป็น ลดค่าไฟฟ้าและยืดอายุการใช้งานเครื่อง</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon"><i data-lucide="smartphone"></i></div>
+        </article>
+        <article class="card feature hover-lift reveal">
+          <span class="icon-tile"><i data-lucide="smartphone"></i></span>
           <h3>ดูได้ทุกที่ ทุกเวลา</h3>
-          <p>เปิดเว็บไซต์จากมือถือหรือคอมพิวเตอร์ ดูข้อมูลฟาร์มของคุณได้แบบ Real-time</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon"><i data-lucide="flag"></i></div>
+          <p>เปิดเว็บไซต์จากมือถือหรือคอมพิวเตอร์ ดูข้อมูลฟาร์มของคุณได้แบบเรียลไทม์</p>
+        </article>
+        <article class="card feature hover-lift reveal">
+          <span class="icon-tile"><i data-lucide="database"></i></span>
           <h3>ข้อมูลคุณภาพน้ำของประเทศ</h3>
           <p>ฐานข้อมูล DO ทั่วประเทศที่เปิดให้สาธารณะใช้อ้างอิงและวิเคราะห์ได้</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== How it works ==================== -->
+  <section class="how section">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>วิธีการทำงาน</h2>
+        <p>เริ่มต้นใช้งานได้ง่ายเพียง 4 ขั้นตอน</p>
+      </div>
+      <div class="timeline">
+        <div class="step reveal">
+          <div class="step-node">1</div>
+          <div>
+            <h3>ติดตั้งทุ่นวัด</h3>
+            <p>ติดตั้งทุ่นเซนเซอร์ DO ในบ่อเลี้ยงสัตว์น้ำ ใช้พลังงานจากแผงโซลาร์</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <div class="step-node">2</div>
+          <div>
+            <h3>ส่งข้อมูลขึ้นคลาวด์</h3>
+            <p>เซนเซอร์วัดค่าทุก 15 วินาที ส่งขึ้นระบบผ่าน WiFi อัตโนมัติ</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <div class="step-node">3</div>
+          <div>
+            <h3>วิเคราะห์และควบคุม</h3>
+            <p>ระบบวิเคราะห์แนวโน้ม สั่งเปิด/ปิดเครื่องตีน้ำให้อัตโนมัติ</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <div class="step-node">4</div>
+          <div>
+            <h3>ดูผ่านเว็บ</h3>
+            <p>เปิดแดชบอร์ดดูข้อมูลแบบเรียลไทม์ พร้อมกราฟแนวโน้มย้อนหลัง</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="section-wave" aria-hidden="true">
-    <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
-      <path d="M0,40 C480,80 960,0 1440,40 L1440,80 L0,80 Z" fill="rgba(14,165,233,0.05)"/>
-    </svg>
-  </div>
-
-  <!-- How it works -->
-  <section class="how-it-works">
-    <div class="features-container">
-      <h2 class="section-title">วิธีการทำงาน</h2>
-      <p class="section-subtitle">เริ่มต้นใช้งานได้ง่ายเพียง 4 ขั้นตอน</p>
-      <div class="steps-grid">
-        <div class="step-card">
-          <div class="step-number">1</div>
-          <h3>ติดตั้งทุ่นวัด</h3>
-          <p>ติดตั้งทุ่นเซนเซอร์ DO ในบ่อเลี้ยงสัตว์น้ำ ใช้พลังงานจากแผงโซลาร์</p>
-        </div>
-        <div class="step-card">
-          <div class="step-number">2</div>
-          <h3>ส่งข้อมูลขึ้นคลาวด์</h3>
-          <p>เซนเซอร์วัดค่าทุก 15 วินาที ส่งขึ้นระบบผ่าน WiFi อัตโนมัติ</p>
-        </div>
-        <div class="step-card">
-          <div class="step-number">3</div>
-          <h3>วิเคราะห์และควบคุม</h3>
-          <p>ระบบวิเคราะห์แนวโน้ม สั่งเปิด/ปิดเครื่องตีน้ำให้อัตโนมัติ</p>
-        </div>
-        <div class="step-card">
-          <div class="step-number">4</div>
-          <h3>ดูข้อมูลผ่านเว็บ</h3>
-          <p>เปิด Dashboard ดูข้อมูลแบบ Real-time พร้อมกราฟแนวโน้มย้อนหลัง</p>
-        </div>
-      </div>
+  <!-- ==================== CTA ==================== -->
+  <section class="cta section on-dark">
+    <div class="bubbles" aria-hidden="true">
+      <span class="bubble" style="--size:24px;--left:8%;--delay:0s;--duration:15s;"></span>
+      <span class="bubble" style="--size:36px;--left:22%;--delay:4s;--duration:18s;"></span>
+      <span class="bubble" style="--size:20px;--left:38%;--delay:8s;--duration:14s;"></span>
+      <span class="bubble" style="--size:30px;--left:54%;--delay:2s;--duration:17s;"></span>
+      <span class="bubble" style="--size:26px;--left:70%;--delay:6s;--duration:16s;"></span>
+      <span class="bubble" style="--size:38px;--left:86%;--delay:10s;--duration:19s;"></span>
+    </div>
+    <div class="container">
+      <h2>พร้อมเริ่มต้นแล้วหรือยัง?</h2>
+      <p>สมัครสมาชิกฟรี ไม่มีค่าใช้จ่ายแอบแฝง</p>
+      <a href="register.html" class="btn-primary">สมัครใช้งานฟรี <i data-lucide="arrow-right"></i></a>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="cta">
-    <div class="bubbles-container" aria-hidden="true">
-      <div class="bubble" style="--size:24px; --left:6%; --delay:0s; --duration:14s;"></div>
-      <div class="bubble" style="--size:36px; --left:16%; --delay:3s; --duration:14s;"></div>
-      <div class="bubble" style="--size:20px; --left:28%; --delay:6s; --duration:14s;"></div>
-      <div class="bubble" style="--size:32px; --left:40%; --delay:1s; --duration:14s;"></div>
-      <div class="bubble" style="--size:28px; --left:52%; --delay:8s; --duration:14s;"></div>
-      <div class="bubble" style="--size:22px; --left:64%; --delay:4s; --duration:14s;"></div>
-      <div class="bubble" style="--size:38px; --left:76%; --delay:7s; --duration:14s;"></div>
-      <div class="bubble" style="--size:26px; --left:88%; --delay:2s; --duration:14s;"></div>
-      <div class="bubble" style="--size:18px; --left:34%; --delay:11s; --duration:14s;"></div>
-      <div class="bubble" style="--size:30px; --left:70%; --delay:5s; --duration:14s;"></div>
-    </div>
-    <h2>พร้อมเริ่มต้นใช้งานหรือยัง?</h2>
-    <p>สมัครสมาชิกฟรี ไม่มีค่าใช้จ่ายแอบแฝง</p>
-    <a href="register.html" class="btn-hero-primary">
-      สมัครสมาชิกเลย <i data-lucide="arrow-right" class="icon-inline"></i>
-    </a>
-  </section>
-
-  <!-- Footer -->
+  <!-- ==================== Footer ==================== -->
   <footer class="site-footer">
-    <div class="bubbles-container" aria-hidden="true">
-      <div class="bubble" style="--size:18px; --left:10%; --delay:0s; --duration:18s;"></div>
-      <div class="bubble" style="--size:26px; --left:28%; --delay:5s; --duration:18s;"></div>
-      <div class="bubble" style="--size:14px; --left:46%; --delay:9s; --duration:18s;"></div>
-      <div class="bubble" style="--size:22px; --left:62%; --delay:3s; --duration:18s;"></div>
-      <div class="bubble" style="--size:16px; --left:78%; --delay:12s; --duration:18s;"></div>
-      <div class="bubble" style="--size:20px; --left:90%; --delay:7s; --duration:18s;"></div>
-    </div>
-    <div class="footer-grid">
-      <div class="footer-col">
-        <div class="footer-brand">
-          <i data-lucide="waves" class="icon-logo"></i> Aqua Monitor
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-col footer-about-col">
+          <div class="footer-brand"><i data-lucide="waves"></i> Aqua Monitor</div>
+          <p class="footer-about">
+            แพลตฟอร์มเครือข่ายข้อมูลคุณภาพน้ำเพื่อการเพาะเลี้ยงสัตว์น้ำของประเทศไทย
+            ควบคุมออกซิเจนละลายน้ำอัตโนมัติแบบเรียลไทม์
+          </p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+            <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+            <a href="#" aria-label="YouTube"><i data-lucide="youtube"></i></a>
+          </div>
         </div>
-        <p>แพลตฟอร์มเครือข่ายข้อมูลคุณภาพน้ำเพื่อการเพาะเลี้ยงสัตว์น้ำของประเทศไทย ควบคุมออกซิเจนละลายน้ำอัตโนมัติแบบ Real-time</p>
-        <div class="footer-social">
-          <a href="#" aria-label="Facebook"><i data-lucide="facebook" class="icon-inline"></i></a>
-          <a href="#" aria-label="Twitter"><i data-lucide="twitter" class="icon-inline"></i></a>
-          <a href="#" aria-label="YouTube"><i data-lucide="youtube" class="icon-inline"></i></a>
+        <div class="footer-col">
+          <h4>เมนู</h4>
+          <ul>
+            <li><a href="index.html">หน้าแรก</a></li>
+            <li><a href="public.html">ข้อมูลสาธารณะ</a></li>
+            <li><a href="login.html">เข้าสู่ระบบ</a></li>
+            <li><a href="register.html">สมัครสมาชิก</a></li>
+          </ul>
         </div>
-      </div>
-      <div class="footer-col">
-        <h4>เมนู</h4>
-        <ul>
-          <li><a href="index.html">หน้าแรก</a></li>
-          <li><a href="public.html">ข้อมูลสาธารณะ</a></li>
-          <li><a href="login.html">เข้าสู่ระบบ</a></li>
-          <li><a href="register.html">สมัครสมาชิก</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>ติดต่อเรา</h4>
-        <div class="footer-contact-item">
-          <i data-lucide="mail" class="icon-inline"></i> contact@aquamonitor.th
-        </div>
-        <div class="footer-contact-item">
-          <i data-lucide="map-pin" class="icon-inline"></i> จังหวัดตรัง ประเทศไทย
-        </div>
-        <div class="footer-contact-item">
-          <i data-lucide="phone" class="icon-inline"></i> 075-000-000
+        <div class="footer-col">
+          <h4>ติดต่อเรา</h4>
+          <ul class="footer-contact">
+            <li><i data-lucide="mail"></i> contact@aquamonitor.th</li>
+            <li><i data-lucide="map-pin"></i> จังหวัดตรัง ประเทศไทย</li>
+            <li><i data-lucide="phone"></i> 075-000-000</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -212,82 +285,59 @@
     </div>
   </footer>
 
+  <!-- ==================== Motion JS ==================== -->
   <script>
-    // Premium scroll-reveal
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-        }
-      });
-    }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
+    (function () {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    document.querySelectorAll('.feature-card, .step-card, .stat-card, .chart-box, .section-title').forEach((el, i) => {
-      el.classList.add('reveal-on-scroll');
-      el.style.transitionDelay = (i * 0.1) + 's';
-      revealObserver.observe(el);
-    });
+      // Scroll reveal (fade up, staggered per group)
+      if (!reduceMotion && 'IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.style.transitionDelay = (entry.target.dataset.delay || '0s');
+              entry.target.classList.add('is-visible');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
 
-    // Navbar scroll effect
-    window.addEventListener('scroll', () => {
-      document.querySelector('.navbar')?.classList.toggle('scrolled', window.scrollY > 20);
-    });
-
-    // Magnetic buttons
-    document.querySelectorAll('.btn-hero-primary, .btn-hero-secondary, .btn-primary').forEach(btn => {
-      btn.addEventListener('mousemove', e => {
-        const rect = btn.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
-      });
-      btn.addEventListener('mouseleave', () => {
-        btn.style.transform = '';
-      });
-    });
-
-    // Hero spotlight follows cursor
-    const hero = document.querySelector('.hero');
-    if (hero) {
-      hero.addEventListener('mousemove', e => {
-        const rect = hero.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        hero.style.setProperty('--mouse-x', x + '%');
-        hero.style.setProperty('--mouse-y', y + '%');
-      });
-    }
-
-    lucide.createIcons();
-  </script>
-  <script>
-    (function() {
-      const bgAnimated = document.querySelector('.bg-animated');
-      if (!bgAnimated) return;
-
-      let ticking = false;
-
-      function updateBackground() {
-        const scrollY = window.scrollY;
-        const winHeight = window.innerHeight;
-        const docHeight = document.documentElement.scrollHeight - winHeight;
-        const scrollPercent = docHeight > 0 ? Math.min(scrollY / docHeight, 1) : 0;
-
-        const hueRotate = scrollPercent * 30;
-        bgAnimated.style.filter = `hue-rotate(${hueRotate}deg)`;
-
-        const translateY = scrollY * 0.1;
-        bgAnimated.style.transform = `translateY(${translateY}px)`;
-
-        ticking = false;
+        // stagger reveals that share a parent
+        const groups = new Map();
+        document.querySelectorAll('.reveal').forEach((el) => {
+          const key = el.parentElement;
+          const i = groups.get(key) || 0;
+          el.dataset.delay = (i * 0.09) + 's';
+          groups.set(key, i + 1);
+          io.observe(el);
+        });
+      } else {
+        document.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-visible'));
       }
 
-      window.addEventListener('scroll', () => {
-        if (!ticking) {
-          requestAnimationFrame(updateBackground);
-          ticking = true;
-        }
-      });
+      // Navbar shadow on scroll
+      const nav = document.getElementById('siteNav');
+      const onScroll = () => nav && nav.classList.toggle('scrolled', window.scrollY > 12);
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      // Mobile nav toggle
+      const toggle = document.getElementById('navToggle');
+      const links = document.getElementById('navLinks');
+      if (toggle && links) {
+        toggle.addEventListener('click', () => {
+          const open = links.classList.toggle('open');
+          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        links.querySelectorAll('a').forEach((a) =>
+          a.addEventListener('click', () => {
+            links.classList.remove('open');
+            toggle.setAttribute('aria-expanded', 'false');
+          })
+        );
+      }
+
+      if (window.lucide) lucide.createIcons();
     })();
   </script>
 </body>

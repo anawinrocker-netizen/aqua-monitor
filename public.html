@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ข้อมูลสาธารณะ - Aqua Monitor</title>
+  <title>ข้อมูลสาธารณะ — Aqua Monitor</title>
+  <meta name="description" content="ฐานข้อมูลค่าออกซิเจนละลายน้ำและอุณหภูมิจากเครือข่ายฟาร์มทั่วประเทศไทย">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Prompt:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/landing.css">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/theme.css">
   <link rel="stylesheet" href="css/public.css">
 
   <!-- Leaflet -->
@@ -21,88 +21,147 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="landing-body">
+<body>
 
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="navbar-content">
-      <a href="index.html" class="logo">
-        <i data-lucide="waves" class="icon-logo"></i> Aqua Monitor
+  <!-- ==================== Navbar ==================== -->
+  <nav class="site-nav" id="siteNav">
+    <div class="container">
+      <a href="index.html" class="brand">
+        <i data-lucide="waves"></i> Aqua Monitor
       </a>
-      <div class="nav-buttons">
-        <a href="index.html" class="btn-nav-secondary">หน้าแรก</a>
-        <a href="login.html" class="btn-nav-secondary">เข้าสู่ระบบ</a>
-        <a href="register.html" class="btn-nav-primary">สมัครสมาชิก</a>
+      <button class="nav-toggle" id="navToggle" aria-label="เปิดเมนู" aria-expanded="false">
+        <i data-lucide="menu"></i>
+      </button>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">หน้าแรก</a>
+        <a href="login.html">เข้าสู่ระบบ</a>
+        <a href="register.html" class="btn-primary">สมัครสมาชิก</a>
       </div>
     </div>
   </nav>
 
-  <!-- Hero -->
-  <section class="public-hero">
-    <div class="bubbles-container" aria-hidden="true">
-      <div class="bubble" style="--size:30px; --left:5%; --delay:0s; --duration:15s;"></div>
-      <div class="bubble" style="--size:52px; --left:18%; --delay:3s; --duration:15s;"></div>
-      <div class="bubble" style="--size:22px; --left:30%; --delay:6s; --duration:15s;"></div>
-      <div class="bubble" style="--size:45px; --left:42%; --delay:1s; --duration:15s;"></div>
-      <div class="bubble" style="--size:38px; --left:55%; --delay:9s; --duration:15s;"></div>
-      <div class="bubble" style="--size:27px; --left:68%; --delay:4s; --duration:15s;"></div>
-      <div class="bubble" style="--size:48px; --left:80%; --delay:7s; --duration:15s;"></div>
-      <div class="bubble" style="--size:33px; --left:92%; --delay:2s; --duration:15s;"></div>
+  <!-- ==================== Hero ==================== -->
+  <header class="p-hero on-dark">
+    <div class="bubbles" aria-hidden="true">
+      <span class="bubble" style="--size:30px;--left:6%;--delay:0s;--duration:16s;"></span>
+      <span class="bubble" style="--size:48px;--left:18%;--delay:3s;--duration:19s;"></span>
+      <span class="bubble" style="--size:22px;--left:30%;--delay:6s;--duration:14s;"></span>
+      <span class="bubble" style="--size:38px;--left:44%;--delay:1s;--duration:17s;"></span>
+      <span class="bubble" style="--size:26px;--left:57%;--delay:9s;--duration:15s;"></span>
+      <span class="bubble" style="--size:44px;--left:70%;--delay:4s;--duration:20s;"></span>
+      <span class="bubble" style="--size:20px;--left:82%;--delay:7s;--duration:13s;"></span>
+      <span class="bubble" style="--size:34px;--left:92%;--delay:2s;--duration:18s;"></span>
     </div>
-    <h1>ข้อมูลคุณภาพน้ำของประเทศไทย</h1>
-    <p>ฐานข้อมูลค่าออกซิเจนละลายน้ำและอุณหภูมิจากเครือข่ายฟาร์มทั่วประเทศ</p>
-    <svg class="hero-wave" viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute; bottom:-1px; left:0; width:100%; height:120px; z-index:2;">
-      <path d="M0,60 C320,120 720,0 1440,80 L1440,120 L0,120 Z" fill="rgba(240,249,255,0.5)" />
-      <path d="M0,80 C480,40 960,120 1440,60 L1440,120 L0,120 Z" fill="#f0f9ff" />
+
+    <div class="container">
+      <div class="p-hero-copy">
+        <span class="eyebrow">ข้อมูลเปิดเพื่อสาธารณะ</span>
+        <h1>ข้อมูลคุณภาพน้ำ<br>ของ<span class="accent">ประเทศไทย</span></h1>
+        <p>ฐานข้อมูลค่าออกซิเจนละลายน้ำและอุณหภูมิจากเครือข่ายฟาร์มทั่วประเทศ อัปเดตแบบเรียลไทม์และเปิดให้ทุกคนใช้อ้างอิงได้</p>
+      </div>
+
+      <div class="p-hero-art">
+        <div class="art-wrap">
+          <!-- hand-drawn style water drop + map pin + fish -->
+          <svg viewBox="0 0 360 320" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ภาพประกอบหยดน้ำ หมุดแผนที่ และปลา">
+            <!-- big water drop -->
+            <path d="M180 40 C180 40 118 118 118 168 a62 62 0 1 0 124 0 C242 118 180 40 180 40 Z"
+                  fill="#38bdf8"/>
+            <path d="M180 40 C180 40 118 118 118 168 a62 62 0 1 0 124 0 C242 118 180 40 180 40 Z"
+                  fill="url(#dropShine)" opacity="0.5"/>
+            <ellipse cx="156" cy="196" rx="16" ry="24" fill="#fff" opacity="0.35"/>
+            <!-- fish inside drop -->
+            <g transform="translate(150 178)">
+              <path d="M0 12 C10 0 34 0 46 12 C34 24 10 24 0 12 Z" fill="#0c4a6e"/>
+              <path d="M46 12 L60 2 L58 22 Z" fill="#0c4a6e"/>
+              <circle cx="12" cy="10" r="3" fill="#fff"/>
+            </g>
+            <!-- map pin (top-right) -->
+            <g transform="translate(246 60)">
+              <path d="M30 0 a30 30 0 0 1 30 30 c0 22 -30 52 -30 52 S0 52 0 30 A30 30 0 0 1 30 0 Z" fill="#f97316"/>
+              <circle cx="30" cy="30" r="12" fill="#fff"/>
+            </g>
+            <!-- water ripples -->
+            <path d="M30 262 Q100 248 170 262 T332 262" stroke="#bae6fd" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+            <path d="M20 288 Q100 274 180 288 T352 286" stroke="#7dd3fc" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+            <path d="M44 310 Q120 298 196 310 T340 308" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+            <defs>
+              <linearGradient id="dropShine" x1="118" y1="40" x2="242" y2="230" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#fff"/>
+                <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <svg class="hero-wave" viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M0,60 C320,120 720,0 1440,80 L1440,120 L0,120 Z" fill="rgba(248,251,255,.5)"/>
+      <path d="M0,80 C480,40 960,120 1440,60 L1440,120 L0,120 Z" fill="#f8fbff"/>
     </svg>
-  </section>
+  </header>
 
-  <!-- Stats Cards -->
-  <section class="public-stats">
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-icon"><i data-lucide="waves" class="icon-stat"></i></div>
-        <div class="stat-value" id="totalFarms">--</div>
-        <div class="stat-label">ฟาร์มในเครือข่าย</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon"><i data-lucide="droplet" class="icon-stat"></i></div>
-        <div class="stat-value" id="avgDO">--</div>
-        <div class="stat-label">DO เฉลี่ย (mg/L)</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon"><i data-lucide="thermometer" class="icon-stat"></i></div>
-        <div class="stat-value" id="avgTemp">--</div>
-        <div class="stat-label">อุณหภูมิเฉลี่ย (°C)</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon"><i data-lucide="layout-dashboard" class="icon-stat"></i></div>
-        <div class="stat-value" id="totalReadings">--</div>
-        <div class="stat-label">บันทึกข้อมูลทั้งหมด</div>
+  <!-- ==================== Stat cards ==================== -->
+  <section class="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <article class="card stat hover-lift reveal">
+          <span class="icon-tile"><i data-lucide="waves"></i></span>
+          <div class="stat-value" id="totalFarms">--</div>
+          <div class="stat-label">ฟาร์มในเครือข่าย</div>
+        </article>
+        <article class="card stat hover-lift reveal">
+          <span class="icon-tile"><i data-lucide="droplet"></i></span>
+          <div class="stat-value" id="avgDO">--</div>
+          <div class="stat-label">DO เฉลี่ย (mg/L)</div>
+        </article>
+        <article class="card stat hover-lift reveal">
+          <span class="icon-tile"><i data-lucide="thermometer"></i></span>
+          <div class="stat-value" id="avgTemp">--</div>
+          <div class="stat-label">อุณหภูมิเฉลี่ย (°C)</div>
+        </article>
+        <article class="card stat hover-lift reveal">
+          <span class="icon-tile"><i data-lucide="database"></i></span>
+          <div class="stat-value" id="totalReadings">--</div>
+          <div class="stat-label">บันทึกข้อมูลทั้งหมด</div>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- Map Section -->
-  <section class="map-section">
-    <div class="section-container">
-      <h2>แผนที่ฟาร์มในเครือข่าย</h2>
-      <p class="section-desc">
-        จุดสีแสดงสถานะ DO ของแต่ละฟาร์ม —
-        <span><span class="status-dot status-good"></span>ปกติ</span>
-        <span><span class="status-dot status-warning"></span>เฝ้าระวัง</span>
-        <span><span class="status-dot status-danger"></span>ต่ำกว่ามาตรฐาน</span>
-      </p>
-      <div id="map"></div>
+  <!-- ==================== Map ==================== -->
+  <section class="section">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="icon-tile"><i data-lucide="map"></i></span>
+        <div class="sec-title">
+          <h2>แผนที่ฟาร์มในเครือข่าย</h2>
+          <p>จุดสีแสดงสถานะ DO ล่าสุดของแต่ละฟาร์ม</p>
+        </div>
+      </div>
+      <div class="card map-card reveal">
+        <div class="map-legend">
+          <span><span class="status-dot status-good"></span>ปกติ</span>
+          <span><span class="status-dot status-warning"></span>เฝ้าระวัง</span>
+          <span><span class="status-dot status-danger"></span>ต่ำกว่ามาตรฐาน</span>
+        </div>
+        <div id="map"></div>
+      </div>
     </div>
   </section>
 
-  <!-- Region Section -->
-  <section class="charts-section">
-    <div class="section-container">
-      <div class="filter-header">
-        <h2>เปรียบเทียบรายภาค</h2>
-        <select id="regionFilter" class="chart-select">
+  <!-- ==================== Region comparison ==================== -->
+  <section class="section">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="icon-tile"><i data-lucide="map-pinned"></i></span>
+        <div class="sec-title">
+          <h2>เปรียบเทียบรายภาค</h2>
+          <p>ค่าเฉลี่ยล่าสุดจำแนกตามภูมิภาค</p>
+        </div>
+        <span class="spacer"></span>
+        <select id="regionFilter" class="chart-select" aria-label="เลือกภูมิภาค">
           <option value="all">ทั้งหมด</option>
           <option value="เหนือ">ภาคเหนือ</option>
           <option value="กลาง">ภาคกลาง</option>
@@ -112,28 +171,29 @@
         </select>
       </div>
       <div class="charts-grid">
-        <div class="chart-box">
-          <h3>DO เฉลี่ย (mg/L)</h3>
-          <div class="chart-wrap">
-            <canvas id="regionDOChart"></canvas>
-          </div>
+        <div class="card chart-card region reveal">
+          <h3><span class="tick"></span>DO เฉลี่ย (mg/L)</h3>
+          <div class="chart-wrap"><canvas id="regionDOChart"></canvas></div>
         </div>
-        <div class="chart-box">
-          <h3>อุณหภูมิเฉลี่ย (°C)</h3>
-          <div class="chart-wrap">
-            <canvas id="regionTempChart"></canvas>
-          </div>
+        <div class="card chart-card region reveal">
+          <h3><span class="tick"></span>อุณหภูมิเฉลี่ย (°C)</h3>
+          <div class="chart-wrap"><canvas id="regionTempChart"></canvas></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Aqua Type Section -->
-  <section class="charts-section">
-    <div class="section-container">
-      <div class="filter-header">
-        <h2>เปรียบเทียบรายชนิดสัตว์น้ำ</h2>
-        <select id="aquaTypeFilter" class="chart-select">
+  <!-- ==================== Aqua type comparison ==================== -->
+  <section class="section">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="icon-tile"><i data-lucide="fish"></i></span>
+        <div class="sec-title">
+          <h2>เปรียบเทียบรายชนิดสัตว์น้ำ</h2>
+          <p>ค่าเฉลี่ยล่าสุดจำแนกตามชนิดสัตว์น้ำ</p>
+        </div>
+        <span class="spacer"></span>
+        <select id="aquaTypeFilter" class="chart-select" aria-label="เลือกชนิดสัตว์น้ำ">
           <option value="all">ทั้งหมด</option>
           <option value="กุ้งขาว">กุ้งขาว</option>
           <option value="กุ้งกุลาดำ">กุ้งกุลาดำ</option>
@@ -144,63 +204,50 @@
         </select>
       </div>
       <div class="charts-grid">
-        <div class="chart-box">
-          <h3>DO เฉลี่ย (mg/L)</h3>
-          <div class="chart-wrap">
-            <canvas id="aquaDOChart"></canvas>
-          </div>
+        <div class="card chart-card aqua reveal">
+          <h3><span class="tick"></span>DO เฉลี่ย (mg/L)</h3>
+          <div class="chart-wrap"><canvas id="aquaDOChart"></canvas></div>
         </div>
-        <div class="chart-box">
-          <h3>อุณหภูมิเฉลี่ย (°C)</h3>
-          <div class="chart-wrap">
-            <canvas id="aquaTempChart"></canvas>
-          </div>
+        <div class="card chart-card aqua reveal">
+          <h3><span class="tick"></span>อุณหภูมิเฉลี่ย (°C)</h3>
+          <div class="chart-wrap"><canvas id="aquaTempChart"></canvas></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- ==================== Footer ==================== -->
   <footer class="site-footer">
-    <div class="bubbles-container" aria-hidden="true">
-      <div class="bubble" style="--size:18px; --left:10%; --delay:0s; --duration:18s;"></div>
-      <div class="bubble" style="--size:26px; --left:28%; --delay:5s; --duration:18s;"></div>
-      <div class="bubble" style="--size:14px; --left:46%; --delay:9s; --duration:18s;"></div>
-      <div class="bubble" style="--size:22px; --left:62%; --delay:3s; --duration:18s;"></div>
-      <div class="bubble" style="--size:16px; --left:78%; --delay:12s; --duration:18s;"></div>
-      <div class="bubble" style="--size:20px; --left:90%; --delay:7s; --duration:18s;"></div>
-    </div>
-    <div class="footer-grid">
-      <div class="footer-col">
-        <div class="footer-brand">
-          <i data-lucide="waves" class="icon-logo"></i> Aqua Monitor
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-col footer-about-col">
+          <div class="footer-brand"><i data-lucide="waves"></i> Aqua Monitor</div>
+          <p class="footer-about">
+            แพลตฟอร์มเครือข่ายข้อมูลคุณภาพน้ำเพื่อการเพาะเลี้ยงสัตว์น้ำของประเทศไทย
+            ควบคุมออกซิเจนละลายน้ำอัตโนมัติแบบเรียลไทม์
+          </p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+            <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+            <a href="#" aria-label="YouTube"><i data-lucide="youtube"></i></a>
+          </div>
         </div>
-        <p>แพลตฟอร์มเครือข่ายข้อมูลคุณภาพน้ำเพื่อการเพาะเลี้ยงสัตว์น้ำของประเทศไทย ควบคุมออกซิเจนละลายน้ำอัตโนมัติแบบ Real-time</p>
-        <div class="footer-social">
-          <a href="#" aria-label="Facebook"><i data-lucide="facebook" class="icon-inline"></i></a>
-          <a href="#" aria-label="Twitter"><i data-lucide="twitter" class="icon-inline"></i></a>
-          <a href="#" aria-label="YouTube"><i data-lucide="youtube" class="icon-inline"></i></a>
+        <div class="footer-col">
+          <h4>เมนู</h4>
+          <ul>
+            <li><a href="index.html">หน้าแรก</a></li>
+            <li><a href="public.html">ข้อมูลสาธารณะ</a></li>
+            <li><a href="login.html">เข้าสู่ระบบ</a></li>
+            <li><a href="register.html">สมัครสมาชิก</a></li>
+          </ul>
         </div>
-      </div>
-      <div class="footer-col">
-        <h4>เมนู</h4>
-        <ul>
-          <li><a href="index.html">หน้าแรก</a></li>
-          <li><a href="public.html">ข้อมูลสาธารณะ</a></li>
-          <li><a href="login.html">เข้าสู่ระบบ</a></li>
-          <li><a href="register.html">สมัครสมาชิก</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>ติดต่อเรา</h4>
-        <div class="footer-contact-item">
-          <i data-lucide="mail" class="icon-inline"></i> contact@aquamonitor.th
-        </div>
-        <div class="footer-contact-item">
-          <i data-lucide="map-pin" class="icon-inline"></i> จังหวัดตรัง ประเทศไทย
-        </div>
-        <div class="footer-contact-item">
-          <i data-lucide="phone" class="icon-inline"></i> 075-000-000
+        <div class="footer-col">
+          <h4>ติดต่อเรา</h4>
+          <ul class="footer-contact">
+            <li><i data-lucide="mail"></i> contact@aquamonitor.th</li>
+            <li><i data-lucide="map-pin"></i> จังหวัดตรัง ประเทศไทย</li>
+            <li><i data-lucide="phone"></i> 075-000-000</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -209,118 +256,122 @@
     </div>
   </footer>
 
+  <!-- ==================== Chrome + motion JS ==================== -->
   <script>
-    // Premium scroll-reveal
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-        }
-      });
-    }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
+    (function () {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    document.querySelectorAll('.feature-card, .step-card, .stat-card, .chart-box, .section-title').forEach((el, i) => {
-      el.classList.add('reveal-on-scroll');
-      el.style.transitionDelay = (i * 0.1) + 's';
-      revealObserver.observe(el);
-    });
-
-    // Navbar scroll effect
-    window.addEventListener('scroll', () => {
-      document.querySelector('.navbar')?.classList.toggle('scrolled', window.scrollY > 20);
-    });
-
-    // Magnetic buttons
-    document.querySelectorAll('.btn-hero-primary, .btn-hero-secondary, .btn-primary').forEach(btn => {
-      btn.addEventListener('mousemove', e => {
-        const rect = btn.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
-      });
-      btn.addEventListener('mouseleave', () => {
-        btn.style.transform = '';
-      });
-    });
-
-    // Animated count-up for stats
-    (function() {
-      function animateValue(element, start, end, duration) {
-        const range = end - start;
-        if (range === 0) { element.textContent = end; return; }
-        const stepTime = Math.max(8, Math.abs(Math.floor(duration / Math.abs(range))));
-        const step = Math.max(1, Math.ceil(Math.abs(range) / 100)) * (range > 0 ? 1 : -1);
-        let current = start;
-        const isFloat = String(end).includes('.');
-        const timer = setInterval(() => {
-          current += step;
-          if ((step > 0 && current >= end) || (step < 0 && current <= end)) {
-            current = end;
-            clearInterval(timer);
-          }
-          element.textContent = isFloat ? current.toFixed(1) : Math.floor(current).toLocaleString();
-        }, stepTime);
-      }
-
-      const statObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && !entry.target.dataset.animated) {
-            const raw = (entry.target.textContent || '').replace(/,/g, '').trim();
-            const target = parseFloat(raw);
-            if (!isNaN(target) && raw !== '--' && raw !== '') {
-              entry.target.dataset.animated = 'true';
-              animateValue(entry.target, 0, target, 1500);
+      /* ----- Scroll reveal (staggered per group) ----- */
+      if (!reduceMotion && 'IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.style.transitionDelay = (entry.target.dataset.delay || '0s');
+              entry.target.classList.add('is-visible');
+              io.unobserve(entry.target);
             }
-          }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+        const groups = new Map();
+        document.querySelectorAll('.reveal').forEach((el) => {
+          const key = el.parentElement;
+          const i = groups.get(key) || 0;
+          el.dataset.delay = (i * 0.09) + 's';
+          groups.set(key, i + 1);
+          io.observe(el);
         });
-      }, { threshold: 0.5 });
-
-      // Observe both existing values and re-observe after public.js renders
-      function bind() {
-        document.querySelectorAll('.stat-number, .stat-value').forEach(el => statObserver.observe(el));
-      }
-      bind();
-      // Re-bind when stats are populated by public.js (poll briefly)
-      let tries = 0;
-      const reBind = setInterval(() => {
-        tries++;
-        bind();
-        if (tries > 20) clearInterval(reBind);
-      }, 500);
-    })();
-
-    lucide.createIcons();
-  </script>
-  <script>
-    (function() {
-      const bgAnimated = document.querySelector('.bg-animated');
-      if (!bgAnimated) return;
-
-      let ticking = false;
-
-      function updateBackground() {
-        const scrollY = window.scrollY;
-        const winHeight = window.innerHeight;
-        const docHeight = document.documentElement.scrollHeight - winHeight;
-        const scrollPercent = docHeight > 0 ? Math.min(scrollY / docHeight, 1) : 0;
-
-        const hueRotate = scrollPercent * 30;
-        bgAnimated.style.filter = `hue-rotate(${hueRotate}deg)`;
-
-        const translateY = scrollY * 0.1;
-        bgAnimated.style.transform = `translateY(${translateY}px)`;
-
-        ticking = false;
+      } else {
+        document.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-visible'));
       }
 
-      window.addEventListener('scroll', () => {
-        if (!ticking) {
-          requestAnimationFrame(updateBackground);
-          ticking = true;
+      /* ----- Count-up for stat numbers (reads REAL values written by public.js) ----- */
+      const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+
+      function countUp(el, target, decimals, hasComma) {
+        const dur = 1400;
+        const start = performance.now();
+        function frame(now) {
+          const p = Math.min((now - start) / dur, 1);
+          const val = target * easeOut(p);
+          let out = val.toFixed(decimals);
+          if (hasComma) out = Number(out).toLocaleString(undefined, {
+            minimumFractionDigits: decimals, maximumFractionDigits: decimals
+          });
+          el.textContent = out;
+          if (p < 1) requestAnimationFrame(frame);
+          else el.textContent = hasComma
+            ? target.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals })
+            : target.toFixed(decimals);
         }
-      });
+        requestAnimationFrame(frame);
+      }
+
+      // Try to animate an element once it is BOTH in view and populated with real data.
+      function makeStatWatcher(el) {
+        let inView = reduceMotion; // if reduced motion, treat as "in view" so it just shows the value
+        let done = false;
+
+        const tryRun = () => {
+          if (done) return;
+          const raw = (el.textContent || '').trim();
+          if (raw === '' || raw === '--') return;        // not populated yet
+          const clean = raw.replace(/,/g, '');
+          const num = parseFloat(clean);
+          if (isNaN(num)) return;
+          if (!inView) return;                            // wait until scrolled into view
+          done = true;
+          mo.disconnect();
+          const decimals = clean.includes('.') ? (clean.split('.')[1].length) : 0;
+          const hasComma = raw.includes(',') || num >= 1000;
+          if (reduceMotion) return;                       // leave the real value as-is
+          countUp(el, num, decimals, hasComma);
+        };
+
+        // Watch for public.js writing the real value
+        const mo = new MutationObserver(tryRun);
+        mo.observe(el, { childList: true, characterData: true, subtree: true });
+
+        if (!reduceMotion && 'IntersectionObserver' in window) {
+          const vo = new IntersectionObserver((entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) { inView = true; vo.disconnect(); tryRun(); }
+            });
+          }, { threshold: 0.5 });
+          vo.observe(el);
+        } else {
+          inView = true;
+        }
+        tryRun();
+      }
+
+      document.querySelectorAll('.stat-value').forEach(makeStatWatcher);
+
+      /* ----- Navbar shadow on scroll ----- */
+      const nav = document.getElementById('siteNav');
+      const onScroll = () => nav && nav.classList.toggle('scrolled', window.scrollY > 12);
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      /* ----- Mobile nav toggle ----- */
+      const toggle = document.getElementById('navToggle');
+      const links = document.getElementById('navLinks');
+      if (toggle && links) {
+        toggle.addEventListener('click', () => {
+          const open = links.classList.toggle('open');
+          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        links.querySelectorAll('a').forEach((a) =>
+          a.addEventListener('click', () => {
+            links.classList.remove('open');
+            toggle.setAttribute('aria-expanded', 'false');
+          })
+        );
+      }
+
+      if (window.lucide) lucide.createIcons();
     })();
   </script>
+
   <script type="module" src="js/public.js"></script>
 </body>
 </html>
