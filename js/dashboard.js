@@ -2,9 +2,10 @@ import { auth, db } from './firebase-config.js';
 import { 
   onAuthStateChanged, signOut 
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { 
+import {
   doc, getDoc, collection, query, where, orderBy, limit, onSnapshot, setDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { checkAndAlert, startHourlyReport } from './telegram-alert.js';
 
 // DOM Elements
 const farmInfo = document.getElementById('farmInfo');
@@ -20,6 +21,20 @@ let currentUser = null;
 let currentFarmId = null;
 let doChart = null;
 let rocChart = null;
+
+// <<< เพิ่ม: เก็บค่าล่าสุดไว้ให้รายงานประจำชั่วโมงของ Telegram เรียกใช้
+let latestDO = null;
+let latestTemp = null;
+let hourlyReportStarted = false;
+
+// ==================== ตัวช่วย: แปลง Firestore Timestamp เป็น JS Date ====================
+// <<< เพิ่ม: reading.timestamp ที่ ESP32 ส่งมาจะเป็น Firestore Timestamp object
+// ใช้ฟังก์ชันนี้แปลงเป็น Date ปลอดภัย (กันกรณีข้อมูลเก่าที่ไม่มี timestamp)
+function tsToDate(ts) {
+  if (!ts) return null;
+  if (typeof ts.toDate === 'function') return ts.toDate(); // Firestore Timestamp
+  return new Date(ts); // เผื่อกรณีเป็น string/number
+}
 
 // คำนวณ DO Saturation จาก DO mg/L + Temp
 function calculateDOSat(doMgL, tempC) {
@@ -68,7 +83,7 @@ function listenToReadings() {
   const q = query(
     collection(db, 'readings'),
     where('farmId', '==', currentFarmId),
-    orderBy('__name__', 'desc'),
+    orderBy('timestamp', 'desc'),   // <<< แก้: เดิมเป็น '__name__' (ID สุ่ม) → ใช้ timestamp จริง
     limit(96 * 4)
   );
 
@@ -83,7 +98,7 @@ function listenToReadings() {
     const readings = [];
     snapshot.forEach(doc => readings.push({ id: doc.id, ...doc.data() }));
 
-    readings.reverse();
+    readings.reverse(); // กลับเป็นเรียงจากเก่า → ใหม่ (ตามเวลาจริง)
 
     const latest = readings[readings.length - 1];
     const doVal = latest.do;
@@ -94,24 +109,52 @@ function listenToReadings() {
     currentDO.className = 'status-value ' + getDOClass(doVal);
     currentTemp.textContent = tempVal.toFixed(1);
     currentSat.textContent = satVal.toFixed(1);
-    lastUpdate.textContent = new Date().toLocaleTimeString('th-TH', { 
-      hour: '2-digit', minute: '2-digit', second: '2-digit' 
-    });
+
+    // <<< แก้: แสดงเวลาของ reading ล่าสุดจริง (เดิมแสดงเวลาปัจจุบันของเครื่อง)
+    const latestDate = tsToDate(latest.timestamp);
+    lastUpdate.textContent = latestDate
+      ? latestDate.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+      : '--';
 
     updateChart(readings);
     updateROCChart(readings);
+
+    // <<< เพิ่ม: แจ้งเตือน Telegram
+    // เก็บค่าล่าสุดไว้ให้รายงานประจำชั่วโมง
+    latestDO = doVal;
+    latestTemp = tempVal;
+
+    // คำนวณอัตราการเปลี่ยนแปลง DO ล่าสุด (mg/L ต่อ 10 นาที) แบบเดียวกับกราฟ ROC
+    const ROC_WINDOW = 40;
+    let latestRate = null;
+    if (readings.length > ROC_WINDOW) {
+      latestRate = readings[readings.length - 1].do - readings[readings.length - 1 - ROC_WINDOW].do;
+    }
+
+    checkAndAlert(doVal, latestRate);
+
+    // เริ่มรายงานประจำชั่วโมงครั้งเดียวหลังโหลดข้อมูลชุดแรก
+    if (!hourlyReportStarted) {
+      hourlyReportStarted = true;
+      startHourlyReport(() => ({ do: latestDO, temp: latestTemp }));
+    }
+  }, (error) => {
+    // <<< เพิ่ม: ดักจับ error โดยเฉพาะกรณีต้องสร้าง Firestore index
+    console.error('readings query error:', error);
+    if (error.code === 'failed-precondition') {
+      console.warn('⚠ Firestore ต้องสร้าง composite index ก่อน — กดลิงก์ในข้อความ error สีแดงด้านบนนี้เพื่อสร้าง แล้วรอ 1-2 นาที');
+    }
   });
 }
 
 // ==================== Chart DO ====================
 function updateChart(readings) {
   const sampled = readings.filter((_, i) => i % 4 === 0);
-  const now = Date.now();
 
-  const labels = sampled.map((_, idx) => {
-    const secondsAgo = (sampled.length - 1 - idx) * 60;
-    const t = new Date(now - secondsAgo * 1000);
-    return t.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+  // <<< แก้: ใช้เวลาจริงจาก reading.timestamp (เดิมเดาจาก index ย้อนหลัง 60 วิ/จุด)
+  const labels = sampled.map(r => {
+    const d = tsToDate(r.timestamp);
+    return d ? d.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' }) : '';
   });
   const data = sampled.map(r => r.do);
 
@@ -154,7 +197,6 @@ function updateChart(readings) {
 // ==================== Rate of Change Chart ====================
 function updateROCChart(readings) {
   const ROC_WINDOW = 40;
-  const now = Date.now();
 
   let rocData = [];
   let rocLabels = [];
@@ -166,11 +208,9 @@ function updateROCChart(readings) {
       const roc = newDO - oldDO;
       rocData.push(roc.toFixed(3));
 
-      const secondsAgo = (readings.length - 1 - i) * 15;
-      const t = new Date(now - secondsAgo * 1000);
-      rocLabels.push(t.toLocaleTimeString('th-TH', { 
-        hour: '2-digit', minute: '2-digit' 
-      }));
+      // <<< แก้: ใช้เวลาจริงจาก reading.timestamp (เดิมเดาจาก index ย้อนหลัง 15 วิ/จุด)
+      const d = tsToDate(readings[i].timestamp);
+      rocLabels.push(d ? d.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' }) : '');
     }
   } else {
     rocLabels = ['รอข้อมูล...'];

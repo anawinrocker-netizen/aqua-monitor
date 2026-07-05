@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ข้อตกลงการใช้บริการ และ นโยบายความเป็นส่วนตัว - Aqua Monitor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Prompt:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .legal-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .legal-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--color-primary-dark);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 24px;
+      width: auto;
+    }
+
+    .legal-back:hover { text-decoration: underline; }
+
+    .legal-card {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-radius: var(--radius-card);
+      box-shadow: 0 20px 60px rgba(14, 165, 233, 0.12), 0 1px 3px rgba(0, 0, 0, 0.05);
+      padding: 48px 44px;
+    }
+
+    .legal-card h1 {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--color-primary-dark);
+      line-height: 1.3;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .legal-card h1 svg { color: var(--color-primary); width: 30px; height: 30px; flex-shrink: 0; }
+
+    .legal-note {
+      background: #f0f9ff;
+      border-left: 4px solid var(--color-primary);
+      border-radius: 8px;
+      padding: 16px 18px;
+      font-size: 14px;
+      color: #475569;
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+
+    .legal-updated {
+      font-size: 14px;
+      color: var(--color-text-muted);
+      margin-bottom: 28px;
+      font-weight: 600;
+    }
+
+    .legal-hr {
+      border: none;
+      border-top: 1px solid var(--color-border);
+      margin: 32px 0;
+    }
+
+    /* Table of contents */
+    .legal-toc {
+      background: #f8fafc;
+      border: 1px solid var(--color-border);
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin-bottom: 32px;
+    }
+
+    .legal-toc h3 {
+      font-size: 16px;
+      color: var(--color-primary-dark);
+      margin-bottom: 14px;
+    }
+
+    .legal-toc ol {
+      margin: 0 0 0 18px;
+      padding: 0;
+    }
+
+    .legal-toc li { margin-bottom: 8px; }
+
+    .legal-toc a {
+      color: var(--color-primary);
+      text-decoration: none;
+      font-size: 14.5px;
+    }
+
+    .legal-toc a:hover { text-decoration: underline; }
+
+    .legal-toc .toc-section-label {
+      font-weight: 700;
+      color: #0c4a6e;
+      margin: 14px 0 8px;
+      font-size: 15px;
+      list-style: none;
+      margin-left: -18px;
+    }
+
+    .legal-card h2 {
+      font-size: 21px;
+      color: #0c4a6e;
+      margin: 36px 0 18px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--color-primary-light);
+      scroll-margin-top: 20px;
+    }
+
+    .legal-card h3 {
+      font-size: 17px;
+      color: var(--color-text);
+      margin: 26px 0 12px;
+      scroll-margin-top: 20px;
+    }
+
+    .legal-card p { color: #334155; margin-bottom: 14px; font-size: 15.5px; }
+
+    .legal-card ul { margin: 0 0 16px 22px; }
+    .legal-card ul li { margin-bottom: 9px; color: #334155; font-size: 15.5px; line-height: 1.7; }
+
+    .legal-intro { color: #475569; font-style: normal; margin-bottom: 8px; }
+
+    /* Tables */
+    .legal-table-wrap { overflow-x: auto; margin: 0 0 20px; }
+
+    table.legal-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14.5px;
+      background: #ffffff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(14, 165, 233, 0.06);
+    }
+
+    table.legal-table th {
+      background: var(--gradient-primary);
+      color: #ffffff;
+      text-align: left;
+      padding: 12px 16px;
+      font-weight: 600;
+      font-family: 'Prompt', sans-serif;
+    }
+
+    table.legal-table td {
+      padding: 12px 16px;
+      border-top: 1px solid var(--color-border);
+      color: #334155;
+      vertical-align: top;
+      line-height: 1.6;
+    }
+
+    table.legal-table tr:nth-child(even) td { background: #f8fafc; }
+
+    /* Placeholder note for values to fill in later */
+    .placeholder-note {
+      display: inline-block;
+      background: #fef3c7;
+      color: #92400e;
+      border: 1px dashed #f59e0b;
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 600px) {
+      .legal-card { padding: 32px 22px; }
+      .legal-card h1 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="legal-wrap">
+    <a href="register.html" class="legal-back"><i data-lucide="arrow-left" class="icon-inline"></i> ย้อนกลับ</a>
+
+    <div class="legal-card">
+      <h1><i data-lucide="shield-check"></i> ข้อตกลงการใช้บริการ และ นโยบายความเป็นส่วนตัว — Aqua Monitor</h1>
+
+      <div class="legal-note">
+        หมายเหตุ: เอกสารนี้เป็นแม่แบบสำหรับโครงงานเพื่อการศึกษา จัดทำให้อิงตามแนวทาง พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA) ของไทย เพื่อให้ใกล้เคียงงานจริง หากนำไปใช้เชิงพาณิชย์จริงควรให้นักกฎหมายตรวจทานก่อน
+      </div>
+      <p class="legal-updated">ปรับปรุงล่าสุด: 21 มิถุนายน 2569</p>
+
+      <hr class="legal-hr">
+
+      <!-- Table of contents -->
+      <nav class="legal-toc">
+        <h3><i data-lucide="list" class="icon-inline"></i> สารบัญ</h3>
+        <ol>
+          <li class="toc-section-label">ส่วนที่ 1 — ข้อตกลงการใช้บริการ</li>
+          <li><a href="#tos-1">1. การยอมรับข้อตกลง</a></li>
+          <li><a href="#tos-2">2. คำอธิบายบริการ</a></li>
+          <li><a href="#tos-3">3. การสมัครและบัญชีผู้ใช้</a></li>
+          <li><a href="#tos-4">4. การใช้งานที่เหมาะสม</a></li>
+          <li><a href="#tos-5">5. ข้อจำกัดความรับผิด (สำคัญ)</a></li>
+          <li><a href="#tos-6">6. ทรัพย์สินทางปัญญา</a></li>
+          <li><a href="#tos-7">7. การระงับหรือยกเลิกบัญชี</a></li>
+          <li><a href="#tos-8">8. การเปลี่ยนแปลงข้อตกลง</a></li>
+          <li><a href="#tos-9">9. กฎหมายที่ใช้บังคับ</a></li>
+          <li><a href="#tos-10">10. การติดต่อ</a></li>
+          <li class="toc-section-label">ส่วนที่ 2 — นโยบายความเป็นส่วนตัว (PDPA)</li>
+          <li><a href="#pp-1">1. ข้อมูลที่เราเก็บรวบรวม</a></li>
+          <li><a href="#pp-2">2. วัตถุประสงค์ในการเก็บ</a></li>
+          <li><a href="#pp-3">3. ฐานทางกฎหมายในการประมวลผล</a></li>
+          <li><a href="#pp-4">4. ระยะเวลาการเก็บรักษาข้อมูล</a></li>
+          <li><a href="#pp-5">5. การเปิดเผยข้อมูลสู่สาธารณะ</a></li>
+          <li><a href="#pp-6">6. การแบ่งปันข้อมูลกับบุคคลที่สาม</a></li>
+          <li><a href="#pp-7">7. สิทธิของเจ้าของข้อมูล (ตาม PDPA)</a></li>
+          <li><a href="#pp-8">8. ความปลอดภัยของข้อมูล</a></li>
+          <li><a href="#pp-9">9. คุกกี้และเทคโนโลยีติดตาม</a></li>
+          <li><a href="#pp-10">10. การติดต่อ</a></li>
+        </ol>
+      </nav>
+
+      <hr class="legal-hr">
+
+      <!-- ============ ส่วนที่ 1 ============ -->
+      <h2>ส่วนที่ 1 — ข้อตกลงการใช้บริการ (Terms of Service)</h2>
+
+      <h3 id="tos-1">1. การยอมรับข้อตกลง</h3>
+      <p>การสมัครสมาชิกหรือใช้งานระบบ Aqua Monitor ("ระบบ" หรือ "บริการ") ถือว่าท่านได้อ่าน เข้าใจ และยอมรับข้อตกลงฉบับนี้ รวมถึงนโยบายความเป็นส่วนตัวในส่วนที่ 2 ทั้งหมดแล้ว หากท่านไม่ยอมรับ กรุณาหยุดใช้งานบริการ</p>
+
+      <h3 id="tos-2">2. คำอธิบายบริการ</h3>
+      <p>Aqua Monitor เป็นระบบติดตามและควบคุมค่าออกซิเจนละลายน้ำ (Dissolved Oxygen) สำหรับการเพาะเลี้ยงสัตว์น้ำ ประกอบด้วยอุปกรณ์เซนเซอร์ การบันทึกข้อมูลบนคลาวด์ การแสดงผลผ่านเว็บไซต์ และการสั่งงานเครื่องเติมอากาศอัตโนมัติ บริการนี้พัฒนาขึ้นเพื่อการศึกษาและการสาธิต</p>
+
+      <h3 id="tos-3">3. การสมัครและบัญชีผู้ใช้</h3>
+      <ul>
+        <li>ท่านต้องให้ข้อมูลที่ถูกต้องและเป็นจริงในการสมัคร</li>
+        <li>ท่านมีหน้าที่รักษารหัสผ่านของตนเองเป็นความลับ และรับผิดชอบต่อกิจกรรมทั้งหมดที่เกิดขึ้นภายใต้บัญชีของท่าน</li>
+        <li>ผู้สมัครควรมีอายุตั้งแต่ 18 ปีขึ้นไป หรือได้รับความยินยอมจากผู้ปกครอง</li>
+        <li>ท่านต้องยืนยันอีเมลของท่านก่อนเข้าใช้งานเต็มรูปแบบ</li>
+      </ul>
+
+      <h3 id="tos-4">4. การใช้งานที่เหมาะสม</h3>
+      <p>ท่านตกลงว่าจะ ไม่:</p>
+      <ul>
+        <li>ใช้บริการเพื่อวัตถุประสงค์ที่ผิดกฎหมาย</li>
+        <li>พยายามเข้าถึงข้อมูลของผู้ใช้รายอื่นโดยไม่ได้รับอนุญาต</li>
+        <li>ส่งข้อมูลเท็จ ก่อกวน หรือทำให้ระบบเสียหาย</li>
+        <li>ใช้บอทหรือสคริปต์ดึงข้อมูลจำนวนมากโดยไม่ได้รับอนุญาต</li>
+      </ul>
+
+      <h3 id="tos-5">5. ข้อจำกัดความรับผิด (สำคัญ)</h3>
+      <ul>
+        <li>ค่าที่ระบบแสดงเป็นเครื่องมือช่วยตัดสินใจเท่านั้น ไม่ใช่การรับประกันความถูกต้องแบบสมบูรณ์ ความแม่นยำขึ้นอยู่กับเซนเซอร์ การเชื่อมต่อ และสภาพแวดล้อม</li>
+        <li>ผู้พัฒนาไม่รับผิดชอบต่อความเสียหายใด ๆ ต่อสัตว์น้ำ ทรัพย์สิน หรือรายได้ ที่เกิดจากการเชื่อถือค่าที่ระบบแสดง การขัดข้องของอุปกรณ์ การขาดการเชื่อมต่ออินเทอร์เน็ต หรือไฟฟ้าดับ</li>
+        <li>ผู้ใช้ควรมีการตรวจสอบด้วยวิธีอื่นควบคู่เสมอ โดยเฉพาะในสถานการณ์วิกฤต</li>
+      </ul>
+
+      <h3 id="tos-6">6. ทรัพย์สินทางปัญญา</h3>
+      <p>ซอร์สโค้ด ดีไซน์ และเนื้อหาของระบบเป็นของผู้พัฒนา ข้อมูลที่ท่านป้อนเข้าระบบยังคงเป็นของท่าน แต่ท่านอนุญาตให้ผู้พัฒนาประมวลผลและแสดงผลตามวัตถุประสงค์ของบริการ</p>
+
+      <h3 id="tos-7">7. การระงับหรือยกเลิกบัญชี</h3>
+      <p>ผู้พัฒนาขอสงวนสิทธิ์ระงับหรือลบบัญชีที่ละเมิดข้อตกลง ท่านสามารถขอปิดบัญชีและลบข้อมูลได้ทุกเมื่อ (ดูส่วนที่ 2 ข้อ 7)</p>
+
+      <h3 id="tos-8">8. การเปลี่ยนแปลงข้อตกลง</h3>
+      <p>ผู้พัฒนาอาจปรับปรุงข้อตกลงนี้ และจะแจ้งวันที่ปรับปรุงล่าสุดไว้ด้านบน การใช้งานต่อหลังการเปลี่ยนแปลงถือว่าท่านยอมรับ</p>
+
+      <h3 id="tos-9">9. กฎหมายที่ใช้บังคับ</h3>
+      <p>ข้อตกลงนี้อยู่ภายใต้กฎหมายแห่งราชอาณาจักรไทย</p>
+
+      <h3 id="tos-10">10. การติดต่อ</h3>
+      <p>อีเมล: <span class="placeholder-note">[ใส่อีเมลของคุณ — กรอกภายหลัง]</span></p>
+
+      <hr class="legal-hr">
+
+      <!-- ============ ส่วนที่ 2 ============ -->
+      <h2>ส่วนที่ 2 — นโยบายความเป็นส่วนตัว (Privacy Policy / PDPA)</h2>
+
+      <p class="legal-intro">นโยบายนี้อธิบายว่าเราเก็บ ใช้ และคุ้มครองข้อมูลส่วนบุคคลของท่านอย่างไร ตามแนวทาง พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562</p>
+
+      <h3 id="pp-1">1. ข้อมูลที่เราเก็บรวบรวม</h3>
+      <div class="legal-table-wrap">
+        <table class="legal-table">
+          <thead>
+            <tr>
+              <th>ประเภท</th>
+              <th>ข้อมูล</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ข้อมูลบัญชี</td>
+              <td>อีเมล, รหัสผ่าน (จัดเก็บแบบเข้ารหัสโดย Firebase ไม่มีใครเห็นรหัสจริง)</td>
+            </tr>
+            <tr>
+              <td>ข้อมูลฟาร์ม</td>
+              <td>ชื่อฟาร์ม, รหัสฟาร์ม, ตำแหน่งที่ตั้ง/พิกัด (ถ้าท่านระบุ)</td>
+            </tr>
+            <tr>
+              <td>ข้อมูลเซนเซอร์</td>
+              <td>ค่า DO, อุณหภูมิน้ำ, ค่าความอิ่มตัวออกซิเจน, เวลาที่บันทึก</td>
+            </tr>
+            <tr>
+              <td>ข้อมูลการใช้งาน</td>
+              <td>ประวัติการเปิด/ปิดเครื่อง, การเชื่อมต่อเพื่อนในเครือข่าย</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 id="pp-2">2. วัตถุประสงค์ในการเก็บ</h3>
+      <ul>
+        <li>เพื่อให้บริการแสดงผลและควบคุมระบบเติมอากาศ</li>
+        <li>เพื่อคำนวณสถิติและแนวโน้มค่าน้ำ</li>
+        <li>เพื่อแสดงข้อมูลในเครือข่ายฟาร์ม (เฉพาะเพื่อนที่ท่านอนุญาต)</li>
+        <li>เพื่อรวบรวมสถิติภาพรวมแบบไม่ระบุตัวตนในหน้าข้อมูลสาธารณะ</li>
+        <li>เพื่อพัฒนาและปรับปรุงระบบ</li>
+      </ul>
+
+      <h3 id="pp-3">3. ฐานทางกฎหมายในการประมวลผล</h3>
+      <p>เราประมวลผลข้อมูลของท่านบนฐานความยินยอม (Consent) ที่ท่านให้ไว้ตอนสมัคร และฐานการปฏิบัติตามสัญญาการให้บริการ</p>
+
+      <h3 id="pp-4">4. ระยะเวลาการเก็บรักษาข้อมูล (Data Retention)</h3>
+      <div class="legal-table-wrap">
+        <table class="legal-table">
+          <thead>
+            <tr>
+              <th>ข้อมูล</th>
+              <th>ระยะเวลาเก็บ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ข้อมูลบัญชีและฟาร์ม</td>
+              <td>เก็บตลอดระยะเวลาที่บัญชียังใช้งานอยู่ และจะลบภายใน 90 วัน หลังจากท่านขอปิดบัญชี</td>
+            </tr>
+            <tr>
+              <td>ข้อมูลเซนเซอร์ (ค่าน้ำย้อนหลัง)</td>
+              <td>เก็บไว้ 2 ปี นับจากวันที่บันทึก จากนั้นจะถูกลบหรือทำให้ไม่สามารถระบุตัวตนได้ (anonymize) เพื่อใช้เป็นสถิติภาพรวม</td>
+            </tr>
+            <tr>
+              <td>ข้อมูลที่กฎหมายกำหนดให้เก็บ</td>
+              <td>ตามระยะเวลาที่กฎหมายที่เกี่ยวข้องกำหนด</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 id="pp-5">5. การเปิดเผยข้อมูลสู่สาธารณะ</h3>
+      <p>ระบบมีหน้า "ข้อมูลสาธารณะ" ที่แสดงสถิติค่าน้ำภาพรวม โดยจะแสดงเป็นข้อมูลที่ไม่ระบุตัวตน (ไม่แสดงอีเมลหรือข้อมูลส่วนตัวของท่าน) ท่านสามารถเลือกตั้งค่าให้ฟาร์มของท่านเป็นส่วนตัวได้</p>
+
+      <h3 id="pp-6">6. การแบ่งปันข้อมูลกับบุคคลที่สาม</h3>
+      <p>เราใช้บริการ Google Firebase (Google LLC) เป็นผู้ประมวลผลข้อมูล (Data Processor) ในการจัดเก็บข้อมูลบนคลาวด์ (เซิร์ฟเวอร์ภูมิภาคเอเชียตะวันออกเฉียงใต้) เราไม่ขายข้อมูลส่วนบุคคลของท่านให้บุคคลที่สามใด ๆ</p>
+
+      <h3 id="pp-7">7. สิทธิของเจ้าของข้อมูล (ตาม PDPA)</h3>
+      <p>ท่านมีสิทธิดังนี้ และสามารถใช้สิทธิได้โดยติดต่อเราตามข้อ 10:</p>
+      <ul>
+        <li>สิทธิเข้าถึง — ขอดูข้อมูลส่วนบุคคลที่เราเก็บ</li>
+        <li>สิทธิแก้ไข — ขอแก้ไขข้อมูลให้ถูกต้อง</li>
+        <li>สิทธิลบ/ทำลาย — ขอให้ลบข้อมูลของท่าน</li>
+        <li>สิทธิระงับการใช้ — ขอให้ระงับการประมวลผลชั่วคราว</li>
+        <li>สิทธิคัดค้าน — คัดค้านการประมวลผลบางประเภท</li>
+        <li>สิทธิเพิกถอนความยินยอม — ถอนความยินยอมได้ทุกเมื่อ</li>
+        <li>สิทธิร้องเรียน — ร้องเรียนต่อสำนักงานคณะกรรมการคุ้มครองข้อมูลส่วนบุคคล (สคส.)</li>
+      </ul>
+
+      <h3 id="pp-8">8. ความปลอดภัยของข้อมูล</h3>
+      <ul>
+        <li>รหัสผ่านจัดเก็บแบบเข้ารหัสโดยระบบ Firebase Authentication</li>
+        <li>การรับส่งข้อมูลใช้การเชื่อมต่อแบบเข้ารหัส (HTTPS)</li>
+        <li>เราจำกัดการเข้าถึงข้อมูลเฉพาะผู้ที่จำเป็น</li>
+      </ul>
+
+      <h3 id="pp-9">9. คุกกี้และเทคโนโลยีติดตาม</h3>
+      <p>ระบบใช้คุกกี้/ที่จัดเก็บในเบราว์เซอร์เท่าที่จำเป็นต่อการล็อกอินและการทำงานของระบบเท่านั้น</p>
+
+      <h3 id="pp-10">10. การติดต่อ</h3>
+      <p>หากมีคำถามเกี่ยวกับข้อมูลส่วนบุคคล หรือต้องการใช้สิทธิข้างต้น ติดต่อ:</p>
+      <ul>
+        <li>ผู้ดูแลระบบ: <span class="placeholder-note">[ชื่อผู้พัฒนา — กรอกภายหลัง]</span></li>
+        <li>อีเมล: <span class="placeholder-note">[ใส่อีเมลของคุณ — กรอกภายหลัง]</span></li>
+      </ul>
+
+      <hr class="legal-hr">
+      <a href="register.html" class="legal-back"><i data-lucide="arrow-left" class="icon-inline"></i> ย้อนกลับไปหน้าสมัครสมาชิก</a>
+    </div>
+  </div>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>

@@ -28,8 +28,27 @@
         </div>
 
         <div class="form-group">
-          <label for="password">รหัสผ่าน (อย่างน้อย 6 ตัว)</label>
-          <input type="password" id="password" required minlength="6" placeholder="••••••••">
+          <label for="password">รหัสผ่าน (อย่างน้อย 8 ตัว และมีตัวเลขอย่างน้อย 1 ตัว)</label>
+          <input type="password" id="password" required minlength="8" placeholder="••••••••">
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">ยืนยันรหัสผ่าน</label>
+          <input type="password" id="confirmPassword" required minlength="8" placeholder="••••••••">
+        </div>
+
+        <div class="checkbox-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="acceptTerms" required>
+            <span>ฉันได้อ่านและยอมรับ <a href="terms.html" target="_blank" rel="noopener">ข้อตกลงการใช้บริการและนโยบายความเป็นส่วนตัว</a></span>
+          </label>
+        </div>
+
+        <div class="checkbox-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="publicConsent">
+            <span>ฉันยินยอมให้แสดงข้อมูลฟาร์มของฉันในเครือข่ายสาธารณะแบบไม่ระบุตัวตน เพื่อประโยชน์ทางสถิติ</span>
+          </label>
         </div>
 
         <button type="submit" id="submitBtn">สมัครสมาชิก</button>

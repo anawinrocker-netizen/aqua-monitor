@@ -1,9 +1,11 @@
 import { auth, db } from './firebase-config.js';
-import { 
-  signInWithEmailAndPassword 
+import {
+  signInWithEmailAndPassword,
+  sendEmailVerification,
+  signOut
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { 
-  doc, getDoc 
+import {
+  doc, getDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const form = document.getElementById('loginForm');
@@ -25,7 +27,41 @@ form.addEventListener('submit', async (e) => {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
 
-    // 2. ดูว่า user มีฟาร์มหรือยัง
+    // 2. ตรวจสอบว่ายืนยันอีเมลแล้วหรือยัง
+    if (!user.emailVerified) {
+      // ยังไม่ยืนยัน → ออกจากระบบทันที และแสดงปุ่มส่งอีเมลยืนยันอีกครั้ง
+      await signOut(auth);
+
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'เข้าสู่ระบบ';
+
+      message.className = 'message error';
+      message.style.flexDirection = 'column';
+      message.innerHTML =
+        '<span><i data-lucide="mail-warning" class="icon-inline"></i> ' +
+        'กรุณายืนยันอีเมลก่อนเข้าใช้งาน เราได้ส่งลิงก์ไปที่อีเมลของคุณแล้ว</span>' +
+        '<button type="button" id="resendBtn" style="margin-top:12px;">ส่งอีเมลยืนยันอีกครั้ง</button>';
+      lucide.createIcons();
+
+      const resendBtn = document.getElementById('resendBtn');
+      resendBtn.addEventListener('click', async () => {
+        resendBtn.disabled = true;
+        resendBtn.textContent = 'กำลังส่ง...';
+        try {
+          // ต้อง sign in ชั่วคราวเพื่อให้มี user object สำหรับส่งอีเมล
+          const cred = await signInWithEmailAndPassword(auth, email, password);
+          await sendEmailVerification(cred.user);
+          await signOut(auth);
+          resendBtn.textContent = 'ส่งอีเมลแล้ว ✓';
+        } catch (err) {
+          resendBtn.disabled = false;
+          resendBtn.textContent = 'ส่งอีเมลยืนยันอีกครั้ง';
+        }
+      });
+      return;
+    }
+
+    // 3. ยืนยันแล้ว → ดูว่า user มีฟาร์มหรือยัง
     const userDoc = await getDoc(doc(db, 'users', user.uid));
     const userData = userDoc.data();
 
@@ -47,9 +83,9 @@ form.addEventListener('submit', async (e) => {
     submitBtn.disabled = false;
     submitBtn.textContent = 'เข้าสู่ระบบ';
 
-    let errorMsg = 'เกิดข้อผิดพลาด';
-    if (error.code === 'auth/invalid-credential' || 
-        error.code === 'auth/wrong-password' || 
+    let errorMsg = 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง';
+    if (error.code === 'auth/invalid-credential' ||
+        error.code === 'auth/wrong-password' ||
         error.code === 'auth/user-not-found') {
       errorMsg = 'อีเมลหรือรหัสผ่านไม่ถูกต้อง';
     } else if (error.code === 'auth/invalid-email') {
