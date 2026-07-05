@@ -3,138 +3,195 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard - Aqua Monitor</title>
+  <title>แดชบอร์ด — Aqua Monitor</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Prompt:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/dashboard.css">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/dashboard-app.css">
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
-<body class="dashboard-body">
+<body>
 
-  <!-- Header -->
-  <header class="dashboard-header">
-    <div class="bubbles-container" aria-hidden="true">
-      <div class="bubble" style="--size:20px; --left:8%; --delay:0s; --duration:14s;"></div>
-      <div class="bubble" style="--size:32px; --left:22%; --delay:4s; --duration:14s;"></div>
-      <div class="bubble" style="--size:16px; --left:38%; --delay:8s; --duration:14s;"></div>
-      <div class="bubble" style="--size:26px; --left:54%; --delay:2s; --duration:14s;"></div>
-      <div class="bubble" style="--size:18px; --left:70%; --delay:6s; --duration:14s;"></div>
-      <div class="bubble" style="--size:24px; --left:86%; --delay:10s; --duration:14s;"></div>
-    </div>
-    <div class="header-content">
-      <h1><i data-lucide="waves" class="icon-logo"></i> Aqua Monitor</h1>
-      <div class="user-info">
-        <span id="farmInfo">กำลังโหลด...</span>
-        <a href="friends.html" class="btn-logout" style="text-decoration:none;">
-          <i data-lucide="users" class="icon-inline"></i> เพื่อน
+  <!-- ==================== Top bar (logged-in) ==================== -->
+  <nav class="site-nav" id="siteNav">
+    <div class="container">
+      <a href="index.html" class="brand">
+        <i data-lucide="waves"></i> Aqua Monitor
+      </a>
+      <div class="dash-actions">
+        <span class="farm-chip">
+          <i data-lucide="warehouse"></i> <span id="farmInfo">กำลังโหลด...</span>
+        </span>
+        <a href="friends.html" class="btn-ghost btn-sm">
+          <i data-lucide="users"></i> เพื่อน
         </a>
-        <button id="logoutBtn" class="btn-logout">
-          <i data-lucide="log-out" class="icon-inline"></i> ออกจากระบบ
+        <button id="logoutBtn" class="btn-ghost btn-sm">
+          <i data-lucide="log-out"></i> ออกจากระบบ
         </button>
       </div>
     </div>
-  </header>
+  </nav>
 
-  <!-- Main -->
-  <main class="dashboard-main">
+  <!-- ==================== Main ==================== -->
+  <main class="dash-main">
+    <div class="container">
 
-    <!-- Status Cards -->
-    <section class="status-grid">
-      <div class="status-card animate-in">
-        <div class="icon-wrapper"><i data-lucide="droplet"></i></div>
-        <div class="status-label">DO ปัจจุบัน</div>
-        <div class="status-value" id="currentDO">--</div>
-        <div class="status-unit">mg/L</div>
+      <div class="page-head">
+        <h1>ภาพรวมฟาร์ม</h1>
+        <p>ค่าคุณภาพน้ำแบบเรียลไทม์จากทุ่นเซนเซอร์ในบ่อของคุณ</p>
       </div>
 
-      <div class="status-card animate-in">
-        <div class="icon-wrapper"><i data-lucide="thermometer"></i></div>
-        <div class="status-label">อุณหภูมิ</div>
-        <div class="status-value" id="currentTemp">--</div>
-        <div class="status-unit">°C</div>
-      </div>
+      <!-- Status cards (live values — shown instantly, no scroll reveal) -->
+      <section class="status-grid">
+        <article class="card stat-card do-card">
+          <span class="icon-tile"><i data-lucide="droplet"></i></span>
+          <div class="stat-label">DO ปัจจุบัน</div>
+          <div class="stat-value-row">
+            <span class="status-value" id="currentDO">--</span>
+            <span class="stat-unit">mg/L</span>
+          </div>
+        </article>
 
-      <div class="status-card animate-in">
-        <div class="icon-wrapper"><i data-lucide="gauge"></i></div>
-        <div class="status-label">DO Saturation</div>
-        <div class="status-value" id="currentSat">--</div>
-        <div class="status-unit">%</div>
-      </div>
+        <article class="card stat-card">
+          <span class="icon-tile"><i data-lucide="thermometer"></i></span>
+          <div class="stat-label">อุณหภูมิ</div>
+          <div class="stat-value-row">
+            <span class="status-value" id="currentTemp">--</span>
+            <span class="stat-unit">°C</span>
+          </div>
+        </article>
 
-      <div class="status-card status-aerator animate-in">
-        <div class="icon-wrapper"><i data-lucide="fan"></i></div>
-        <div class="status-label">เครื่องตีน้ำ</div>
-        <div class="status-value" id="aeratorStatus">--</div>
-        <button id="toggleAerator" class="btn-toggle">เปลี่ยนสถานะ</button>
-      </div>
-    </section>
+        <article class="card stat-card">
+          <span class="icon-tile"><i data-lucide="gauge"></i></span>
+          <div class="stat-label">DO Saturation</div>
+          <div class="stat-value-row">
+            <span class="status-value" id="currentSat">--</span>
+            <span class="stat-unit">%</span>
+          </div>
+        </article>
 
-    <!-- Last Update -->
-    <p class="last-update">
-      <span class="status-dot status-good live-dot"></span>
-      อัปเดตล่าสุด: <span id="lastUpdate">--</span>
-    </p>
+        <article class="card stat-card aerator-card">
+          <span class="icon-tile"><i data-lucide="fan"></i></span>
+          <div class="stat-label">เครื่องตีน้ำ</div>
+          <div class="status-value" id="aeratorStatus">--</div>
+          <button id="toggleAerator" class="btn-toggle">เปลี่ยนสถานะ</button>
+        </article>
+      </section>
 
-    <!-- Charts -->
-    <section class="chart-section">
-      <h2><i data-lucide="activity" class="icon-inline"></i> กราฟ DO ย้อนหลัง 24 ชั่วโมง</h2>
-      <div class="chart-container">
-        <canvas id="doChart"></canvas>
-      </div>
-    </section>
-
-    <!-- Rate of Change Chart -->
-    <section class="chart-section" style="margin-top: 24px;">
-      <h2><i data-lucide="trending-up" class="icon-inline"></i> อัตราการเปลี่ยนแปลง DO (Rate of Change)</h2>
-      <p class="chart-desc">
-        <i data-lucide="trending-up" class="icon-inline"></i> เส้นบวก = DO เพิ่มขึ้น (ปลอดภัย) |
-        <i data-lucide="trending-down" class="icon-inline"></i> เส้นลบ = DO ลดลง |
-        <i data-lucide="alert-triangle" class="icon-inline"></i> เกินเส้นแดง (-0.5) = ระบบจะเปิดเครื่องตีน้ำอัตโนมัติ
+      <!-- Last update -->
+      <p class="last-update">
+        <span class="status-dot status-good live-dot"></span>
+        อัปเดตล่าสุด: <span id="lastUpdate">--</span>
       </p>
-      <div class="chart-container">
-        <canvas id="rocChart"></canvas>
-      </div>
-    </section>
 
+      <!-- Charts -->
+      <div class="charts-stack">
+        <section class="card chart-card reveal">
+          <div class="chart-head">
+            <span class="icon-tile"><i data-lucide="activity"></i></span>
+            <h2>กราฟ DO ย้อนหลัง 24 ชั่วโมง</h2>
+          </div>
+          <div class="chart-container">
+            <canvas id="doChart"></canvas>
+          </div>
+        </section>
+
+        <section class="card chart-card reveal">
+          <div class="chart-head">
+            <span class="icon-tile"><i data-lucide="trending-up"></i></span>
+            <h2>อัตราการเปลี่ยนแปลง DO (Rate of Change)</h2>
+          </div>
+          <p class="chart-desc">
+            <span><i data-lucide="trending-up"></i> เส้นบวก = DO เพิ่มขึ้น (ปลอดภัย)</span>
+            <span><i data-lucide="trending-down"></i> เส้นลบ = DO ลดลง</span>
+            <span><i data-lucide="alert-triangle"></i> เกินเส้นแดง (-0.5) = ระบบจะเปิดเครื่องตีน้ำอัตโนมัติ</span>
+          </p>
+          <div class="chart-container">
+            <canvas id="rocChart"></canvas>
+          </div>
+        </section>
+      </div>
+
+    </div>
   </main>
 
+  <!-- ==================== Footer ==================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-col footer-about-col">
+          <div class="footer-brand"><i data-lucide="waves"></i> Aqua Monitor</div>
+          <p class="footer-about">
+            แพลตฟอร์มเครือข่ายข้อมูลคุณภาพน้ำเพื่อการเพาะเลี้ยงสัตว์น้ำของประเทศไทย
+            ควบคุมออกซิเจนละลายน้ำอัตโนมัติแบบเรียลไทม์
+          </p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+            <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+            <a href="#" aria-label="YouTube"><i data-lucide="youtube"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>เมนู</h4>
+          <ul>
+            <li><a href="index.html">หน้าแรก</a></li>
+            <li><a href="public.html">ข้อมูลสาธารณะ</a></li>
+            <li><a href="friends.html">เพื่อน</a></li>
+            <li><a href="dashboard.html">แดชบอร์ด</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>ติดต่อเรา</h4>
+          <ul class="footer-contact">
+            <li><i data-lucide="mail"></i> contact@aquamonitor.th</li>
+            <li><i data-lucide="map-pin"></i> จังหวัดตรัง ประเทศไทย</li>
+            <li><i data-lucide="phone"></i> 075-000-000</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 Aqua Monitor | โครงงานวิทยาศาสตร์ โรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัย ตรัง
+    </div>
+  </footer>
+
+  <!-- ==================== Chrome + motion JS ==================== -->
   <script>
-    document.querySelectorAll('.animate-in').forEach((el, i) => {
-      el.style.animationDelay = (i * 0.1) + 's';
-    });
-    lucide.createIcons();
-  </script>
-  <script>
-    (function() {
-      const bgAnimated = document.querySelector('.bg-animated');
-      if (!bgAnimated) return;
+    (function () {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      let ticking = false;
-
-      function updateBackground() {
-        const scrollY = window.scrollY;
-        const winHeight = window.innerHeight;
-        const docHeight = document.documentElement.scrollHeight - winHeight;
-        const scrollPercent = docHeight > 0 ? Math.min(scrollY / docHeight, 1) : 0;
-
-        const hueRotate = scrollPercent * 30;
-        bgAnimated.style.filter = `hue-rotate(${hueRotate}deg)`;
-
-        const translateY = scrollY * 0.1;
-        bgAnimated.style.transform = `translateY(${translateY}px)`;
-
-        ticking = false;
+      /* Reveal chart cards only (status numbers must show instantly) */
+      if (!reduceMotion && 'IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.style.transitionDelay = (entry.target.dataset.delay || '0s');
+              entry.target.classList.add('is-visible');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+        const groups = new Map();
+        document.querySelectorAll('.reveal').forEach((el) => {
+          const key = el.parentElement;
+          const i = groups.get(key) || 0;
+          el.dataset.delay = (i * 0.1) + 's';
+          groups.set(key, i + 1);
+          io.observe(el);
+        });
+      } else {
+        document.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-visible'));
       }
 
-      window.addEventListener('scroll', () => {
-        if (!ticking) {
-          requestAnimationFrame(updateBackground);
-          ticking = true;
-        }
-      });
+      /* Navbar shadow on scroll */
+      const nav = document.getElementById('siteNav');
+      const onScroll = () => nav && nav.classList.toggle('scrolled', window.scrollY > 12);
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      if (window.lucide) lucide.createIcons();
     })();
   </script>
   <script type="module" src="js/dashboard.js"></script>

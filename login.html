@@ -3,68 +3,155 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>เข้าสู่ระบบ - Aqua Monitor</title>
+  <title>เข้าสู่ระบบ — Aqua Monitor</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Prompt:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/auth.css">
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-  <div class="container">
-    <div class="card">
-      <h1><i data-lucide="waves" class="icon-logo"></i> Aqua Monitor</h1>
-      <h2>เข้าสู่ระบบ</h2>
+  <div class="auth">
 
-      <form id="loginForm">
-        <div class="form-group">
-          <label for="email">อีเมล</label>
-          <input type="email" id="email" required placeholder="example@email.com">
+    <!-- LEFT: ocean panel -->
+    <aside class="auth-aside on-dark">
+      <a href="index.html" class="back-btn"><i data-lucide="arrow-left"></i> กลับหน้าหลัก</a>
+      <div class="bubbles" aria-hidden="true">
+        <span class="bubble" style="--size:26px;--left:12%;--delay:0s;--duration:16s;"></span>
+        <span class="bubble" style="--size:40px;--left:30%;--delay:4s;--duration:19s;"></span>
+        <span class="bubble" style="--size:20px;--left:52%;--delay:8s;--duration:14s;"></span>
+        <span class="bubble" style="--size:32px;--left:72%;--delay:2s;--duration:17s;"></span>
+        <span class="bubble" style="--size:24px;--left:88%;--delay:6s;--duration:15s;"></span>
+      </div>
+      <div class="aside-inner">
+        <div class="aside-brand"><i data-lucide="waves"></i> Aqua Monitor</div>
+        <p class="aside-tag">ยินดีต้อนรับกลับ — เข้าสู่ระบบเพื่อดูค่าคุณภาพน้ำในบ่อของคุณแบบเรียลไทม์</p>
+
+        <div class="aside-art buoy-stage">
+          <div class="buoy-float">
+            <img class="buoy-photo" src="images/buoy.png" alt="ทุ่นเซนเซอร์วัดออกซิเจน Aqua Monitor">
+            <img class="buoy-reflection" src="images/buoy.png" alt="" aria-hidden="true">
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="password">รหัสผ่าน</label>
-          <input type="password" id="password" required placeholder="••••••••">
+        <ul class="trust-list">
+          <li><span class="trust-check"><i data-lucide="check"></i></span> ติดตามค่าน้ำแบบเรียลไทม์</li>
+          <li><span class="trust-check"><i data-lucide="check"></i></span> ควบคุมอัตโนมัติเชิงรุก</li>
+          <li><span class="trust-check"><i data-lucide="check"></i></span> เริ่มใช้งานฟรี</li>
+        </ul>
+      </div>
+      <svg class="auth-wave" viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M0,60 C320,120 720,0 1440,80 L1440,120 L0,120 Z" fill="rgba(255,255,255,.5)"/>
+        <path d="M0,80 C480,40 960,120 1440,60 L1440,120 L0,120 Z" fill="#ffffff"/>
+      </svg>
+    </aside>
+
+    <!-- RIGHT: form -->
+    <main class="auth-main">
+      <div class="auth-card">
+        <div class="auth-head">
+          <h1>เข้าสู่ระบบ</h1>
+          <p>กรอกอีเมลและรหัสผ่านของคุณเพื่อเข้าใช้งาน</p>
         </div>
 
-        <button type="submit" id="submitBtn">เข้าสู่ระบบ</button>
+        <form id="loginForm">
+          <div class="field">
+            <label for="email">อีเมล</label>
+            <input type="email" id="email" required placeholder="example@email.com" autocomplete="email">
+          </div>
 
-        <p id="message" class="message"></p>
-      </form>
+          <div class="field">
+            <label for="password">รหัสผ่าน</label>
+            <input type="password" id="password" required placeholder="••••••••" autocomplete="current-password">
+          </div>
 
-      <p class="link-text">ยังไม่มีบัญชี? <a href="register.html">สมัครสมาชิก</a></p>
+          <button type="submit" id="submitBtn" class="btn-primary">เข้าสู่ระบบ</button>
+
+          <p id="message" class="message"></p>
+        </form>
+
+        <p class="link-text">ยังไม่มีบัญชี? <a href="register.html">สมัครสมาชิก</a></p>
+
+        <p class="auth-foot">
+          © 2026 Aqua Monitor · <a href="terms.html" data-open-terms>ข้อตกลงการใช้บริการ</a>
+        </p>
+      </div>
+    </main>
+  </div>
+
+  <!-- Terms & Privacy modal -->
+  <div class="modal" id="termsModal" aria-hidden="true">
+    <div class="modal-overlay" data-close></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="termsTitle">
+      <div class="modal-head">
+        <h2 id="termsTitle">ข้อตกลงการใช้บริการและนโยบายความเป็นส่วนตัว</h2>
+        <button type="button" class="modal-close" data-close aria-label="ปิด"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-note">
+          หมายเหตุ: เอกสารนี้จัดทำขึ้นเพื่อ<strong>โครงงานเพื่อการศึกษา</strong> ข้อความด้านล่างเป็นเนื้อหาตัวอย่าง
+          กรุณาปรึกษาผู้เชี่ยวชาญด้านกฎหมายก่อนนำไปใช้งานจริง
+        </div>
+
+        <h3>1. การยอมรับข้อตกลง</h3>
+        <p>การสมัครสมาชิกและใช้งาน Aqua Monitor ถือว่าคุณได้อ่าน เข้าใจ และยอมรับข้อตกลงการใช้บริการและนโยบายความเป็นส่วนตัวฉบับนี้ทั้งหมดแล้ว หากคุณไม่ยอมรับ กรุณางดใช้งานบริการ</p>
+
+        <h3>2. คำอธิบายบริการ</h3>
+        <p>Aqua Monitor เป็นแพลตฟอร์มติดตามค่าคุณภาพน้ำ (เช่น ออกซิเจนละลายน้ำและอุณหภูมิ) จากทุ่นเซนเซอร์ พร้อมระบบช่วยควบคุมเครื่องตีน้ำ และการแสดงผลข้อมูลผ่านเว็บไซต์</p>
+
+        <h3>3. การใช้งานที่เหมาะสม</h3>
+        <ul>
+          <li>ใช้บริการตามวัตถุประสงค์ที่ถูกต้องตามกฎหมายเท่านั้น</li>
+          <li>ไม่เข้าถึงบัญชีผู้อื่นหรือรบกวนการทำงานของระบบ</li>
+          <li>รับผิดชอบในการรักษารหัสผ่านและความปลอดภัยของบัญชีของคุณเอง</li>
+        </ul>
+
+        <h3>4. ข้อจำกัดความรับผิด</h3>
+        <p>ค่าที่ระบบแสดงเป็น<strong>เครื่องมือช่วยในการตัดสินใจ</strong> เท่านั้น ไม่ใช่การรับประกันความถูกต้องแบบสมบูรณ์ ผู้ใช้ควรใช้วิจารณญาณและตรวจสอบร่วมกับวิธีอื่น ผู้พัฒนาไม่รับผิดชอบต่อความเสียหายที่เกิดจากการพึ่งพาข้อมูลของระบบแต่เพียงอย่างเดียว</p>
+
+        <h3>5. ข้อมูลที่เก็บรวบรวม</h3>
+        <ul>
+          <li>ข้อมูลบัญชี: ชื่อ-นามสกุล อีเมล และรหัสผ่าน (จัดเก็บแบบเข้ารหัส)</li>
+          <li>ข้อมูลฟาร์มและเซนเซอร์: ค่าที่วัดได้ ตำแหน่งที่ตั้ง ชนิดสัตว์น้ำ และเวลาบันทึก</li>
+        </ul>
+
+        <h3>6. วัตถุประสงค์ของการใช้ข้อมูล</h3>
+        <p>เพื่อให้บริการติดตามและควบคุมคุณภาพน้ำ ปรับปรุงระบบ และจัดทำสถิติภาพรวมของเครือข่าย โดยข้อมูลสาธารณะจะแสดงแบบ<strong>ไม่ระบุตัวตน</strong> เมื่อคุณให้ความยินยอมเท่านั้น</p>
+
+        <h3>7. ระยะเวลาการเก็บข้อมูล</h3>
+        <ul>
+          <li>ข้อมูลบัญชี: จะถูกลบภายใน <strong>90 วัน</strong> หลังจากปิดบัญชี</li>
+          <li>ข้อมูลเซนเซอร์: จัดเก็บเป็นระยะเวลา <strong>2 ปี</strong> เพื่อการวิเคราะห์แนวโน้ม</li>
+        </ul>
+
+        <h3>8. สิทธิของเจ้าของข้อมูลตาม PDPA</h3>
+        <p>ตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล คุณมีสิทธิดังนี้:</p>
+        <ul>
+          <li>สิทธิเข้าถึงและขอสำเนาข้อมูลส่วนบุคคลของคุณ</li>
+          <li>สิทธิขอแก้ไขข้อมูลให้ถูกต้องเป็นปัจจุบัน</li>
+          <li>สิทธิขอลบข้อมูล</li>
+          <li>สิทธิเพิกถอนความยินยอมเมื่อใดก็ได้</li>
+        </ul>
+
+        <h3>9. การติดต่อ</h3>
+        <p>หากมีคำถามเกี่ยวกับข้อตกลงหรือต้องการใช้สิทธิของคุณ กรุณาติดต่อ:</p>
+        <p class="muted">อีเมล: [ใส่อีเมล] &nbsp;·&nbsp; ผู้พัฒนา: [ชื่อผู้พัฒนา]</p>
+      </div>
     </div>
   </div>
 
-  <script>lucide.createIcons();</script>
   <script>
-    (function() {
-      const bgAnimated = document.querySelector('.bg-animated');
-      if (!bgAnimated) return;
-
-      let ticking = false;
-
-      function updateBackground() {
-        const scrollY = window.scrollY;
-        const winHeight = window.innerHeight;
-        const docHeight = document.documentElement.scrollHeight - winHeight;
-        const scrollPercent = docHeight > 0 ? Math.min(scrollY / docHeight, 1) : 0;
-
-        const hueRotate = scrollPercent * 30;
-        bgAnimated.style.filter = `hue-rotate(${hueRotate}deg)`;
-
-        const translateY = scrollY * 0.1;
-        bgAnimated.style.transform = `translateY(${translateY}px)`;
-
-        ticking = false;
+    (function () {
+      const modal = document.getElementById('termsModal');
+      if (modal) {
+        const open = (e) => { if (e) e.preventDefault(); modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; };
+        const close = () => { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; };
+        document.querySelectorAll('[data-open-terms]').forEach((el) => el.addEventListener('click', open));
+        modal.querySelectorAll('[data-close]').forEach((el) => el.addEventListener('click', close));
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('open')) close(); });
       }
-
-      window.addEventListener('scroll', () => {
-        if (!ticking) {
-          requestAnimationFrame(updateBackground);
-          ticking = true;
-        }
-      });
+      if (window.lucide) lucide.createIcons();
     })();
   </script>
   <script type="module" src="js/login.js"></script>

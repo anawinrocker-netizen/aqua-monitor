@@ -22,6 +22,30 @@ let currentFarmId = null;
 let doChart = null;
 let rocChart = null;
 
+// ==================== Chart.js premium styling (visual only) ====================
+// ปรับเฉพาะรูปลักษณ์ของกราฟ — ไม่แตะข้อมูล การคำนวณ หรือลำดับเวลาใด ๆ
+Chart.defaults.font.family = "'IBM Plex Sans Thai','Prompt',sans-serif";
+Chart.defaults.font.size = 12;
+Chart.defaults.color = '#64748b';
+
+function lineGradient(ctx, area, top, bottom) {
+  if (!area) return top; // chartArea ยังไม่พร้อมตอนวาดครั้งแรก
+  const g = ctx.createLinearGradient(0, area.top, 0, area.bottom);
+  g.addColorStop(0, top);
+  g.addColorStop(1, bottom);
+  return g;
+}
+
+const CHART_TOOLTIP = {
+  backgroundColor: 'rgba(12,74,110,0.96)',
+  padding: 12,
+  cornerRadius: 10,
+  displayColors: false,
+  caretSize: 6,
+  titleFont: { family: "'Prompt',sans-serif", weight: '600', size: 13 },
+  bodyFont: { size: 13 }
+};
+
 // <<< เพิ่ม: เก็บค่าล่าสุดไว้ให้รายงานประจำชั่วโมงของ Telegram เรียกใช้
 let latestDO = null;
 let latestTemp = null;
@@ -174,21 +198,35 @@ function updateChart(readings) {
         label: 'DO (mg/L)',
         data: data,
         borderColor: '#0ea5e9',
-        backgroundColor: 'rgba(14, 165, 233, 0.1)',
+        backgroundColor: (c) => lineGradient(c.chart.ctx, c.chart.chartArea, 'rgba(14,165,233,0.28)', 'rgba(14,165,233,0)'),
         fill: true,
         tension: 0.4,
         pointRadius: 0,
         pointHoverRadius: 5,
-        borderWidth: 2
+        pointBackgroundColor: '#0ea5e9',
+        borderWidth: 2.5
       }]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      plugins: { legend: { display: true, position: 'top' } },
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: CHART_TOOLTIP
+      },
       scales: {
-        y: { beginAtZero: false, title: { display: true, text: 'DO (mg/L)' } },
-        x: { title: { display: true, text: 'เวลา' }, ticks: { maxTicksLimit: 12 } }
+        y: {
+          beginAtZero: false,
+          border: { display: false },
+          grid: { color: 'rgba(14,165,233,0.10)', drawTicks: false },
+          ticks: { color: '#94a3b8', padding: 8, maxTicksLimit: 6 }
+        },
+        x: {
+          border: { display: false },
+          grid: { display: false },
+          ticks: { color: '#64748b', maxTicksLimit: 12, maxRotation: 0, autoSkip: true }
+        }
       }
     }
   });
@@ -233,36 +271,46 @@ function updateROCChart(readings) {
         label: 'อัตราการเปลี่ยนแปลง DO (mg/L ต่อ 10 นาที)',
         data: rocData,
         borderColor: '#06b6d4',
-        backgroundColor: 'rgba(6, 182, 212, 0.1)',
+        backgroundColor: (c) => lineGradient(c.chart.ctx, c.chart.chartArea, 'rgba(6,182,212,0.24)', 'rgba(6,182,212,0)'),
         fill: true,
         tension: 0.4,
         pointRadius: 0,
         pointHoverRadius: 5,
-        borderWidth: 2
+        pointBackgroundColor: '#06b6d4',
+        borderWidth: 2.5
       }]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      plugins: { legend: { display: true, position: 'top' } },
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: CHART_TOOLTIP
+      },
       scales: {
-        y: { 
-          title: { display: true, text: 'ΔDO (mg/L / 10 นาที)' },
+        y: {
+          title: { display: true, text: 'ΔDO (mg/L / 10 นาที)', color: '#94a3b8' },
           suggestedMin: -1,
           suggestedMax: 1,
+          border: { display: false },
           grid: {
+            // <<< คงเส้นอ้างอิงเดิม: เส้นศูนย์ (เทา) และเส้นอันตราย -0.5 (แดง)
             color: (ctx) => {
               if (ctx.tick.value === 0) return '#64748b';
               if (ctx.tick.value === -0.5) return '#ef4444';
-              return '#e2e8f0';
+              return 'rgba(14,165,233,0.10)';
             },
             lineWidth: (ctx) => {
               if (ctx.tick.value === 0) return 2;
               if (ctx.tick.value === -0.5) return 2;
               return 1;
-            }
+            },
+            drawTicks: false
           },
           ticks: {
+            color: '#94a3b8',
+            padding: 8,
             callback: function(value) {
               if (value === -0.5) return '-0.5 (อันตราย)';
               if (value === 0) return '0';
@@ -270,7 +318,11 @@ function updateROCChart(readings) {
             }
           }
         },
-        x: { title: { display: true, text: 'เวลา' }, ticks: { maxTicksLimit: 12 } }
+        x: {
+          border: { display: false },
+          grid: { display: false },
+          ticks: { color: '#64748b', maxTicksLimit: 12, maxRotation: 0, autoSkip: true }
+        }
       }
     }
   });

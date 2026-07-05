@@ -28,14 +28,23 @@
   z-index: 1;
 }
 
+/* left-side darkening keeps the headline crisp over the ambient buoy */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(3,26,45,.46) 0%, rgba(3,26,45,.18) 34%, transparent 60%);
+  pointer-events: none;
+  z-index: 3;
+}
+/* bubbles float above the buoy backdrop */
+.hero .bubbles { z-index: 2; }
+
 .hero .container {
   position: relative;
-  z-index: 3;
-  display: grid;
-  grid-template-columns: 1.05fr .95fr;
-  align-items: center;
-  gap: clamp(var(--s-8), 5vw, var(--s-20));
+  z-index: 4;
 }
+.hero-copy { max-width: min(600px, 100%); }
 
 .hero-eyebrow {
   color: var(--sky);
@@ -74,26 +83,70 @@
 }
 .trust-row .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--sky); }
 
-/* ---------- Hero illustration (buoy) ---------- */
-.hero-art {
-  position: relative;
-  z-index: 3;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* ---------- Ambient buoy backdrop (landing hero only) ----------
+   A big, faded, edge-bleeding presence that melts into the ocean gradient.
+   Layer order inside: glow + navy grounding (::before) → blurred aura →
+   masked semi-transparent buoy → soft blue tint veil (::after). */
+.hero-buoy {
+  position: absolute;
+  z-index: 1;
+  top: 52%;
+  right: -5%;
+  transform: translateY(-50%);
+  width: clamp(460px, 52vw, 820px);
+  aspect-ratio: 581 / 430;
+  pointer-events: none;
 }
-.buoy-wrap {
-  position: relative;
-  width: min(440px, 100%);
-  animation: float-y 6s ease-in-out infinite;
+/* ocean-cyan glow + a soft navy grounding shadow to give it weight */
+.hero-buoy::before {
+  content: "";
+  position: absolute;
+  inset: -14% -10% -10% -12%;
+  background:
+    radial-gradient(ellipse at 60% 40%, rgba(6,182,212,.42) 0%, rgba(6,182,212,0) 62%),
+    radial-gradient(ellipse at 58% 84%, rgba(3,26,45,.45) 0%, rgba(3,26,45,0) 60%);
+  filter: blur(30px);
 }
-.buoy-wrap svg { width: 100%; height: auto; display: block; filter: drop-shadow(0 24px 40px rgba(3,26,45,.4)); }
+/* soft blue tint veil so the buoy colors sit in the hero palette */
+.hero-buoy::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 64% 44%, rgba(9,58,95,.5) 0%, rgba(12,74,110,.16) 46%, transparent 72%);
+  pointer-events: none;
+}
+/* heavily blurred out-of-focus copy that bleeds into the gradient */
+.hero-buoy-aura {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 118%;
+  transform: translate(-50%, -50%);
+  filter: blur(52px) saturate(.7);
+  opacity: .3;
+}
+/* the sharp buoy: semi-transparent, desaturated, edges masked into the bg */
+.hero-buoy-img {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: .6;
+  filter: saturate(.6) brightness(.98);
+  -webkit-mask-image: radial-gradient(ellipse 82% 82% at 68% 42%, #000 34%, rgba(0,0,0,0) 74%);
+          mask-image: radial-gradient(ellipse 82% 82% at 68% 42%, #000 34%, rgba(0,0,0,0) 74%);
+  animation: hero-buoy-float 6s ease-in-out infinite;
+}
+@keyframes hero-buoy-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
 
-/* floating DO data chip */
+/* floating DO data chip — kept fully opaque + crisp, on top of everything */
 .data-chip {
   position: absolute;
-  top: 12%;
-  right: -6%;
+  z-index: 5;
+  top: 30%;
+  right: 32%;
   display: flex;
   align-items: center;
   gap: var(--s-3);
@@ -117,17 +170,24 @@
   left: 0; right: 0; bottom: -1px;
   width: 100%;
   height: clamp(60px, 8vw, 120px);
-  z-index: 2;
+  z-index: 3;
   display: block;
 }
 
-@media (max-width: 880px) {
-  .hero .container { grid-template-columns: 1fr; text-align: center; gap: var(--s-12); }
+/* Tablet: keep the buoy large but pull it further off the right edge */
+@media (max-width: 1024px) {
+  .hero-buoy { right: -18%; width: clamp(440px, 64vw, 720px); opacity: .9; }
+  .data-chip { right: 20%; top: 26%; }
+}
+
+/* Mobile: hide the backdrop + chip so text is never obstructed; center copy */
+@media (max-width: 780px) {
+  .hero-buoy { display: none; }
+  .data-chip { display: none; }
+  .hero::after { background: linear-gradient(180deg, rgba(3,26,45,.28), transparent 40%); }
+  .hero-copy { max-width: 620px; margin-inline: auto; text-align: center; }
   .hero-sub { margin-inline: auto; }
   .hero-actions, .trust-row { justify-content: center; }
-  .hero-art { order: -1; }
-  .buoy-wrap { width: min(340px, 80%); }
-  .data-chip { right: 2%; }
 }
 
 /* ==========================================================================

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aqua Monitor — ระบบควบคุมออกซิเจนละลายน้ำอัจฉริยะเชิงรุก</title>
+  <title>Aqua Monitor — ระบบควบคุมออกซิเจนละลายน้ำอัตโนมัติพร้อมการบันทึกข้อมูลแบบรวมศูนย์</title>
   <meta name="description" content="แพลตฟอร์มเครือข่ายข้อมูลคุณภาพน้ำ ควบคุมออกซิเจนละลายน้ำอัตโนมัติแบบเชิงรุก เพื่อเกษตรกรผู้เพาะเลี้ยงสัตว์น้ำของประเทศไทย">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,6 +33,12 @@
 
   <!-- ==================== Hero ==================== -->
   <header class="hero on-dark">
+    <!-- Ambient buoy backdrop: blurred aura + tinted, masked, semi-transparent buoy -->
+    <div class="hero-buoy" aria-hidden="true">
+      <img class="hero-buoy-aura" src="images/buoy.png" alt="">
+      <img class="hero-buoy-img" src="images/buoy.png" alt="ทุ่นเซนเซอร์วัดออกซิเจน Aqua Monitor">
+    </div>
+
     <div class="bubbles" aria-hidden="true">
       <span class="bubble" style="--size:28px;--left:6%;--delay:0s;--duration:16s;"></span>
       <span class="bubble" style="--size:48px;--left:15%;--delay:4s;--duration:19s;"></span>
@@ -51,7 +57,7 @@
     <div class="container">
       <div class="hero-copy">
         <span class="eyebrow hero-eyebrow">นวัตกรรมเพื่อเกษตรกรผู้เลี้ยงสัตว์น้ำ</span>
-        <h1>ระบบควบคุมออกซิเจน<br>ละลายน้ำ<span class="accent">อัจฉริยะเชิงรุก</span></h1>
+        <h1>ระบบควบคุมออกซิเจนละลายน้ำ<span class="accent">อัตโนมัติ</span><br>พร้อมการบันทึกข้อมูลแบบรวมศูนย์</h1>
         <p class="hero-sub">
           แพลตฟอร์มเครือข่ายข้อมูลคุณภาพน้ำ ที่วัดค่า DO ตลอด 24 ชั่วโมง
           และสั่งเปิดเครื่องตีน้ำล่วงหน้าก่อนถึงจุดอันตราย
@@ -67,53 +73,15 @@
         </div>
       </div>
 
-      <div class="hero-art">
-        <div class="buoy-wrap">
-          <!-- hand-drawn style sensor buoy with solar panel -->
-          <svg viewBox="0 0 400 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ทุ่นเซนเซอร์วัดออกซิเจนพร้อมแผงโซลาร์ลอยอยู่บนผิวน้ำ">
-            <!-- antenna -->
-            <line x1="200" y1="70" x2="200" y2="120" stroke="#e0f2fe" stroke-width="4" stroke-linecap="round"/>
-            <circle cx="200" cy="64" r="8" fill="#f97316" stroke="#fff" stroke-width="2.5"/>
-            <circle cx="200" cy="64" r="15" fill="none" stroke="#7dd3fc" stroke-width="2" opacity="0.6"/>
-            <!-- solar panel -->
-            <g>
-              <rect x="150" y="112" width="100" height="40" rx="6" fill="#0c4a6e" stroke="#e0f2fe" stroke-width="3" transform="skewX(-8)"/>
-              <line x1="176" y1="112" x2="169" y2="152" stroke="#38bdf8" stroke-width="2"/>
-              <line x1="202" y1="112" x2="195" y2="152" stroke="#38bdf8" stroke-width="2"/>
-              <line x1="228" y1="112" x2="221" y2="152" stroke="#38bdf8" stroke-width="2"/>
-              <line x1="150" y1="132" x2="242" y2="132" stroke="#38bdf8" stroke-width="2"/>
-            </g>
-            <!-- buoy body -->
-            <rect x="164" y="150" width="72" height="86" rx="18" fill="#fb923c"/>
-            <rect x="164" y="150" width="72" height="86" rx="18" fill="url(#buoyShine)" opacity="0.35"/>
-            <rect x="164" y="182" width="72" height="20" fill="#f8fafc"/>
-            <circle cx="200" cy="215" r="11" fill="#0c4a6e"/>
-            <circle cx="200" cy="215" r="4" fill="#7dd3fc"/>
-            <!-- floating collar -->
-            <ellipse cx="200" cy="238" rx="66" ry="20" fill="#0ea5e9"/>
-            <ellipse cx="200" cy="234" rx="66" ry="20" fill="#38bdf8"/>
-            <ellipse cx="200" cy="234" rx="40" ry="11" fill="#0c4a6e" opacity="0.55"/>
-            <!-- water surface + ripples -->
-            <path d="M20 262 Q110 246 200 262 T380 262" stroke="#bae6fd" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
-            <path d="M40 288 Q130 272 220 288 T392 286" stroke="#7dd3fc" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
-            <path d="M10 312 Q100 298 190 312 T372 310" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
-            <ellipse cx="200" cy="252" rx="90" ry="10" fill="#38bdf8" opacity="0.18"/>
-            <defs>
-              <linearGradient id="buoyShine" x1="164" y1="150" x2="236" y2="236" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#fff"/>
-                <stop offset="1" stop-color="#fff" stop-opacity="0"/>
-              </linearGradient>
-            </defs>
-          </svg>
-          <div class="data-chip">
-            <span class="chip-dot"></span>
-            <span>
-              <span class="chip-label">DO ปัจจุบัน</span><br>
-              <span class="chip-value">6.5 mg/L</span>
-            </span>
-          </div>
-        </div>
-      </div>
+    </div>
+
+    <!-- crisp floating data chip, kept fully opaque over the ambient buoy -->
+    <div class="data-chip">
+      <span class="chip-dot"></span>
+      <span>
+        <span class="chip-label">DO ปัจจุบัน</span><br>
+        <span class="chip-value">6.5 mg/L</span>
+      </span>
     </div>
 
     <svg class="hero-wave" viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

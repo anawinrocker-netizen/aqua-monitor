@@ -1,0 +1,222 @@
+/* ==========================================================================
+   Aqua Monitor — Dashboard app view (dashboard-app.css)
+   Phase 3. Depends on theme.css. Load AFTER theme.css.
+   NOTE: #currentDO and #aeratorStatus have their class list REWRITTEN by
+   dashboard.js to "status-value do-*" / "status-value on|off" — so those
+   elements are styled ONLY via .status-value + .do-*/.on/.off here.
+   ========================================================================== */
+
+/* ---------- Logged-in top bar (extends shared .site-nav) ---------- */
+.dash-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+}
+.farm-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: .9rem;
+  color: var(--navy);
+  background: rgba(14,165,233,.10);
+  border: 1px solid rgba(14,165,233,.18);
+  padding: 8px 14px;
+  border-radius: 999px;
+  max-width: 46vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.farm-chip svg, .farm-chip i[data-lucide] { width: 18px; height: 18px; color: var(--ocean); flex: none; }
+.farm-chip #farmInfo { overflow: hidden; text-overflow: ellipsis; }
+
+.btn-sm { padding: 9px 16px; font-size: .9rem; }
+.btn-sm svg, .btn-sm i[data-lucide] { width: 18px; height: 18px; }
+#logoutBtn { cursor: pointer; font-family: var(--font-head); }
+
+@media (max-width: 680px) {
+  .site-nav .container { flex-wrap: wrap; gap: var(--s-3); padding-block: var(--s-3); }
+  .dash-actions { width: 100%; justify-content: flex-start; }
+  .farm-chip { order: -1; max-width: 100%; }
+}
+
+/* ---------- Main layout ---------- */
+.dash-main { padding-block: var(--s-10) var(--s-16); }
+.page-head { margin-bottom: var(--s-6); }
+.page-head h1 { font-size: clamp(1.5rem, 3vw, 2rem); margin: 0 0 4px; }
+.page-head p { margin: 0; color: var(--muted); font-size: .95rem; }
+
+/* ==========================================================================
+   Status cards
+   ========================================================================== */
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-6);
+}
+.stat-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s-2);
+  padding: var(--s-6);
+}
+.stat-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: var(--grad-tile);
+  transition: background .4s var(--ease);
+}
+.stat-card .icon-tile { margin-bottom: var(--s-2); }
+.stat-label { color: var(--muted); font-size: .92rem; font-weight: 500; }
+.stat-value-row { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+
+.status-value {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  line-height: 1;
+  color: var(--navy);
+  letter-spacing: -.02em;
+  font-variant-numeric: tabular-nums;
+  transition: color .3s var(--ease);
+}
+.stat-unit { color: var(--muted); font-size: .9rem; font-weight: 500; }
+
+/* DO value color states (classes set by dashboard.js getDOClass) */
+.status-value.do-good    { color: var(--success); }
+.status-value.do-warning { color: var(--warning); }
+.status-value.do-danger  { color: var(--danger); }
+
+/* DO card top accent + subtle glow follow the live state */
+.do-card::before { background: var(--ocean); }
+.do-card:has(#currentDO.do-good)::before    { background: var(--success); }
+.do-card:has(#currentDO.do-warning)::before { background: var(--warning); }
+.do-card:has(#currentDO.do-danger)::before  { background: var(--danger); }
+.do-card:has(#currentDO.do-danger) {
+  box-shadow: 0 0 0 1px rgba(239,68,68,.28), 0 12px 30px rgba(239,68,68,.14);
+}
+
+/* ---------- Aerator card ---------- */
+.aerator-card::before { background: var(--line); }
+.aerator-card:has(#aeratorStatus.on)::before  { background: var(--success); }
+.aerator-card:has(#aeratorStatus.off)::before { background: var(--muted); }
+
+#aeratorStatus.status-value {
+  font-size: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+#aeratorStatus.on  { color: var(--success); }
+#aeratorStatus.off { color: var(--muted); }
+#aeratorStatus svg, #aeratorStatus i[data-lucide] { width: 22px; height: 22px; }
+
+/* fan spins + card glows softly while aerator is ON */
+.aerator-card:has(#aeratorStatus.on) .icon-tile { animation: fan-spin 3.2s linear infinite; }
+.aerator-card:has(#aeratorStatus.on) { animation: aerator-glow 2.6s ease-in-out infinite; }
+@keyframes fan-spin { to { transform: rotate(360deg); } }
+@keyframes aerator-glow {
+  0%, 100% { box-shadow: var(--sh-md); }
+  50%      { box-shadow: var(--sh-md), 0 0 0 5px rgba(16,185,129,.12); }
+}
+
+.btn-toggle {
+  margin-top: auto;
+  align-self: stretch;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: .92rem;
+  padding: 11px 18px;
+  border-radius: var(--r-sm);
+  border: 1.5px solid var(--line);
+  background: var(--surface);
+  color: var(--navy);
+  cursor: pointer;
+  transition: transform .2s var(--ease), box-shadow .25s var(--ease),
+              background .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease);
+}
+.btn-toggle:hover { border-color: var(--ocean); background: rgba(14,165,233,.06); transform: translateY(-2px); }
+.btn-toggle:active { transform: none; }
+.btn-toggle:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+/* ON = success, OFF = muted (driven by the status span's class) */
+.aerator-card:has(#aeratorStatus.on) .btn-toggle {
+  border-color: transparent;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(16,185,129,.28);
+}
+.aerator-card:has(#aeratorStatus.off) .btn-toggle {
+  border-color: var(--line);
+  background: var(--surface);
+  color: var(--muted);
+}
+
+@media (max-width: 900px) { .status-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .status-grid { grid-template-columns: 1fr; } }
+
+/* ==========================================================================
+   Last-update line
+   ========================================================================== */
+.last-update {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  color: var(--muted);
+  font-size: .9rem;
+  margin: var(--s-5) 0 var(--s-10);
+}
+.last-update #lastUpdate { color: var(--ink); font-weight: 600; }
+.status-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex: none; }
+.status-good { background: var(--success); }
+.live-dot { position: relative; }
+.live-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  animation: live-pulse 1.8s ease-out infinite;
+}
+@keyframes live-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(16,185,129,.5); }
+  100% { box-shadow: 0 0 0 9px rgba(16,185,129,0); }
+}
+
+/* ==========================================================================
+   Chart cards
+   ========================================================================== */
+.charts-stack { display: grid; gap: var(--s-6); }
+.chart-card { padding: var(--s-6); }
+.chart-head {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-bottom: var(--s-2);
+}
+.chart-head .icon-tile { width: 44px; height: 44px; border-radius: 12px; flex: none; }
+.chart-head .icon-tile svg, .chart-head .icon-tile i[data-lucide] { width: 22px; height: 22px; }
+.chart-head h2 { margin: 0; font-size: 1.15rem; font-weight: 600; }
+.chart-desc {
+  color: var(--muted);
+  font-size: .85rem;
+  line-height: 1.6;
+  margin: 0 0 var(--s-5);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+}
+.chart-desc svg, .chart-desc i[data-lucide] { width: 15px; height: 15px; vertical-align: -2px; }
+.chart-container { position: relative; height: clamp(280px, 42vh, 360px); }
+
+@media (max-width: 520px) {
+  .chart-container { height: 300px; }
+  .dash-main { padding-block: var(--s-8) var(--s-12); }
+}
