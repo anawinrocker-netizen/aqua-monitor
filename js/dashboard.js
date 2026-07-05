@@ -5,7 +5,7 @@ import {
 import {
   doc, getDoc, collection, query, where, orderBy, limit, onSnapshot, setDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-import { checkAndAlert, startHourlyReport } from './telegram-alert.js';
+// import { checkAndAlert, startHourlyReport } from './telegram-alert.js'; // <<< ปิดไว้: telegram-alert.js ไม่มีบน deploy ทำให้ dashboard พังเพราะ 404
 
 // DOM Elements
 const farmInfo = document.getElementById('farmInfo');
@@ -131,13 +131,13 @@ function listenToReadings() {
       latestRate = readings[readings.length - 1].do - readings[readings.length - 1 - ROC_WINDOW].do;
     }
 
-    checkAndAlert(doVal, latestRate);
+    // checkAndAlert(doVal, latestRate); // <<< ปิดไว้: telegram-alert.js ไม่มีบน deploy
 
     // เริ่มรายงานประจำชั่วโมงครั้งเดียวหลังโหลดข้อมูลชุดแรก
-    if (!hourlyReportStarted) {
-      hourlyReportStarted = true;
-      startHourlyReport(() => ({ do: latestDO, temp: latestTemp }));
-    }
+    // if (!hourlyReportStarted) {
+    //   hourlyReportStarted = true;
+    //   startHourlyReport(() => ({ do: latestDO, temp: latestTemp }));
+    // }
   }, (error) => {
     // <<< เพิ่ม: ดักจับ error โดยเฉพาะกรณีต้องสร้าง Firestore index
     console.error('readings query error:', error);
@@ -300,17 +300,24 @@ toggleBtn.addEventListener('click', async () => {
   if (!currentFarmId) return;
 
   toggleBtn.disabled = true;
-  const commandRef = doc(db, 'commands', currentFarmId);
-  const snap = await getDoc(commandRef);
-  const currentlyOn = snap.exists() ? snap.data().aeratorOn : false;
+  try {
+    const commandRef = doc(db, 'commands', currentFarmId);
+    // อ่านสถานะปัจจุบันจาก Firestore command doc จริง (ไม่ใช่ toggle จากตัวแปร local)
+    const snap = await getDoc(commandRef);
+    const currentlyOn = snap.exists() ? snap.data().aeratorOn : false;
 
-  await setDoc(commandRef, {
-    aeratorOn: !currentlyOn,
-    reason: 'manual',
-    farmId: currentFarmId
-  });
-
-  toggleBtn.disabled = false;
+    await setDoc(commandRef, {
+      aeratorOn: !currentlyOn,
+      reason: 'manual',
+      farmId: currentFarmId
+    });
+  } catch (error) {
+    console.error('toggle aerator error:', error);
+    alert('ไม่สามารถเปลี่ยนสถานะได้ กรุณาลองใหม่');
+  } finally {
+    // ปลดล็อกปุ่มเสมอ แม้เกิด error หรือ setDoc ค้าง
+    toggleBtn.disabled = false;
+  }
 });
 
 // ==================== Logout ====================
